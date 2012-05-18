@@ -6,4 +6,6 @@ else
   gem 'ruby-debug19'
 end
 
+gem 'database_cleaner'
+
 gemspec

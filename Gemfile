@@ -39,3 +39,5 @@ gem 'jquery-rails'
 gem 'spree'
 gem 'spree_usa_epay'
 gem 'spree_skrill'
+
+gem 'spree_app', :path => 'lib/spree_app'

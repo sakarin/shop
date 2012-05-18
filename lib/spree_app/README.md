@@ -7,6 +7,10 @@ Introduction goes here.
 Example
 =======
 
+Install
+-------
+bundle exec rails g spree_app:install
+
 Example goes here.
 
 Testing

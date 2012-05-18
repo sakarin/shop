@@ -1,5 +1,12 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
+---
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      spree/supplier:
+        name: Name
+        code: Code
+        email: E-Mail
+  new_supplier: New Supplier
+  edit_supplier: Edit Supplier
+  supplier_admin: Suppliers
+  manage_suppliers: Manage Suppliers.

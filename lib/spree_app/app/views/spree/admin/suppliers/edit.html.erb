@@ -1,0 +1,8 @@
+<h1><%= t(:editing_supplier) %></h1>
+
+<%= form_for @supplier, :url => object_url, :method => :put do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+<% end %>
+
+

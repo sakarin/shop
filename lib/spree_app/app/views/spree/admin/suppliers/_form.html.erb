@@ -1,0 +1,19 @@
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @supplier } %>
+<fieldset id="general_fields">
+
+  <%= f.field_container :name do %>
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+  <% end %>
+
+  <%= f.field_container :code do %>
+      <%= f.label :code %><br />
+      <%= f.text_field :code %>
+  <% end %>
+
+  <%= f.field_container :email do %>
+      <%= f.label :email %><br />
+      <%= f.text_field :email %>
+  <% end %>
+
+</fieldset>

@@ -13,3 +13,4 @@
 
 //= require_tree .
 //= require store/spree_app
+//= require store/spree_flexi_variants

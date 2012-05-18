@@ -4,6 +4,15 @@ PATH
     spree_app (1.1.0)
       spree_core (~> 1.1.0)
 
+PATH
+  remote: lib/spree_flexi_variants
+  specs:
+    spree_flexi_variants (1.0.0)
+      carrierwave
+      json
+      rmagick
+      spree_core (~> 1.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -59,6 +68,9 @@ GEM
       builder (>= 2.0.0)
     builder (3.0.0)
     cancan (1.6.7)
+    carrierwave (0.6.2)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
     cocaine (0.2.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -153,6 +165,7 @@ GEM
       polyamorous (~> 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
+    rmagick (2.13.1)
     sass (3.1.18)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -238,12 +251,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  carrierwave
   coffee-rails (~> 3.2.1)
   jquery-rails
   rails (= 3.2.3)
+  rmagick
   sass-rails (~> 3.2.3)
   spree
   spree_app!
+  spree_flexi_variants!
   spree_skrill
   spree_usa_epay
   sqlite3

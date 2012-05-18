@@ -41,3 +41,8 @@ gem 'spree_usa_epay'
 gem 'spree_skrill'
 
 gem 'spree_app', :path => 'lib/spree_app'
+
+# see the notes in spree_flexi_variants
+gem 'rmagick'
+gem 'carrierwave'
+gem 'spree_flexi_variants', :path => 'lib/spree_flexi_variants'

@@ -11,7 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517034707) do
+ActiveRecord::Schema.define(:version => 20120518025946) do
+
+  create_table "product_customization_types_products", :id => false, :force => true do |t|
+    t.integer "product_customization_type_id"
+    t.integer "product_id"
+  end
 
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
@@ -27,6 +32,37 @@ ActiveRecord::Schema.define(:version => 20120517034707) do
     t.string   "code"
     t.boolean  "advertise",    :default => false
     t.string   "path"
+  end
+
+  create_table "spree_ad_hoc_option_types", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "option_type_id"
+    t.string   "price_modifier_type"
+    t.boolean  "is_required",         :default => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  create_table "spree_ad_hoc_option_values", :force => true do |t|
+    t.integer  "ad_hoc_option_type_id"
+    t.integer  "option_value_id"
+    t.decimal  "price_modifier",        :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.datetime "created_at",                                                           :null => false
+    t.datetime "updated_at",                                                           :null => false
+    t.integer  "position"
+  end
+
+  create_table "spree_ad_hoc_option_values_line_items", :force => true do |t|
+    t.integer  "line_item_id"
+    t.integer  "ad_hoc_option_value_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  create_table "spree_ad_hoc_variant_exclusions", :force => true do |t|
+    t.integer  "product_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "spree_addresses", :force => true do |t|
@@ -124,6 +160,30 @@ ActiveRecord::Schema.define(:version => 20120517034707) do
     t.datetime "updated_at",                  :null => false
     t.string   "gateway_customer_profile_id"
     t.string   "gateway_payment_profile_id"
+  end
+
+  create_table "spree_customizable_product_options", :force => true do |t|
+    t.integer  "product_customization_type_id"
+    t.integer  "position"
+    t.string   "presentation",                  :null => false
+    t.string   "name",                          :null => false
+    t.string   "description"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "spree_customized_product_options", :force => true do |t|
+    t.integer  "product_customization_id"
+    t.integer  "customizable_product_option_id"
+    t.string   "value"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "customization_image"
+  end
+
+  create_table "spree_excluded_ad_hoc_option_values", :force => true do |t|
+    t.integer "ad_hoc_variant_exclusion_id"
+    t.integer "ad_hoc_option_value_id"
   end
 
   create_table "spree_gateways", :force => true do |t|
@@ -278,6 +338,21 @@ ActiveRecord::Schema.define(:version => 20120517034707) do
   end
 
   add_index "spree_preferences", ["key"], :name => "index_spree_preferences_on_key", :unique => true
+
+  create_table "spree_product_customization_types", :force => true do |t|
+    t.string   "name"
+    t.string   "presentation"
+    t.string   "description"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "spree_product_customizations", :force => true do |t|
+    t.integer  "line_item_id"
+    t.integer  "product_customization_type_id"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
 
   create_table "spree_product_option_types", :force => true do |t|
     t.integer  "position"

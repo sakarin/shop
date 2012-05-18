@@ -11,4 +11,5 @@
  *= require_self
  *= require_tree .
  *= require store/spree_app
+ *= require store/spree-flexi-variants
 */

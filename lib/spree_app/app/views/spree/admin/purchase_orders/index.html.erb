@@ -1,0 +1,82 @@
+<div class='toolbar order-links'>
+  <%= button_link_to t(:new_purchase_order), new_admin_purchase_order_url, :icon => 'add', :id => 'admin_new_purchase_order' %>
+</div>
+
+<%= render :partial => 'spree/admin/shared/order_sub_menu' %>
+
+
+<h1><%= t(:listing_purchase_orders) %></h1>
+
+<table class="index" id="listing_purchase_orders" data-hook>
+  <thead>
+  <tr data-hook="admin_purchase_orders_index_headers">
+
+    <th><%= sort_link @search, :created_at, t(:created_at, :scope => 'activerecord.attributes.spree/order') %></th>
+
+    <th><%= sort_link @search, :number, t(:number, :scope => 'activerecord.attributes.spree/order') %></th>
+    <th><%= sort_link @search, :supplier, t(:supplier, :scope => 'activerecord.attributes.spree/order') %></th>
+    <th><%= sort_link @search, :state, t(:state, :scope => 'activerecord.attributes.spree/order') %></th>
+
+    <th data-hook="admin_purchase_orders_index_header_actions"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @purchase_orders.each do |purchase_order| %>
+      <tr data-hook="admin_purchase_orders_index_rows">
+        <td><%= (purchase_order.created_at).to_s(:date_time24) %></td>
+        <td><%= link_to purchase_order.number, edit_admin_purchase_order_path(purchase_order) %></td>
+        <td><%= link_to purchase_order.supplier.name, edit_admin_supplier_path(purchase_order.supplier) %></td>
+        <td><%= t("purchase_order_state.#{purchase_order.state.downcase}") %></td>
+
+        <td class='actions' data-hook="admin_purchase_orders_index_row_actions">
+          <%= link_to_edit_url edit_admin_purchase_order_path(purchase_order), :title => "admin_edit_#{dom_id(purchase_order)}" %>
+          <%= link_to_delete purchase_order, :url => admin_purchase_order_url(purchase_order) %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= paginate @purchase_orders %>
+
+
+<% content_for :sidebar do %>
+    <div class="box" data-hook="admin_purchase_orders_index_search">
+      <h3><%= t(:search) %></h3>
+      <%= search_form_for [:admin, @search] do |f| %>
+          <%= label_tag nil, t(:date_range) %>
+          <br/>
+          <div class="date-range-filter">
+            <div class="left sub-field">
+              <%= f.text_field :created_at_gt, :class => 'datepicker' %>
+              <br/>
+              <%= label_tag nil, t(:start), :class => 'sub' %>
+            </div>
+            <div class="right sub-field">
+              <%= f.text_field :created_at_lt, :class => 'datepicker' %>
+              <br/>
+              <%= label_tag nil, t(:stop), :class => 'sub' %>
+            </div>
+          </div>
+
+          <%= label_tag nil, t(:purchase_order_number) %>
+          <br/>
+          <%= f.text_field :number, :size => 25 %>
+          </p>
+          <p>
+            <%= label_tag nil, t(:supplier) %><br/>
+            <%= f.select :supplier_id_eq, Spree::Supplier.all.collect { |s| [s.name, s.id] }, {:include_blank => true} %>
+          </p>
+
+          <p>
+            <%= label_tag nil, t(:status) %><br/>
+            <%= f.select :state_eq, Spree::PurchaseOrder.state_machines[:state].states.collect { |s| [t("purchase_order_state.#{s.name}"), s.value] }, {:include_blank => true} %>
+          </p>
+
+          <p>
+
+          <div data-hook="admin_orders_index_search_buttons">
+            <p><%= button t(:search) %></p>
+          </div>
+      <% end %>
+    </div>
+<% end %>

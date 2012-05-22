@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120518025946) do
+ActiveRecord::Schema.define(:version => 20120522022517) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -199,14 +199,23 @@ ActiveRecord::Schema.define(:version => 20120518025946) do
   end
 
   create_table "spree_inventory_units", :force => true do |t|
-    t.integer  "lock_version",            :default => 0
+    t.integer  "lock_version",                           :default => 0
     t.string   "state"
     t.integer  "variant_id"
     t.integer  "order_id"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
     t.integer  "shipment_id"
     t.integer  "return_authorization_id"
+    t.string   "season",                  :limit => 10,  :default => ""
+    t.string   "team",                    :limit => 50,  :default => ""
+    t.string   "shirt_type",              :limit => 20,  :default => ""
+    t.string   "name",                    :limit => 15,  :default => ""
+    t.string   "number",                  :limit => 2,   :default => ""
+    t.string   "size",                    :limit => 15,  :default => ""
+    t.string   "patch",                   :limit => 100, :default => ""
+    t.string   "sleeve",                  :limit => 10,  :default => ""
+    t.integer  "po_version",                             :default => 0
   end
 
   add_index "spree_inventory_units", ["order_id"], :name => "index_inventory_units_on_order_id"
@@ -457,6 +466,26 @@ ActiveRecord::Schema.define(:version => 20120518025946) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "spree_purchase_items", :force => true do |t|
+    t.integer  "purchase_order_id"
+    t.integer  "inventory_unit_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "spree_purchase_items", ["inventory_unit_id"], :name => "index_purchase_items_on_inventory_unit_id"
+  add_index "spree_purchase_items", ["purchase_order_id"], :name => "index_purchase_items_on_purchase_order_id"
+
+  create_table "spree_purchase_orders", :force => true do |t|
+    t.string   "number"
+    t.integer  "supplier_id"
+    t.string   "state"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "spree_purchase_orders", ["supplier_id"], :name => "index_purchase_orders_on_supplier_id"
 
   create_table "spree_return_authorizations", :force => true do |t|
     t.string   "number"

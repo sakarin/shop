@@ -10,3 +10,17 @@ en:
   edit_supplier: Edit Supplier
   supplier_admin: Suppliers
   manage_suppliers: Manage Suppliers.
+
+  new_purchase_order: New Purchase Order
+  purchase_order: Purchase Order
+  purchse_orders: Purchase Orders
+  listing_purchase_orders: Listing Purchase Order
+  include_in_purchase_order: Include in PO
+
+  print_purchase_order: Print Purchase Order
+  purchase_state:
+      purchased: Purchased
+      received: Received
+
+  number: Number
+  po_quantity: Quantity

@@ -9,6 +9,8 @@ Spree::Core::Engine.routes.draw do
 
     match '/admin', :to => 'admin/orders#index', :as => :admin
 
+    match 'admin/purchase_orders/download', :to => "admin/purchase_orders#download"
+
     # modify checkout process
     match '/checkout', :to => 'checkout#edit', :state => 'delivery', :as => :checkout
 

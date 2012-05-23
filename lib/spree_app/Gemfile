@@ -9,5 +9,13 @@ end
 gem 'database_cleaner'
 
 
+gem "spreadsheet", "~> 0.6.5.9"
+gem 'to_xls'
+
+
+gem "pdfkit"
+gem "wkhtmltopdf-binary"
+
+
 
 gemspec

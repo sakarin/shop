@@ -265,15 +265,35 @@ a:visited {
     margin-bottom: -1px;
 }
 
-#admin-menu ul li a {
+#admin-menu ul li.selected span { background: #DADADA; }
+#admin-menu ul li span {
+    display: block;
+    height: 33px;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+#admin-menu ul#login-nav li  {
     display: block;
     padding: 10px 20px;
     color: #fff;
     /*color: #154e8c;*/
     font-weight: bold;
     text-decoration: none;
-    /*vertical-align: baseline*/
     outline: none;
+}
+#admin-menu ul#login-nav li a{
+    color: #fff;
+}
+#admin-menu ul li span a{
+    color:white;
+    text-decoration: none;
+    font-weight: bold;
+    outline: none;
+}
+#admin-menu ul li span img {
+    vertical-align: bottom;
+    padding-bottom: 3px;
 }
 
 #sub-menu ul li a {

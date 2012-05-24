@@ -7,6 +7,7 @@ module Spree
     has_many :purchase_orders, :through => :purchase_items
 
 
+
     scope :pending, where(:state => 'pending')
 
     scope :backorder_inventory_units, where("state LIKE 'backordered' AND po_version = 0").select("id, count(variant_id) as quantity, po_version, variant_id, name, number, size, patch, season, team, shirt_type, sleeve, state").group('variant_id, name, number, size, patch, season, team, shirt_type, sleeve')
@@ -14,13 +15,11 @@ module Spree
     scope :pending_inventory_units, where("state LIKE 'backordered' AND po_version > 0 ").select("id, count(variant_id) as quantity, po_version, variant_id, name, number, size, patch, season, team, shirt_type, sleeve, state").group('variant_id, name, number, size, patch, season, team, shirt_type, sleeve')
 
 
-
-
     # state machine (see http://github.com/pluginaweek/state_machine/tree/master for details)
     state_machine :initial => 'backordered' do
 
       event :pending do
-        transition :to => 'pending', :from => 'purchased'
+        transition :to => 'backordered', :from => 'purchased'
       end
 
       event :fill_backorder do
@@ -45,6 +44,9 @@ module Spree
       #after_transition :on => :fill_backorder, :do => :update_order
       #after_transition :to => 'returned', :do => :restock_variant
     end
+
+
+
 
     # Assigns inventory to a newly completed order.
     # Should only be called once during the life-cycle of an order, on transition to completed.
@@ -204,7 +206,7 @@ module Spree
       back_order.times {
         order.inventory_units.create(
             {:variant => variant, :state => 'backordered', :name => option_name.upcase, :number => option_number, :size => option_size,
-                :patch => option_patch, :season => option_season, :team => option_team, :shirt_type => option_type, :sleeve => option_sleeve}, :without_protection => true
+             :patch => option_patch, :season => option_season, :team => option_team, :shirt_type => option_type, :sleeve => option_sleeve}, :without_protection => true
         )
       }
 

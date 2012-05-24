@@ -12,7 +12,7 @@
   <thead>
   <tr data-hook="admin_purchase_orders_index_headers">
 
-    <th><%= sort_link @search, :created_at, t(:created_at, :scope => 'activerecord.attributes.spree/order') %></th>
+    <th><%= sort_link @search, :created_at, t(:created_at) %></th>
 
     <th><%= sort_link @search, :number, t(:number, :scope => 'activerecord.attributes.spree/order') %></th>
     <th><%= sort_link @search, :supplier, t(:supplier, :scope => 'activerecord.attributes.spree/order') %></th>
@@ -61,7 +61,7 @@
 
           <%= label_tag nil, t(:purchase_order_number) %>
           <br/>
-          <%= f.text_field :number, :size => 25 %>
+          <%= f.text_field :number_cont, :size => 25 %>
           </p>
           <p>
             <%= label_tag nil, t(:supplier) %><br/>

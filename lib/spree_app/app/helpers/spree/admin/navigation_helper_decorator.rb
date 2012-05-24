@@ -48,10 +48,11 @@ Spree::Admin::NavigationHelper.module_eval do
     if options[:css_class]
       css_classes << options[:css_class]
     end
-    content_tag('li', link, :class => css_classes.join(' '))
-    #unless options[:label] == 'product_customization_types' || options[:label] == 'promotions'
-    #  content_tag('li', content_tag('span', icon(options[:label]) + ' ' + link), :class => css_classes.join(' '))
-    #end
+
+    #content_tag('li', link, :class => css_classes.join(' '))
+    unless options[:label] == 'product_customization_types' || options[:label] == 'promotions'
+      content_tag('li', content_tag('span', icon(options[:label]) + ' ' + link), :class => css_classes.join(' '))
+    end
 
   end
 

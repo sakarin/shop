@@ -25,3 +25,10 @@ en:
 
   number: Number
   po_quantity: Quantity
+
+
+  new_receive_product: New Receive Product
+  new_refund: New Refund
+  refund_updated: Refund Approved
+
+  approve: Approve

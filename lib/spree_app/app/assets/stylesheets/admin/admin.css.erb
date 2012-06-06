@@ -259,19 +259,45 @@ a:visited {
     list-style: none;
 }
 
-#admin-menu ul li,
-#sub-menu ul li {
+#admin-menu ul li{
     margin-right: 0;
     margin-bottom: -1px;
 }
+#sub-menu ul li {
+    margin-right: 0;
+    margin-bottom: -1px;
+
+}
 
 #admin-menu ul li.selected span { background: #DADADA; }
-#admin-menu ul li span {
+#admin-menu ul li span{
     display: block;
     height: 33px;
     padding-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+#sub-menu ul#sub_nav li span{
+    display: block;
+    height: 24px;
+    padding-top: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#sub-menu ul#sub_nav li span img {
+    vertical-align: middle;
+    padding-bottom: 3px;
+    display: inline-block;
+}
+
+#sub-menu ul#sub_nav li span a{
+    color:#000;
+    text-decoration: none;
+    font-weight: bold;
+    outline: none;
+    display: inline-block;
 }
 #admin-menu ul#login-nav li  {
     display: block;
@@ -282,6 +308,7 @@ a:visited {
     text-decoration: none;
     outline: none;
 }
+
 #admin-menu ul#login-nav li a{
     color: #fff;
 }

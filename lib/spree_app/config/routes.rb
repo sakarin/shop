@@ -1,8 +1,6 @@
 Spree::Core::Engine.routes.draw do
 
 
-  resources :purchase_orders
-
   # Add your extension routes here
 
   Spree::Core::Engine.routes.prepend do
@@ -15,8 +13,23 @@ Spree::Core::Engine.routes.draw do
     match '/checkout', :to => 'checkout#edit', :state => 'delivery', :as => :checkout
 
     namespace :admin do
+
       resources :suppliers
-      resources :purchase_orders
+      resources :purchase_orders do
+        resources :receive_products
+        resources :refunds do
+          member do
+            put :fire
+          end
+        end
+      end
+
+      resources :refund_products do
+        member do
+          put :fire
+        end
+      end
+
     end
 
   end

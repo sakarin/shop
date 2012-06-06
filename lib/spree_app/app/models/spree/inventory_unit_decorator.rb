@@ -1,10 +1,16 @@
 module Spree
   InventoryUnit.class_eval do
 
-    attr_accessible :po_version
+    attr_accessible :po_version, :refund_product_id
 
     has_many :purchase_items
     has_many :purchase_orders, :through => :purchase_items
+
+    has_many :receive_items
+    has_many :receive_orders, :through => :receive_items
+
+    has_many :refund_items
+    has_many :refunds, :through => :refund_items
 
 
 
@@ -20,28 +26,33 @@ module Spree
 
       event :pending do
         transition :to => 'backordered', :from => 'purchased'
+
       end
 
       event :fill_backorder do
         transition :to => 'purchased', :from => 'backordered'
+        transition :to => 'purchased', :from => 'sold'
       end
 
       # รับของเสร็จจึงจะ sold
       event :sold do
         transition :to => 'sold', :from => 'purchased'
-
+        transition :to => 'sold', :from => 'backordered'
       end
       event :ship do
         transition :to => 'shipped', :if => :allow_ship?
       end
-      event :return do
-        transition :to => 'returned', :from => 'shipped'
-
-        transition :to => 'returned', :from => 'backordered'
-        transition :to => 'returned', :from => 'pending'
+      event :refund do
+        transition :to => 'refund', :from => 'backordered'
       end
 
-      #after_transition :on => :fill_backorder, :do => :update_order
+      event :return do
+        transition :to => 'returned', :from => 'shipped'
+        #transition :to => 'returned', :from => 'backordered'
+        #transition :to => 'returned', :from => 'pending'
+      end
+
+      after_transition :on => :fill_backorder, :do => :update_order
       #after_transition :to => 'returned', :do => :restock_variant
     end
 

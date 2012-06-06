@@ -5,10 +5,18 @@ module Spree
     has_many :purchase_items, :dependent => :delete_all
     has_many :inventory_units, :through => :purchase_items
 
+    has_many :receive_products, :dependent => :destroy
+
+    has_many :refunds
+
 
     has_many :state_changes, :as => :stateful
 
     belongs_to :supplier
+
+    accepts_nested_attributes_for :purchase_items
+    accepts_nested_attributes_for :receive_products
+    accepts_nested_attributes_for :inventory_units
 
     attr_accessible :number , :supplier_id
 
@@ -32,11 +40,12 @@ module Spree
     state_machine :initial => 'wait_printing', :use_transactions => false do
       event :purchased do
         transition :from => 'wait_printing', :to => 'purchased'
+        transition :from => 'received', :to => 'purchased'
       end
       event :received do
         transition :from => 'purchased', :to => 'received'
       end
-      after_transition :to => 'received', :do => :after_received
+
     end
 
     private
@@ -49,10 +58,6 @@ module Spree
       end
       self.number = random if self.number.blank?
       self.number
-    end
-
-    def after_received
-
     end
 
   end

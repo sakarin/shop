@@ -4,6 +4,7 @@ class CreatePurchaseItem < ActiveRecord::Migration
       t.integer :purchase_order_id
       t.integer :inventory_unit_id
 
+
       t.timestamps
     end
 

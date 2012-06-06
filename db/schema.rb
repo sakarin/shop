@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522082801) do
+ActiveRecord::Schema.define(:version => 20120606001416) do
+
+  create_table "_spree_purchase_items_old_20120531", :force => true do |t|
+    t.integer  "purchase_order_id"
+    t.integer  "inventory_unit_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "state"
+  end
+
+  create_table "_spree_receive_products_old_20120531", :force => true do |t|
+    t.string   "number"
+    t.integer  "purchase_order_id"
+    t.string   "state"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -216,6 +232,7 @@ ActiveRecord::Schema.define(:version => 20120522082801) do
     t.string   "patch",                   :limit => 100, :default => ""
     t.string   "sleeve",                  :limit => 10,  :default => ""
     t.integer  "po_version",                             :default => 0
+    t.integer  "refund_product_id"
   end
 
   add_index "spree_inventory_units", ["order_id"], :name => "index_inventory_units_on_order_id"
@@ -492,6 +509,50 @@ ActiveRecord::Schema.define(:version => 20120522082801) do
   end
 
   add_index "spree_purchase_orders", ["supplier_id"], :name => "index_purchase_orders_on_supplier_id"
+
+  create_table "spree_receive_items", :force => true do |t|
+    t.integer  "receive_product_id"
+    t.integer  "inventory_unit_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "spree_receive_items", ["inventory_unit_id"], :name => "index_receive_items_on_inventory_unit_id"
+  add_index "spree_receive_items", ["receive_product_id"], :name => "index_receive_items_on_receive_product_id"
+
+  create_table "spree_receive_products", :force => true do |t|
+    t.string   "number"
+    t.integer  "purchase_order_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "spree_refund_items", :force => true do |t|
+    t.integer  "refund_id"
+    t.integer  "inventory_unit_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "spree_refund_items", ["inventory_unit_id"], :name => "index_refund_items_on_inventory_unit_id"
+  add_index "spree_refund_items", ["refund_id"], :name => "index_refund_items_on_refund_id"
+
+  create_table "spree_refund_products", :force => true do |t|
+    t.string   "number"
+    t.string   "state"
+    t.decimal  "amount",     :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.string   "order_id"
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+  end
+
+  create_table "spree_refunds", :force => true do |t|
+    t.string   "number"
+    t.integer  "purchase_order_id"
+    t.string   "state"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "spree_return_authorizations", :force => true do |t|
     t.string   "number"

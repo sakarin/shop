@@ -1,0 +1,45 @@
+<div class='toolbar order-links'>
+  <% if @refund_product.can_approve? %>
+      <%= button_link_to t(:approve), fire_admin_refund_product_path(@refund_product, :e => 'approve'), :method => :put, :confirm => t(:are_you_sure) %>
+  <% end %>
+</div>
+
+<h1><%= t(:refund_product) %> <%= @refund_product.number %></h1>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => {:target => @refund_product} %>
+
+<table class="index" style="width:100%;" data-hook="admin_shipment_form_inventory_units">
+  <tr data-hook="shipments_header">
+    <th><%= t(:season) %></th>
+    <th><%= t(:team) %></th>
+    <th><%= t(:type) %></th>
+    <th><%= t(:name) %></th>
+    <th><%= t(:number) %></th>
+    <th><%= t(:size) %></th>
+    <th><%= t(:patch) %></th>
+    <th><%= t(:sleeve) %></th>
+    <th><%= t(:price) %></th>
+  </tr>
+  <% @inventory_units.each do |unit| %>
+      <tr data-hook="shipments_row">
+        <td style="vertical-align:top; width:80px;"><%= unit.season %></td>
+        <td style="vertical-align:top; width:140px;"><%= unit.team %></td>
+        <td style="vertical-align:top; width:50px;"><%= unit.shirt_type %></td>
+        <td style="vertical-align:top; width:50px;"><%= unit.name %></td>
+        <td style="vertical-align:top; width:50px;"><%= unit.number %></td>
+        <td style="vertical-align:top; width:50px;"><%= unit.size %></td>
+        <td style="vertical-align:top; width:140px;"><%= unit.patch %></td>
+        <td style="vertical-align:top; width:50px;"><%= unit.sleeve %></td>
+        <td><%= Spree::LineItem.find_by_order_id_and_variant_id(unit.order_id, unit.variant_id).price %></td>
+      </tr>
+  <% end %>
+  <tr>
+    <td colspan="8" style="text-align: right;font-weight: bold">Amount :</td>
+    <td style="font-weight: bold"><%= @refund_product.amount %></td>
+  </tr>
+</table>
+
+
+
+
+

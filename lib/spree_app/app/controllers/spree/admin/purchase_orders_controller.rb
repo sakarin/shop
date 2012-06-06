@@ -86,6 +86,7 @@ module Spree
             determine_unit_po_version(unit)
           end
 
+
           flash[:notice] = flash_message_for(@purchase_order, :successfully_updated)
           respond_with(@purchase_order) do |format|
             format.html { redirect_to admin_purchase_orders_path }
@@ -96,12 +97,19 @@ module Spree
       end
 
       def destroy
-        (@purchase_order.inventory_units || []).each do |unit|
-          determine_unit_po_version(unit)
-          unit.pending
-        end
+
+        inventory_unit_ids = @purchase_order.inventory_unit_ids
 
         @purchase_order.destroy
+
+        # update old inventory_units
+        (inventory_unit_ids || []).each do |item|
+          unit = InventoryUnit.find(item)
+          determine_unit_po_version(unit)
+        end
+
+
+
         respond_with(@purchase_order) do |format|
           format.js { render_js_for_destroy }
 
@@ -115,10 +123,12 @@ module Spree
 
       def show
         ## generate file
+
         #gen_excel_file
         #gen_pdf_file
 
         @purchase_order.purchased
+
         (@purchase_order.inventory_units || []).each do |unit|
           determine_unit_po_version(unit)
           unit.fill_backorder
@@ -136,7 +146,8 @@ module Spree
       end
 
       def load_purchase_order
-        @purchase_order = PurchaseOrder.find_by_number(params[:id]) if params[:id]
+        @purchase_order ||= PurchaseOrder.find_by_number(params[:id]) if params[:id]
+        @purchase_order
       end
 
       def gen_excel_file

@@ -1,18 +1,32 @@
+<% unless %w(purchased received).include?(@purchase_order.state) %>
 <div class='toolbar order-links'>
   <%= button_link_to(t("print_purchase_order"), admin_purchase_order_url(@purchase_order), :method => :get, :target => '_blank', :icon => 'pdf') %>
 </div>
+<% end %>
 
 <h1><%= t(:purchase_order) %> <%= @purchase_order.number %></h1>
 
-<%= render :partial => 'spree/admin/shared/purchase_order_tabs', :locals => { :current => 'Purchase Order Details' } %>
+<%= render :partial => 'spree/admin/shared/purchase_order_tabs', :locals => {:current => 'Purchase Order Details'} %>
 
 <%= form_for :purchase_order, :url => admin_purchase_order_path(@purchase_order), :method => :put do |f| %>
     <%= render :partial => 'form', :locals => {:f => f} %>
 
-    <div data-hook="admin_purchase_order_new_form_buttons">
-      <p class="form-buttons">
-        <%= button t(:update) %>
-        <%= t(:or) %> <%= link_to t(:back), admin_purchase_orders_url %>
-      </p>
-    </div>
+    <% unless %w(purchased received).include?(@purchase_order.state) %>
+        <div data-hook="admin_purchase_order_new_form_buttons">
+          <p class="form-buttons">
+            <%= button t(:update) %>
+            <%= t(:or) %> <%= link_to t(:back), admin_purchase_orders_url %>
+          </p>
+        </div>
+    <% else %>
+
+        <div data-hook="admin_purchase_order_new_form_buttons">
+          <p class="form-buttons">
+
+            <%= link_to t(:back), admin_purchase_orders_url %>
+          </p>
+        </div>
+
+    <% end %>
+
 <% end %>

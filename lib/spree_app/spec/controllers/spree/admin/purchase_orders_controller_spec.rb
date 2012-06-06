@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe PurchaseOrdersController do
+describe "Spree::Admin::PurchaseOrdersController" do
 
 end

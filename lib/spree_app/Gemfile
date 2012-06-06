@@ -6,8 +6,6 @@ else
   gem 'ruby-debug19'
 end
 
-gem 'database_cleaner'
-
 
 gem "spreadsheet", "~> 0.6.5.9"
 gem 'to_xls'
@@ -16,6 +14,10 @@ gem 'to_xls'
 gem "pdfkit"
 gem "wkhtmltopdf-binary"
 
+group :test do
+  #gem 'turn'
+  gem 'database_cleaner'
+end
 
 
 gemspec

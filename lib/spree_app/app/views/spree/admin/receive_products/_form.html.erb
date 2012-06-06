@@ -1,0 +1,84 @@
+<%= render :partial => 'spree/shared/error_messages', :locals => {:target => @purchase_order} %>
+
+
+    <table class="index" style="width:100%;" data-hook="admin_shipment_form_inventory_units">
+      <tr data-hook="shipments_header">
+        <th style="width:20px;"></th>
+        <th><%= t(:season) %></th>
+        <th><%= t(:team) %></th>
+        <th><%= t(:type) %></th>
+        <th><%= t(:name) %></th>
+        <th><%= t(:number) %></th>
+        <th><%= t(:size) %></th>
+        <th><%= t(:patch) %></th>
+        <th><%= t(:sleeve) %></th>
+        <th><%= t(:po_quantity) %></th>
+        <th><%= t(:history) %></th>
+      </tr>
+
+      <% @pending_inventory_units.each do |unit| %>
+          <tr data-hook="shipments_row">
+            <td style="text-align:center;">
+              <%= check_box_tag "units[#{unit.id}]",
+                                :true,
+                                {:disabled => %w(purchased).include?(unit.state),
+                                 :class => 'inventory_unit'} %>
+
+              <%#= check_box "units", "#{unit.id}",  {}, "true", "false" %>
+            </td>
+
+            <td style="vertical-align:top; width:80px;"><%= unit.season %></td>
+            <td style="vertical-align:top; width:140px;"><%= unit.team %></td>
+            <td style="vertical-align:top; width:50px;"><%= unit.shirt_type %></td>
+            <td style="vertical-align:top; width:50px;"><%= unit.name %></td>
+            <td style="vertical-align:top; width:50px;"><%= unit.number %></td>
+            <td style="vertical-align:top; width:50px;"><%= unit.size %></td>
+            <td style="vertical-align:top; width:140px;"><%= unit.patch %></td>
+            <td style="vertical-align:top; width:50px;"><%= unit.sleeve %></td>
+
+            <td style="vertical-align:top; width:40px;">
+              <%= text_field_tag "unit_quantity[#{unit.id}]", unit.quantity.to_i || 0, {:style => 'width:30px;'} %>
+              <%= hidden_field_tag("unit_quantity_max[#{unit.id}]", unit.quantity.to_i) %>
+            </td>
+            <td><%#= unit.state %>
+
+              <% unit.purchase_orders.each do |p| %>
+                  -> <%= link_to p.number, edit_admin_purchase_order_path(Spree::PurchaseOrder.find_by_number(p.number)), :target => '_blank' %>
+              <% end %>
+
+            </td>
+          </tr>
+      <% end %>
+
+      <% @backorder_inventory_units.each do |unit| %>
+          <tr data-hook="shipments_row">
+            <td style="text-align:center;width:20px;">
+              <%= check_box_tag "units[#{unit.id}]",
+                                :true,
+                                :class => 'inventory_unit' %>
+
+
+            </td>
+
+            <td style="vertical-align:top; width:80px;"><%= unit.season %></td>
+            <td style="vertical-align:top; width:140px;"><%= unit.team %></td>
+            <td style="vertical-align:top; width:50px;"><%= unit.shirt_type %></td>
+            <td style="vertical-align:top; width:50px;"><%= unit.name %></td>
+            <td style="vertical-align:top; width:50px;"><%= unit.number %></td>
+            <td style="vertical-align:top; width:50px;"><%= unit.size %></td>
+            <td style="vertical-align:top; width:140px;"><%= unit.patch %></td>
+            <td style="vertical-align:top; width:50px;"><%= unit.sleeve %></td>
+
+            <td style="vertical-align:top; width:40px;">
+              <%= text_field_tag "unit_quantity[#{unit.id}]", unit.quantity.to_i || 0, {:style => 'width:30px;'} %>
+              <%= hidden_field_tag("unit_quantity_max[#{unit.id}]", unit.quantity.to_i) %>
+            </td>
+            <td><%= unit.state %></td>
+          </tr>
+      <% end %>
+    </table>
+
+
+
+
+

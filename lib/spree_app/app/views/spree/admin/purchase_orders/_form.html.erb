@@ -23,12 +23,8 @@
   <% @pending_inventory_units.each do |unit| %>
       <tr data-hook="shipments_row">
         <td style="text-align:center;">
-          <%= check_box_tag "units[#{unit.id}]",
-                            :true,
-                            { :disabled => %w(purchased).include?(unit.state),
-                              :class => 'inventory_unit'} %>
+          <%= check_box_tag "units[#{unit.id}]", :true, {}, { :disabled => unit.state == 'purchased', :class => 'inventory_unit'} %>
 
-          <%#= check_box "units", "#{unit.id}",  {}, "true", "false" %>
         </td>
 
         <td style="vertical-align:top; width:80px;"><%= unit.season %></td>
@@ -47,7 +43,7 @@
         <td><%#= unit.state %>
 
           <% unit.purchase_orders.each do |p| %>
-                  -> <%= link_to p.number, edit_admin_purchase_order_path(Spree::PurchaseOrder.find_by_number(p.number)) %>
+                  -> <%= link_to p.number, edit_admin_purchase_order_path(Spree::PurchaseOrder.find_by_number(p.number)), :target => '_blank' %>
           <% end %>
 
         </td>
@@ -57,11 +53,7 @@
   <% @backorder_inventory_units.each do |unit| %>
       <tr data-hook="shipments_row">
         <td style="text-align:center;width:20px;">
-          <%= check_box_tag "units[#{unit.id}]",
-                            :true,
-                            :class => 'inventory_unit' %>
-
-
+          <%= check_box_tag "units[#{unit.id}]", :true, {}, { :disabled => unit.state == 'purchased', :class => 'inventory_unit'} %>
         </td>
 
         <td style="vertical-align:top; width:80px;"><%= unit.season %></td>

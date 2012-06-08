@@ -1,0 +1,88 @@
+<div class='toolbar order-links'>
+  <%= button_link_to t(:download_shipment), "/admin/shipments/download", :icon => 'pdf', :id => 'admin_download_shipment' %>
+  <%= button_link_to t(:new_order), new_admin_order_url, :icon => 'add', :id => 'admin_new_order' %>
+</div>
+
+<%= render :partial => 'spree/admin/shared/order_sub_menu' %>
+
+<h2><%= t(:listing_shipments) %></h2>
+<%= paginate @orders %>
+
+<% @orders.each do |order| %>
+    <%= form_for(order.shipment, :url => admin_order_shipments_path(order), :html => {:method => :post}) do |shipment_form| %>
+    <table style="table-layout:fixed;" class="index" id="listing_orders" data-hook>
+      <thead>
+      <tr data-hook="admin_orders_index_headers">
+        <th width="15">
+          <button type="submit" style="font-size: 12px;background: none;height: 20px;" title="Create New Shipment">
+          <%= image_tag('admin/icons/share.png') %>
+          </button>
+        </th>
+        <th width="60">Order</th>
+        <th width="80">Shipment</th>
+        <th width="60">Season</th>
+        <th width="150">Team</th>
+        <th width="30">Type</th>
+        <th width="25">Size</th>
+        <th width="130">Name</th>
+        <th width="15">No</th>
+
+        <th width="120">Patch</th>
+        <th width="">Product Description</th>
+        <th width="65"><%= t('status') %></th>
+
+
+      </tr>
+      </thead>
+      <tbody>
+      <% order.shipment.order.inventory_units.each do |item| %>
+          <tr data-hook="admin_orders_index_rows">
+            <td><%= check_box_tag "inventory_units[#{item.id}]", :true, false,
+                                  {:disabled => %w(shipped packet returned).include?(item.state),
+                                   :class => 'inventory_unit'} %></td>
+            <td><%= link_to order.number, admin_order_path(order) %></td>
+            <td><%= link_to item.shipment.number, edit_admin_shipment_path(item.shipment.number) %></td>
+            <td><%= item.season %></td>
+            <td><%= truncate(item.team.to_s, :length => 25) %></td>
+            <td><%= item.shirt_type %></td>
+            <td><%= item.size %></td>
+            <td><%= item.name %></td>
+            <td><%= item.number %></td>
+            <td><%= truncate(item.patch.to_s, :length => 23) %></td>
+            <td><%= item.sleeve %><%= accurate_title %></td>
+            <td><%= t(item.state) %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <% end %>
+<% end %>
+
+
+<% content_for :sidebar do %>
+    <div class="box" data-hook="admin_orders_index_search" >
+      <h3><%= t(:search) %></h3>
+      <%#= search_form_for [:admin, @search] do |f| %>
+      <%= form_for @search, :url => admin_shipments_path, :method => :get do |f| %>
+          <p>
+            <%= label_tag nil, t(:order_number) %><br/>
+            <%= f.text_field :number_cont, :size => 25 %>
+          </p>
+          <p><%= label_tag nil, t(:order_status) %><br/>
+            <%= f.select :state_eq, Spree::Order.state_machines[:state].states.collect { |s| [t("order_state.#{s.name}"), s.value] }, {:include_blank => true} %>
+          </p>
+          <p>
+            <%= label_tag nil, t(:shipment_number) %><br/>
+            <%#= f.text_field :order_shipment_number_cont, :size => 25 %>
+          </p>
+          <p>
+            <%= f.check_box :completed_at_not_null, {:checked => @show_only_completed}, '1', '' %>
+            <%= label_tag nil, t(:show_only_complete_orders) %>
+          </p>
+
+          <div data-hook="admin_orders_index_search_buttons">
+            <p><%= button t(:search) %></p>
+          </div>
+      <% end %>
+    </div>
+<% end %>

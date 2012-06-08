@@ -38,7 +38,7 @@ module Spree
     def generate_receive_product_number
       record = true
       while record
-        random = "R#{Array.new(9) { rand(9) }.join}"
+        random = "I#{SecureRandom.hex(3).to_s.upcase}"
         record = self.class.find(:first, :conditions => ["number = ?", random])
       end
       self.number = random if self.number.blank?

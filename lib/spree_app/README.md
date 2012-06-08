@@ -64,4 +64,10 @@ Option Types
   shirt-size  shirt-patch
 
 
+Free Shipping
+------------------------------------
+1. Create Shipping Category -> Name = 'Free Shipping'
+2. In product select Shipping Category to Free Shipping
+
+
 

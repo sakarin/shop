@@ -12,6 +12,9 @@ Spree::Core::Engine.routes.draw do
     # modify checkout process
     match '/checkout', :to => 'checkout#edit', :state => 'delivery', :as => :checkout
 
+    match '/admin/shipments', :to => "admin/shipments#home"
+    match 'admin/shipments/download', :to => "admin/shipments#download"
+
     namespace :admin do
 
       resources :suppliers
@@ -27,6 +30,13 @@ Spree::Core::Engine.routes.draw do
       resources :refund_products do
         member do
           put :fire
+        end
+      end
+
+      resources :shipments do
+        member do
+          put :fire
+          get :home
         end
       end
 

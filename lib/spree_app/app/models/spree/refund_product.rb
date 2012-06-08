@@ -43,7 +43,7 @@ module Spree
 
       record = true
       while record
-        random = "RF#{Array.new(9){rand(9)}.join}"
+        random = "RF#{SecureRandom.hex(3).to_s.upcase}"
         record = self.class.where(:number => random).first
       end
       self.number = random

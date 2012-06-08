@@ -53,7 +53,7 @@ module Spree
     def generate_purchase_order_number
       record = true
       while record
-        random = "PO#{Array.new(9) { rand(9) }.join}"
+        random = "P#{SecureRandom.hex(3).to_s.upcase}"
         record = self.class.find(:first, :conditions => ["number = ?", random])
       end
       self.number = random if self.number.blank?

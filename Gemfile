@@ -46,3 +46,5 @@ gem "wkhtmltopdf-binary"
 group :production do
   gem 'exception_notification', :require => 'exception_notifier'
 end
+
+gem 'spree_paypal_express'  , :git => 'git://github.com/spree/spree_paypal_express.git'

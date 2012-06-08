@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120606001416) do
+ActiveRecord::Schema.define(:version => 20120607194254) do
 
   create_table "_spree_purchase_items_old_20120531", :force => true do |t|
     t.integer  "purchase_order_id"
@@ -575,6 +575,12 @@ ActiveRecord::Schema.define(:version => 20120606001416) do
 
   add_index "spree_roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
   add_index "spree_roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
+
+  create_table "spree_shipment_files", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "spree_shipments", :force => true do |t|
     t.string   "tracking"

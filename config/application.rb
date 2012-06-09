@@ -71,5 +71,7 @@ module Shop
 
     config.middleware.use PDFKit::Middleware
 
+
+
   end
 end

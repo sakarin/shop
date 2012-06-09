@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120607194254) do
+ActiveRecord::Schema.define(:version => 20120609151054) do
 
   create_table "_spree_purchase_items_old_20120531", :force => true do |t|
     t.integer  "purchase_order_id"
@@ -315,6 +315,7 @@ ActiveRecord::Schema.define(:version => 20120607194254) do
     t.string   "payment_state"
     t.string   "email"
     t.text     "special_instructions"
+    t.integer  "store_id"
   end
 
   add_index "spree_orders", ["number"], :name => "index_orders_on_number"
@@ -342,6 +343,13 @@ ActiveRecord::Schema.define(:version => 20120607194254) do
     t.string   "state"
     t.string   "response_code"
     t.string   "avs_response"
+  end
+
+  create_table "spree_paypal_accounts", :force => true do |t|
+    t.string "email"
+    t.string "payer_id"
+    t.string "payer_country"
+    t.string "payer_status"
   end
 
   create_table "spree_pending_promotions", :force => true do |t|
@@ -425,6 +433,14 @@ ActiveRecord::Schema.define(:version => 20120607194254) do
 
   add_index "spree_products_promotion_rules", ["product_id"], :name => "index_products_promotion_rules_on_product_id"
   add_index "spree_products_promotion_rules", ["promotion_rule_id"], :name => "index_products_promotion_rules_on_promotion_rule_id"
+
+  create_table "spree_products_stores", :id => false, :force => true do |t|
+    t.integer "product_id"
+    t.integer "store_id"
+  end
+
+  add_index "spree_products_stores", ["product_id"], :name => "index_products_stores_on_product_id"
+  add_index "spree_products_stores", ["store_id"], :name => "index_products_stores_on_store_id"
 
   create_table "spree_products_taxons", :id => false, :force => true do |t|
     t.integer "product_id"
@@ -643,6 +659,16 @@ ActiveRecord::Schema.define(:version => 20120607194254) do
     t.integer "country_id"
   end
 
+  create_table "spree_stores", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.text     "domains"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "default",    :default => false
+    t.string   "email"
+  end
+
   create_table "spree_suppliers", :force => true do |t|
     t.string   "code"
     t.string   "name"
@@ -662,7 +688,7 @@ ActiveRecord::Schema.define(:version => 20120607194254) do
   end
 
   create_table "spree_tax_rates", :force => true do |t|
-    t.decimal  "amount",            :precision => 8, :scale => 4
+    t.decimal  "amount",            :precision => 8, :scale => 5
     t.integer  "zone_id"
     t.integer  "tax_category_id"
     t.datetime "created_at",                                                         :null => false
@@ -674,7 +700,10 @@ ActiveRecord::Schema.define(:version => 20120607194254) do
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "store_id"
   end
+
+  add_index "spree_taxonomies", ["store_id"], :name => "index_spree_taxonomies_on_store_id"
 
   create_table "spree_taxons", :force => true do |t|
     t.integer  "parent_id"
@@ -713,6 +742,7 @@ ActiveRecord::Schema.define(:version => 20120607194254) do
     t.boolean  "active",       :default => true
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.integer  "store_id"
   end
 
   create_table "spree_users", :force => true do |t|

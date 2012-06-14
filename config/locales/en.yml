@@ -1,5 +1,36 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
+---
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      spree/supplier:
+        name: Name
+        code: Code
+        email: E-Mail
+  new_supplier: New Supplier
+  edit_supplier: Edit Supplier
+  supplier_admin: Suppliers
+  manage_suppliers: Manage Suppliers.
+
+  new_purchase_order: New Purchase Order
+  download_purchase_order: Purchase Order Files
+  purchase_order: Purchase Order
+  purchse_orders: Purchase Orders
+  listing_purchase_orders: Listing Purchase Order
+  include_in_purchase_order: Include in PO
+
+  print_purchase_order: Print Purchase Order
+  purchase_state:
+      purchased: Purchased
+      received: Received
+
+  number: Number
+  po_quantity: Quantity
+
+
+  new_receive_product: New Receive Product
+  new_refund: New Refund
+  refund_updated: Refund Approved
+
+  approve: Approve
+
+  download_shipment: Shipment Files

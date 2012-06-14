@@ -27,13 +27,13 @@ gem 'spree'
 gem 'spree_usa_epay'
 gem 'spree_skrill'
 
-gem 'spree_app', :path => 'lib/spree_app'
+#gem 'spree_app', :path => 'lib/spree_app'
 
 # see the notes in spree_flexi_variants
 gem 'rmagick'
 gem 'carrierwave'
 gem 'spree_flexi_variants', :path => 'lib/spree_flexi_variants'
-#gem 'spree_flexi_variants' , :git=>'git@github.com:jsqu99/spree_flexi_variants.git'
+#gem 'spree_flexi_variants' , :git=>'git://github.com/jsqu99/spree_flexi_variants.git'
 
 
 gem "spreadsheet", "~> 0.6.5.9"
@@ -53,3 +53,8 @@ gem 'spree_paypal_express'  , :path => 'lib/spree_paypal_express'
 
 #- git => git://github.com/spree/spree-multi-domain.git
 gem  'spree_multi_domain', :path => 'lib/spree-multi-domain'
+#gem  'spree_multi_domain', :git => 'git://github.com/ramkalari/spree-multi-domain.git'
+
+# git://github.com/martinjlowm/spree-multi-currency.git
+gem  'multi_currencies', :path => 'lib/spree-multi-currency'
+

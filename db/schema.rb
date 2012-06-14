@@ -29,6 +29,25 @@ ActiveRecord::Schema.define(:version => 20120609151054) do
     t.datetime "updated_at",        :null => false
   end
 
+  create_table "currencies", :force => true do |t|
+    t.string   "num_code",                      :null => false
+    t.string   "char_code",                     :null => false
+    t.string   "name",                          :null => false
+    t.boolean  "basic",      :default => false
+    t.string   "locale"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "currency_converters", :force => true do |t|
+    t.integer  "currency_id",                  :null => false
+    t.datetime "date_req",                     :null => false
+    t.float    "nominal",     :default => 1.0, :null => false
+    t.float    "value",                        :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
     t.integer "product_id"

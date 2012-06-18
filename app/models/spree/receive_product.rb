@@ -41,7 +41,7 @@ module Spree
         random = "I#{SecureRandom.hex(3).to_s.upcase}"
         record = self.class.find(:first, :conditions => ["number = ?", random])
       end
-      self.number = random if self.number.blank?
+      self.number = random
       self.number
     end
 

@@ -1,10 +1,10 @@
 <div class='toolbar order-links'>
-  <% if @refund_product.can_approve? %>
-      <%= button_link_to t(:approve), fire_admin_refund_product_path(@refund_product, :e => 'approve'), :method => :put, :confirm => t(:are_you_sure) %>
+  <% if @refund_product.can_paid? %>
+      <%= button_link_to t(:paid), fire_admin_refund_product_path(@refund_product, :e => 'paid'), :method => :put, :confirm => t(:are_you_sure) %>
   <% end %>
 </div>
 
-<h1><%= t(:refund_product) %> <%= @refund_product.number %></h1>
+<h1><%= t(:refund_product) %> #<%= @refund_product.number %></h1>
 
 <%= render :partial => 'spree/shared/error_messages', :locals => {:target => @refund_product} %>
 

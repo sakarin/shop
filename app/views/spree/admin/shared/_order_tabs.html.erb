@@ -47,19 +47,16 @@
             <%= link_to t(:payments), admin_order_payments_url(@order) %>
           </li>
           <li<%== ' class="active"' if current == 'Purchase Orders' %>>
-            <%= link_to t(:purchase_orders), '' %>
+            <%= link_to t(:purchase_orders), "/admin/orders/#{@order.number}/purchase_orders" %>
           </li>
-          <li<%== ' class="active"' if current == 'Receive Products' %>>
-            <%= link_to t(:receive_products), '' %>
-          </li>
-          <li<%== ' class="active"' if current == 'Refunds' %>>
-            <%= link_to t(:refunds), '' %>
-          </li>
+          <!--<li<%== ' class="active"' if current == 'Receive Products' %>>-->
+            <!--<%= link_to t(:receive_products), "/admin/orders/#{@order.number}/receive_orders" %>-->
+          <!--</li>-->
+          <!--<li<%== ' class="active"' if current == 'Refunds' %>>-->
+            <!--<%= link_to t(:refunds), '' %>-->
+          <!--</li>-->
           <li<%== ' class="active"' if current == 'Shipments' %>>
             <%= link_to t(:shipments), admin_order_shipments_url(@order) %>
-          </li>
-          <li<%== ' class="active"' if current == 'Return Authorizations' %>>
-            <%= link_to t(:return_authorizations), admin_order_return_authorizations_url(@order) %>
           </li>
           <li<%== ' class="active"' if current == 'History' %>>
             <%= link_to t(:history), history_admin_order_url(@order) %>

@@ -2,7 +2,7 @@
 
 <% if %w(purchased received).include?(@purchase_order.state) %>
 
-    <h1><%= t(:receive_product) %> <%= @purchase_order.number %></h1>
+    <h1><%= t(:receive_product) %> #<%= @purchase_order.number %></h1>
 
     <%= form_for :receive_product, :url => admin_purchase_order_receive_product_path(@purchase_order, @receive_product), :method => :put do |f| %>
         <%= render :partial => 'form', :locals => {:f => f} %>

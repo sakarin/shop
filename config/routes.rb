@@ -12,6 +12,11 @@ Shop::Application.routes.draw do
     match '/admin', :to => 'admin/orders#index', :as => :admin
 
     match 'admin/purchase_orders/download', :to => "admin/purchase_orders#download"
+    match 'admin/orders/:order_id/purchase_orders', :to => "admin/purchase_orders#purchase_by_order"
+    match 'admin/orders/:order_id/receive_orders', :to => "admin/receive_products#receive_orders"
+
+    match 'admin/shipments/print', :to => "admin/shipments#print"
+    match 'admin/shipments/preview', :to => "admin/shipments#preview"
 
     # modify checkout process
     match '/checkout', :to => 'checkout#edit', :state => 'delivery', :as => :checkout

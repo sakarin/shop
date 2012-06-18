@@ -3,16 +3,12 @@
 <table class="index" id="listing_refund_products" data-hook>
   <thead>
   <tr data-hook="admin_refund_products_index_headers">
-    <th><%= t(:created_at) %></th>
-    <th>Refund Number</th>
-    <th>Order Number</th>
-    <th>Amount</th>
-    <th>Status</th>
+    <th width="200"><%= t(:created_at) %></th>
+    <th width="200">Refund Number</th>
+    <th width="200">Order Number</th>
+    <th width="200">Amount</th>
 
-
-
-
-    <th data-hook="admin_purchase_orders_index_header_actions"></th>
+    <th data-hook="admin_purchase_orders_index_header_actions">Actions</th>
   </tr>
   </thead>
   <tbody>
@@ -22,11 +18,9 @@
         <td><%= link_to refund_product.number, admin_refund_product_path(refund_product) %></td>
         <td><%= link_to refund_product.order.number, admin_order_path(refund_product.order) %></td>
         <td><%= refund_product.amount %></td>
-        <td><%= refund_product.state %></td>
 
-
-        <td class='actions' data-hook="admin_purchase_orders_index_row_actions">
-          <%= link_to_edit_url admin_refund_product_path(refund_product), :title => "admin_edit_#{dom_id(refund_product)}" %>
+        <td>
+          <%= button_to "paid", fire_admin_refund_product_path(refund_product, :e => 'paid'), :method => :put %>
         </td>
       </tr>
   <% end %>

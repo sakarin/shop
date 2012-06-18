@@ -1,6 +1,6 @@
 <div class='toolbar order-links'>
   <%= button_link_to t(:download_shipment), "/admin/shipments/download", :icon => 'pdf', :id => 'admin_download_shipment' %>
-  <%= button_link_to t(:new_order), new_admin_order_url, :icon => 'add', :id => 'admin_new_order' %>
+  <%= button_link_to(t("preview_shipment"), admin_shipments_preview_path, :method => :get, :target => '_blank', :icon => 'pdf') %>
 </div>
 
 <%= render :partial => 'spree/admin/shared/order_sub_menu' %>
@@ -42,7 +42,7 @@
                                    :class => 'inventory_unit'} %></td>
             <td><%= link_to order.number, admin_order_path(order) %></td>
             <td>
-              <%= link_to item.shipment.number, edit_admin_shipment_path(item.shipment.number) unless item.shipment.nil? %>
+              <%= link_to item.shipment.number, edit_admin_order_shipment_path(order, item.shipment.number) unless item.shipment.nil? %>
             </td>
             <td><%= item.season %></td>
             <td><%= truncate(item.team.to_s, :length => 25) %></td>
@@ -64,7 +64,7 @@
 <% content_for :sidebar do %>
     <div class="box" data-hook="admin_orders_index_search" >
       <h3><%= t(:search) %></h3>
-      <%#= search_form_for [:admin, @search] do |f| %>
+
       <%= form_for @search, :url => admin_shipments_path, :method => :get do |f| %>
           <p>
             <%= label_tag nil, t(:order_number) %><br/>

@@ -96,6 +96,14 @@ module Spree
         end
       end
 
+
+      def purchase_by_order
+        @order = Order.find_by_number(params[:order_id])
+        @inventory_units = @order.inventory_units
+
+        render "purchases"
+      end
+
       def destroy
 
         inventory_unit_ids = @purchase_order.inventory_unit_ids
@@ -122,10 +130,19 @@ module Spree
       end
 
       def show
-        ## generate file
+        purchase_file = PurchaseOrderFile.find_by_name(@purchase_order.number)
+        if purchase_file.blank?
+          PurchaseOrderFile.create(:name => @purchase_order.number)
+        end
+        load_purchasing_order_file_generate_file
+        ToXls::ArrayWriter.new(@backorder_inventory_units, :name => 'purchase_order', :columns => [:season, :team, :shirt_type, :name, :number, :size, :sleeve, :patch, :quantity], :headers => ['Season', 'Team', 'Type', 'Number', 'Number', 'Size', 'Sleeve', 'Patch', 'Quantity']).write_io("#{Rails.root}/public/files/purchases/#{@purchase_order.number}.xls")
 
-        #gen_excel_file
-        #gen_pdf_file
+        html = render_to_string(:action => "show.html.erb" , :layout => 'report')
+        kit = PDFKit.new(html)
+        kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/print.css"
+
+        send_data(kit.to_pdf, :filename => "#{@purchase_order.number}.pdf", :type => 'application/pdf')
+        kit.to_file("#{Rails.root}/public/files/purchases/#{@purchase_order.number}.pdf")
 
         @purchase_order.purchased
 
@@ -150,30 +167,23 @@ module Spree
         @purchase_order
       end
 
-      def gen_excel_file
-        load_purchasing_order_file_generate_file
-
-        ToXls::ArrayWriter.new(@backorder_inventory_units, :name => 'purchase_order', :columns => [:season, :team, :shirt_type, :name, :number, :size, :sleeve, :patch, :quantity], :headers => ['Season', 'Team', 'Type', 'Number', 'Number', 'Size', 'Sleeve', 'Patch', 'Quantity']).write_io("#{Rails.root}/public/files/purchases/#{@purchase_order.number}.xls")
-
-        #update excel file_name to data base
-        purchase_file = PurchaseOrderFile.find_by_name(@purchase_order.number)
-        if purchase_file.blank?
-          PurchaseOrderFile.create(:name => @purchase_order.number)
-        end
-
-      end
-
-      def gen_pdf_file
-
-        load_purchasing_order_file_generate_file
-
-        html = render_to_string(:action => "show.html.erb" , :layout => 'report')
-        kit = PDFKit.new(html)
-        kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/print.css"
-
-        send_data(kit.to_pdf, :filename => "#{@purchase_order.number}.pdf", :type => 'application/pdf')
-        kit.to_file("#{Rails.root}/public/files/purchases/#{@purchase_order.number}.pdf")
-      end
+      #def generate_excel_file
+      #  load_purchasing_order_file_generate_file
+      #  ToXls::ArrayWriter.new(@backorder_inventory_units, :name => 'purchase_order', :columns => [:season, :team, :shirt_type, :name, :number, :size, :sleeve, :patch, :quantity], :headers => ['Season', 'Team', 'Type', 'Number', 'Number', 'Size', 'Sleeve', 'Patch', 'Quantity']).write_io("#{Rails.root}/public/files/purchases/#{@purchase_order.number}.xls")
+      #
+      #end
+      #
+      #def generate_pdf_file
+      #
+      #  load_purchasing_order_file_generate_file
+      #
+      #  html = render_to_string(:action => "show.html.erb" , :layout => 'report')
+      #  kit = PDFKit.new(html)
+      #  kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/print.css"
+      #
+      #  send_data(kit.to_pdf, :filename => "#{@purchase_order.number}.pdf", :type => 'application/pdf')
+      #  kit.to_file("#{Rails.root}/public/files/purchases/#{@purchase_order.number}.pdf")
+      #end
 
       def load_inventory_units
         @backorder_inventory_units = InventoryUnit.backorder_inventory_units

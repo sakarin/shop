@@ -82,7 +82,7 @@ table.index th .right {
 table.index th.id-col {
     text-align: center; }
 table.index td {
-    padding: 3px 10px;
+    padding: 4px 4px 4px 4px;
 }
 table.index td a{
     color: #006E96 !important;  }
@@ -101,6 +101,11 @@ table.index.order-summary tr.totals th {
     text-align: right;
     border: none; }
 table.index td.actions {text-align:right;}
+
+/*table.index {*/
+    /*padding: 1px 1px 1px 1px;*/
+    /*margin:  1px 1px 1px 1px;*/
+/*}*/
 
 
 #language-bar,
@@ -389,7 +394,7 @@ table#product_scopes tr td table tr td {
 /* Default font settings.
    The font-size percentage is of 16px. (0.75 * 16px = 12px) */
 body {
-    font-size: 13px;
+    font-size: 11px;
     color: #222;
     font-family: "Helvetica Neue", Helvetica, Tahoma, Verdana, Arial, sans-serif;
 }
@@ -458,7 +463,7 @@ dd          { margin-left: 1.5em;}
 table       { margin-bottom: 1.4em; width:100%; }
 th          { font-weight: bold; }
 thead th 		{ background: #c3d9ff; }
-th,td,caption { padding: 4px 10px 4px 5px; }
+/*th,td,caption { padding: 2px 2px 2px 2px; }*/
 tr.even td  { background: #e5ecf9; }
 tfoot       { font-style: italic; }
 caption     { background: #eee; }

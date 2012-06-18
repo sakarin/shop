@@ -20,7 +20,7 @@ module Spree
         logger.debug "request.port : #{request.port}"
         logger.debug "----------------------------------------------------------------------------"
 
-        redirect_to "http://" + @store.domains + ":3000" + path + "?" + "#{@_env['QUERY_STRING']}"
+        redirect_to "http://" + @store.domains + ":"+ request.port.to_s + path + "?" + "#{@_env['QUERY_STRING']}"
       end
 
     end

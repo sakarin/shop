@@ -100,6 +100,12 @@ module Spree
         respond_with(@receive_product) { |format| format.js { render_js_for_destroy } }
       end
 
+      def receive_orders
+        @order = Order.find_by_number(params[:order_id])
+        @inventory_units = @order.inventory_units
+        render "receives"
+      end
+
 
 
       private

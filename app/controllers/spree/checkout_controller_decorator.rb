@@ -117,7 +117,7 @@ module Spree
 
     # hook to override paypal site options
     def paypal_site_opts
-      {:currency => session[:currency_id].present? ? session[:currency_id].to_s : Preference.find_by_owner_id_and_name(payment_method, 'currency').value}
+      {:currency => session[:currency_id].present? ? session[:currency_id].to_s : "GBP"}
     end
 
 

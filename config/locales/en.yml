@@ -34,3 +34,7 @@ en:
   approve: Approve
 
   download_shipment: Shipment Files
+  print_shipment: Print
+  preview_shipment: Preview Shipments
+
+  refund_product: Refund

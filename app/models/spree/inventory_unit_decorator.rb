@@ -7,12 +7,12 @@ module Spree
     has_many :purchase_orders, :through => :purchase_items
 
     has_many :receive_items
-    has_many :receive_orders, :through => :receive_items
+    has_many :receive_products, :through => :receive_items
 
     has_many :refund_items
     has_many :refunds, :through => :refund_items
 
-
+    scope :packet, where(:state => 'packet')
     scope :pending, where(:state => 'pending')
 
     scope :backorder_inventory_units, where("state LIKE 'backordered' AND po_version = 0").select("id, count(variant_id) as quantity, po_version, variant_id, name, number, size, patch, season, team, shirt_type, sleeve, state").group('variant_id, name, number, size, patch, season, team, shirt_type, sleeve')
@@ -29,24 +29,25 @@ module Spree
       end
 
       event :fill_backorder do
-        transition :to => 'purchased', :from => 'backordered'
-        transition :to => 'purchased', :from => 'sold'
+        transition :from => ['backordered', 'sold'], :to => 'purchased'
       end
 
-      # รับของเสร็จจึงจะ sold
       event :sold do
-        transition :to => 'sold', :from => 'purchased'
-        transition :to => 'sold', :from => 'backordered'
+        transition :from => ['purchased', 'backordered'], :to => 'sold'
       end
+      event :packet do
+        transition :from => 'sold', :to => 'packet'
+      end
+
       event :ship do
         transition :to => 'shipped', :if => :allow_ship?
       end
       event :refund do
-        transition :to => 'refund', :from => 'backordered'
+        transition :from => 'backordered', :to => 'refund'
       end
 
       event :return do
-        transition :to => 'returned', :from => 'shipped'
+        transition :from => 'shipped', :to => 'returned'
       end
 
       after_transition :on => :fill_backorder, :do => :update_order
@@ -84,6 +85,10 @@ module Spree
     def after_refund
       self.shipment = nil
       self.save
+    end
+
+    def allow_ship?
+      self.packet? && !self.shipment.tracking.nil?
     end
 
 

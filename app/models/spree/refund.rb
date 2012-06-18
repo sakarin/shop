@@ -58,9 +58,12 @@ module Spree
           item.update_attributes(:refund_product_id => refund_product.id)
         end
 
+        inventory_units.each &:refund!
       end
 
     end
+
+
 
     def generate_receive_product_number
       record = true

@@ -4,8 +4,6 @@ module Spree
 
 
 
-
-
     private
     def generate_shipment_number
       order = Order.find(self.order_id)
@@ -18,20 +16,17 @@ module Spree
       end
     end
 
-    def create_adjustment(label, target, calculable, mandatory=false)
-      amount = compute_amount(calculable)
-      return if amount == 0 && !mandatory
-      target.adjustments.create({ :amount => amount,
-                                  :source => calculable,
-                                  :originator => self,
-                                  :label => label,
-                                  :mandatory => mandatory}, :without_protection => true)
+    def ensure_correct_adjustment
+      if adjustment
+        adjustment.originator = shipping_method
+        adjustment.save
+      else
+        if self.order.shipments.size == 1
+          shipping_method.create_adjustment(I18n.t(:shipping), order, self, true)
+          reload #ensure adjustment is present on later saves
+        end
+      end
     end
-
-
-
-
-
 
 
   end

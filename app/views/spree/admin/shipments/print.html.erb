@@ -1,0 +1,20 @@
+<% @shipments.each do |shipment| %>
+    <%- locals = {:shipment => shipment} %>
+
+    <% unless shipment.inventory_units.blank? %>
+        <%= render :partial => 'spree/admin/shipments/print_form', :locals => {:shipment => shipment} %>
+        <% if shipment.order.ship_address %>
+            <div class='adr'>
+              <h4><%= t("ship_address") %></h4>
+              <%= render :partial => 'spree/admin/shared/address', :locals => {:address => shipment.order.ship_address} %>
+            </div>
+            <div style="float: right; font-weight: bold;">
+              <%= shipment.number if shipment.number %>
+            </div>
+        <% end %>
+    <% end %>
+    <hr/>
+
+    <br class='clear'/>
+
+<% end %>

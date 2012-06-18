@@ -4,7 +4,7 @@
 </div>
 <% end %>
 
-<h1><%= t(:purchase_order) %> <%= @purchase_order.number %></h1>
+<h1><%= t(:purchase_order) %> #<%= @purchase_order.number %></h1>
 
 <%= render :partial => 'spree/admin/shared/purchase_order_tabs', :locals => {:current => 'Purchase Order Details'} %>
 

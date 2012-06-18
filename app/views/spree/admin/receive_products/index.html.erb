@@ -4,18 +4,14 @@
 
 <%= render :partial => 'spree/admin/shared/purchase_order_tabs', :locals => {:current => 'Receive Product Details'} %>
 
-<h2><%= t(:listing_receive_products) %></h2>
+<h1><%= t(:listing_receive_products) %></h1>
 
 <table class="index" id="listing_receive_products" data-hook>
   <thead>
   <tr data-hook="admin_receive_products_index_headers">
 
     <th><%=  t(:created_at) %></th>
-
     <th><%= t(:number, :scope => 'activerecord.attributes.spree/order') %></th>
-
-
-
     <th data-hook="admin_purchase_orders_index_header_actions"></th>
   </tr>
   </thead>

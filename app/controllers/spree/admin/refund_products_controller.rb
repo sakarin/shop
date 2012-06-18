@@ -17,7 +17,7 @@ module Spree
 
       def fire
         if @refund_product.send("#{params[:e]}")
-          flash.notice = t(:refund_product_updated)
+          flash_message_for(@refund_product, :successfully_created)
         else
           flash[:error] = t(:cannot_perform_operation)
         end

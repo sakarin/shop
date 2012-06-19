@@ -1,0 +1,13 @@
+<h1><%= t(:new_purchase_order) %></h1>
+
+<%= form_for :purchase_order, :url => admin_purchase_order_path(@purchase_order) do |f| %>
+    <%= render :partial => 'form', :locals => {:f => f} %>
+
+    <div data-hook="admin_purchase_order_new_form_buttons">
+      <p class="form-buttons">
+        <%= button t(:create) %>
+        <%= t(:or) %> <%= link_to t(:back), admin_purchase_orders_url %>
+      </p>
+    </div>
+<% end %>
+

@@ -1,0 +1,808 @@
+div.breadcrumbs{display: none;}
+
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    font-family: Georgia, serif;
+    font-weight: normal;
+    padding-top: 20px;
+    text-align: center;
+}
+
+h2 {
+    padding-top: 20px;
+    text-align: center;
+}
+
+p {
+    padding: 5px 0;
+}
+
+/* top-nav */
+
+#top-nav{
+    height: 30px;
+    background: #000000;
+
+}
+#top-nav ul#menu-top-nav{
+    list-style: none;
+}
+#top-nav ul#menu-top-nav li.left{
+    float: left;
+}
+#top-nav ul#menu-top-nav li.right{
+    float: right;
+}
+#top-nav ul#menu-top-nav li{
+    color: #999999;
+    font-size: 15px 95%;
+    padding-top: 3px;
+    margin-left: 10px;
+}
+#top-nav ul#menu-top-nav li a{
+    color: #ffffff;
+}
+
+/* Site banner */
+#site-banner{
+    height: 284px;
+    width:990px;
+    background: url('../../images/footballshirt/bg-header.png') no-repeat;
+}
+ul#nav{
+    list-style:none;
+    margin-top: 12px;
+    font-size: 15px;
+}
+ul#nav li{
+    float: left;
+    border-right: 1px solid #999999;
+    line-height: 15px;
+}
+ul#nav li.last{
+    border: 0px;
+}
+ul#nav li.first a{
+    margin-left: 30px;
+}
+ul#nav li a{
+    display: block;
+    /*
+    margin-left: 25px;
+    margin-right: 25px;
+    */
+    margin-left: 32px;
+    margin-right: 32px;
+}
+.search-box{
+    display: block;
+    float: right;
+    width: 140px;
+    height: 20px;
+    background: transparent url("../../images/footballshirt/search_bg.png") no-repeat top;
+    margin: 2px 0 0 0;
+}
+.search-box p{
+    padding-top: 0px;
+}
+.search-box p input,
+.search-box p input:hover {
+    background: transparent;
+    border: 0;
+    width: 110px;
+    height: 15px;
+    padding: 0;
+    margin: 2px 0 0 2px;
+    padding-left: 20px;
+}
+.breadcrumbs ul{
+    list-style: none;
+    color: #ffffff;
+    font-size: 15px 95%;
+}
+.breadcrumbs ul li{
+    float: left;
+    display: block;
+    list-style: disc outside none;
+}
+.breadcrumbs ul li a{
+    color: #999999;
+}
+#body_content #banner-slider{
+    padding-bottom: 18px;
+    background: url("../../images/footballshirt/home/shadow_bottom_slider.png") no-repeat bottom;
+    margin-bottom: 10px;
+}
+
+/* sidebar */
+.head-sidebar{
+    height: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: url('../../images/footballshirt/sidebar/top-head.png');
+}
+.body-sidebar{
+    border-left: 1px solid #3e3e3e;
+    border-right: 1px solid #181818;
+    padding-bottom: 10px;
+}
+.body-sidebar h2{
+    color: #cccccc;
+    font-weight: normal;
+    font: 14px 'Helvetica';
+    padding-top: 0px;
+    padding-bottom: 5px;
+    text-align: left;
+    padding-left: 20px;
+}
+.body-sidebar ul{
+    list-style: none;
+}
+.body-sidebar ul li a{
+    color: #999999;
+}
+.body-sidebar ul li a:hover{
+    color: #ff3333;
+    text-decoration: none;
+}
+.sidebar-header-line{
+    background: url('../../images/footballshirt/sidebar/header_line.png') repeat-x;
+    display: block;
+    width: 100%;
+    height: 2px;
+    margin-bottom: 10px;
+}
+.footer-sidebar{
+    height: 36px;
+    background: url('../../images/footballshirt/sidebar/footer-sidebar.png') no-repeat;
+}
+#categories-sidebar .body-sidebar{
+    background: url('../../images/footballshirt/sidebar/sidebar_bg_product_category.png') repeat-x #000000;
+}
+#categories-sidebar .product-categories ul li{
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    background: url('../../images/footballshirt/sidebar/team_ul_li_logo.png') no-repeat left;
+    padding-left: 28px;
+}
+
+#best-seller-sidebar .product-categories ul li{
+    /*margin-left: 5px;*/
+    margin-top: 10px;
+    margin-bottom: 5px;
+    /*background: url('../../images/footballshirt/sidebar/team_ul_li_logo.png') no-repeat left;*/
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#categories-sidebar .product-categories ul li.current a{
+    color: #ff3333;
+}
+
+#best-seller-sidebar{
+    margin-top: 10px;
+}
+#best-seller-sidebar .body-sidebar{
+    background: url('../../images/footballshirt/sidebar/sidebar_bg_best_seller.png') repeat-x #000000;
+}
+#best-seller-sidebar .best-top-seller-list ul{
+    list-style: none;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#best-seller-sidebar .best-top-seller-list ul li{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+#best-seller-sidebar .best-top-seller-list ul li img{
+    float: left;
+}
+#best-seller-sidebar .best-top-seller-list span.title,
+#best-seller-sidebar .best-top-seller-list span.price{
+    margin-left: 45px;
+    display: block;
+}
+#best-seller-sidebar .best-top-seller-list a span.price{
+    color: #ff3333;
+}
+#cart-sidebar{
+    color: #999999;
+}
+#cart-sidebar .body-sidebar{
+    background: url('../../images/footballshirt/sidebar/sidebar_bg_shopping_cart.png') repeat-x #000000;
+}
+#payment-sidebar{
+    margin-top: 10px;
+}
+#payment-sidebar .body-sidebar{
+    background: url('../../images/footballshirt/sidebar/sidebar_bg_payment.png') repeat-x #000000;
+}
+.paypal-veried{
+
+    width: 140px;
+    height: 186px;
+    margin-top:15px;
+    margin-left: 15px;
+    display: block;
+}
+#banner-sidebar{
+    margin-top: 10px;
+}
+.bttn-go-to-cart{
+    background: url('../../images/footballshirt/sidebar/bttn_cart.png') no-repeat;
+    width: 56px;
+    height: 22px;
+    display: block;
+    float: left;
+    margin-top:15px;
+}
+.bttn-checkout{
+    background: url('../../images/footballshirt/sidebar/bttn_checkout.png') no-repeat;
+    width: 92px;
+    height: 22px;
+    display: block;
+    float: left;
+    margin-top:15px;
+}
+
+/* body_content */
+#body_content .top-box,
+#product-list .top-box{
+    height: 10px;
+    background: url('../../images/footballshirt/body_content/top-box.png') no-repeat;
+}
+#body_content .top-box-770,
+#product-list .top-box-770{
+    height: 10px;
+    /*background: url('../../images/footballshirt/body_content/top-box-770.png') no-repeat;*/
+}
+#body_content .top-box-960{
+    height: 10px;
+    background: url('../../images/footballshirt/body_content/top-box-960.png') no-repeat;
+}
+#body_content .title,
+#product-list .title{
+    padding-left: 20px;
+    padding-right: 20px;
+    /*background: url('../../images/footballshirt/body_content/title_bg.png') no-repeat #ffffff;*/
+    min-height: 40px;
+
+}
+#body_content .title-960{
+    padding-left: 20px;
+    padding-right: 20px;
+    /*background: url('../../images/footballshirt/body_content/title_bg_960.png') no-repeat #ffffff;*/
+    min-height: 40px;
+}
+#body_content .title h1,
+#product-list .title h1,
+#body_content .title-960 h1{
+    padding-top: 0px;
+    text-align: left;
+    font-size: 24px;
+    color: #06F;
+}
+#product-list .title h1,
+#body_content .title h1.page-title{
+    font-style: italic;
+    text-align: center;
+}
+#body_content .content{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#body_content .content,
+#product-list .content{
+    padding-top: 20px;
+    padding-bottom: 15px;
+    /*background: url('../../images/footballshirt/body_content/body_content_bg.png') no-repeat #ffffff;*/
+}
+#body_content .content-770,
+#product-list .content-770{
+    /*background: url('../../images/footballshirt/body_content/body_content_bg_770.png') no-repeat #ffffff !important;*/
+}
+#body_content .content-960{
+    padding-top: 20px;
+    padding-bottom: 15px;
+    /*background: url('../../images/footballshirt/body_content/body_content_bg_960.png') no-repeat #ffffff;*/
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#product-list .content ul{
+    list-style: none;
+}
+#product-list .content-paging{
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+#product-list .content h2.list-taxon{
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 0px;
+    font-size: 21px;
+    font-style: italic;;
+}
+#product-list .content h2.list-taxon a{
+    color: #333333;
+    font-weight: normal;
+}
+#body_content .footer,
+#product-list .footer{
+    background: url('../../images/footballshirt/body_content/body_content_footer.png') no-repeat;
+    height: 50px;
+}
+#body_content .footer-770,
+#product-list .footer-770{
+    /*background: url('../../images/footballshirt/body_content/body_content_footer_770.png') no-repeat;*/
+    height: 50px;
+}
+#body_content .footer-960{
+    /*background: url('../../images/footballshirt/body_content/body_content_footer_960.png') no-repeat;*/
+    height: 50px;
+}
+#body_content .topic_item{
+    color: #cc3333;
+}
+#body_content .customize{
+    margin-top: 10px;
+    /*background: #e5e5e5;*/
+    /*border: 1px solid #cccccc;*/
+    /*border-radius: 10px;*/
+    padding: 20px;
+}
+#product-list .left-topic{
+    text-align: left;
+}
+#product-list h2.left-topic{
+    color: #ffffff;
+    font-weight: normal;
+    font-style: italic;
+    padding-top: 0px;
+}
+#product-list .content .product-entry{
+    padding-left: 10px;
+    padding-right: 5px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    height: 280px;
+    overflow: hidden;
+}
+#product-list .content .product-entry a{
+    color: #333333;
+}
+#product-list .content .product-entry a img{
+    float: left;
+    width: 180px;
+    height: 180px;
+}
+#product-list .content .product-entry a span.item-title{
+    display: block;
+    background: none;
+    text-align: center;
+}
+#product-list .content .product-entry a span.price{
+    color:#cc3333;
+    display: block;
+    text-align: center;
+}
+#product-list .content .product-entry a span.add-to-cart{
+    background: url('../../images/footballshirt/body_content/bttn_add_to_cart_mini.png') no-repeat;
+    width: 83px;
+    height: 21px;
+    display: block;
+    margin: 0 auto;
+}
+#product-list .content .grid-product-list{
+    margin-left: 15px;
+    margin-right: 15px;
+    min-height: 290px;
+}
+#product-list .content .product-entry a:hover{
+    text-decoration: none;
+}
+/* product thumbnail costomization */
+
+#thumbnails ul#product-thumbnails{
+    list-style: none;
+}
+#thumbnails ul#product-thumbnails li{
+    float: left;
+}
+#product-images #main-image{
+    margin-top: 20px;
+}
+#product-images #main-image img{
+    margin: 0 auto;
+    display: block;
+}
+#product-images #thumbnails{
+    margin-top: 20px;
+}
+#product-images #thumbnails ul#product-thumbnails li{
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid #d2d2d2;
+    border-radius: 5px;
+}
+#product-images #thumbnails ul#product-thumbnails li.selected{
+    border: 2px solid #333333;
+}
+#body_content .content .customize #cart-form #product-customizations fieldset ol li label{
+    float: left;
+    width: 100%;
+}
+#body_content .content .customize #cart-form #product-customizations fieldset ol li input{
+    width: 100%
+}
+#body_content .content .customize #cart-form #ad_hoc_options fieldset label {
+    width: 100%;
+    text-align: left;
+}
+#body_content .content .customize #cart-form #ad_hoc_options fieldset select{
+    width: 300px;
+    text-align: left;
+}
+#body_content .content-960 table#cart-detail{
+    width: 100%;
+    border-collapse: collapse;
+}
+#body_content .content-960 table#cart-detail tbody tr{
+    border-bottom: 1px solid #ddd;
+}
+#body_content .content-960 table#cart-detail thead{
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    font-weight: bold;
+}
+#body_content .content-960 table#cart-detail thead tr th{
+    padding-bottom: 10px;
+}
+#body_content .content-960 table#cart-detail tbody tr td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#body_content .content-960 table#cart-detail tbody tr td dl{
+    margin-left: 10px;
+}
+#body_content .content-960 table#cart-detail tbody tr td dl dd{
+    margin-left: 2.5em;
+}
+#body_content .content-960 table#cart-detail tbody tr td h4{
+    font-weight: normal;
+    color: #222;
+    font-size: 1.2em;
+    line-height: 1.25;
+    margin-bottom: 1.25em;
+}
+#body_content .content-960 table#cart-detail tbody tr td h4 a{
+    color: #333333;
+}
+#body_content .content-960 table#cart-detail{
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+#body_content .content-960 form#updatecart #subtotal{
+    float: right;
+    text-align: left;
+    display: block;
+    height: 150px;
+}
+#body_content .content-960 #subtotal h3{
+    font-size: 19px;
+    font-weight: normal;
+}
+#body_content .content-960 button,
+#body_content .content-960 a.button,
+#body_content .content-960 input.button{
+    border-radius: 1.5em;
+    background: #EFEFEF url(../../images/footballshirt/body_content/bg-button.png) center left repeat-x !important;
+    border-style: solid;
+    border-width: 1px !important;
+    border-color: #ddd #999 !important;
+    padding: 10px 17px;
+    text-decoration: none;
+    text-transform: lowercase;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    color: #333333;
+    margin-top: 15px;
+}
+div#checkout{
+    position: relative;
+}
+div#checkout .progress-steps {
+    position: absolute;
+    top: 0.5em;
+    right: 0;
+}
+ol.progress-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+    font-size: 12px;
+}
+ol.progress-steps li.current-first {
+    color: #FFFFFF;
+}
+ol.progress-steps li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+    float: left;
+    color: #999;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-image: url(../../images/step-progress/incomplete-incomplete.gif);
+}
+ol.progress-steps li.current-first {
+    background-image: url(../../images/step-progress/current-first.gif);
+}
+ol.progress-steps li.next {
+    background-image: url(../../images/step-progress/current-incomplete.gif);
+}
+ol.progress-steps li.last span {
+    background-image: url(../../images/step-progress/incomplete-right.gif);
+}
+ol.progress-steps li span {
+    padding: 5px 14px 7px 24px;
+    display: block;
+    float: left;
+    background-position: top right;
+    background-repeat: no-repeat;
+}
+ol.progress-steps li.current-first span {
+    padding-left: 14px;
+}
+div#checkout-summary {
+    background-color: #C3C9DF;
+    float: right;
+    margin-top: 10px;
+    padding: 20px;
+    width: 180px;
+    margin-top: 50px;
+    display: block;
+    border-radius: 10px;
+}
+br[clear=left] {
+    clear: left;
+}
+#body_content .content-960 form#checkout_form_delivery{
+    margin-top: 10px;
+}
+#body_content .content-960 form#checkout_form_delivery legend {
+    font-size: 150%;
+    margin-bottom: 0.5em;
+}
+#body_content .content-960 hr.space {
+    background: #DDD;
+    color: #DDD;
+    clear: both;
+    float: none;
+    width: 100%;
+    height: 0.1em;
+    margin: 0 0 1.45em;
+    border: none;
+    background: white;
+    color: white;
+}
+ol.progress-steps li.completed-first {
+    background-image: url(../../images/step-progress/completed-first.gif) !important;
+}
+ol.progress-steps li.current {
+    background-image: url(../../images/step-progress/completed-current.gif);
+}
+ol.progress-steps li.next-last {
+    background-image: url(../../images/step-progress/current-incomplete.gif);
+}
+ol.progress-steps li.next-last span {
+    background-image: url(../../images/step-progress/incomplete-right.gif);
+}
+ol.progress-steps li.current {
+    color: white;
+}
+#body_content .content-960 #order table.index{
+    width: 100%;
+    margin-bottom: 20px;
+}
+#body_content .content-960 #order table.index tbody#line-items tr th{
+    text-align: left;
+    font-size: 21px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+#body_content .content-960 #order table.index tbody#line-items tr th.total,
+#body_content .content-960 #order table.index tbody#line-items tr th.qty,
+#body_content .content-960 #order table.index tbody#line-items tr th.price{
+    width: 10%;
+    text-align: right;
+}
+#body_content .content-960 #order table.index tbody#line-items tr{
+    border-bottom: 1px solid #ddd;
+}
+#body_content .content-960 #order table.index tbody#line-items tr td{
+    text-align: left;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+#body_content .content-960 #order table.index tbody#line-items tr td dl{
+    margin-left: 20px;
+}
+#body_content .content-960 #order table.index tbody#line-items tr td dl dt{
+    margin-left: 20px
+}
+#body_content .content-960 #order table.index tbody#line-items tr td dl dd{
+    margin-left: 40px;
+}
+#body_content .content-960 #order table.index tbody#line-items tr td dl dd p{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#body_content .content-960 #order table.index tbody#line-items tr td.total,
+#body_content .content-960 #order table.index tbody#line-items tr td.qty,
+#body_content .content-960 #order table.index tbody#line-items tr td.price{
+    text-align: right;
+}
+
+#body_content .content-960 #order table.index tbody#subtotal tr td.total,
+#body_content .content-960 #order table.index tbody#order-charges tr td.total,
+#body_content .content-960 #order table.index tbody#order-total td.total{
+    text-align: right;
+}
+#body_content .content-960 #myaccount-info p a{
+    color: #cc3333;
+}
+#body_content .content-960 table.order-summary{
+    width: 100%;
+}
+#body_content .content-960 table.order-summary thead tr{
+    font-size: 19px;
+    border-bottom: 1px solid #ddd;
+}
+#body_content .content-960 table.order-summary tbody tr.odd{
+    background: #ddd;
+}
+#body_content .content-960 table.order-summary tbody tr td a{
+    color: #cc3333;
+}
+#body_content .content-960 input[type="text"],
+#body_content .content-960 input[type="password"]{
+    border: 1px #ccc solid;
+    padding: 3px;
+    color: #333;
+    -webkit-border-radius: 2px 2px;
+    -moz-border-radius: 2px;
+    padding:5px;
+}
+#body_content .content-960 form.edit_user input[type="text"],
+#body_content .content-960 form.edit_user input[type="password"]{
+    width: 300px;
+}
+#body_content #existing-customer a,
+#body_content #new-customer a{
+    color: #cc3333;
+}
+
+.errorExplanation {
+    font-size: 1.3em;
+    margin-bottom: 1em;
+    padding: 0.8em;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #f4b4b4 url(../images/shadow_top.png) 0px -50px repeat-x;
+    color: #333;
+    border: 1px solid #ddd;
+}
+.errorExplanation p { margin: 0px; }
+.errorExplanation ul { margin-bottom: 0px; list-style: none;margin-left: 20px;}
+.errorExplanation h2 {
+    font-weight: bold;
+    font-size: 1em;
+    margin: 0px;
+}
+#body_content .content-960 #faqs{
+
+}
+#body_content .content-960 #faqs .category h2{
+    font-weight: bold;
+    font-size: 19px;
+    text-align: left;
+}
+ul.answers{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+ul.answers li{
+    margin-bottom: 10px;
+}
+
+ul.answers li a.question {
+    color: #cc3333;
+}
+ul.answers li div.answer{
+    color: #333;
+}
+
+
+/* footer */
+#footer{
+    margin-top: 10px;
+}
+#footer #footer-nav ul{
+    list-style: none;
+}
+#footer #footer-nav ul li{
+    float: left;
+    border-right: 1px solid #999999;
+    line-height: 10px;
+    font-size: 11px;
+}
+#footer #footer-nav ul li.last{
+    border: 0px;
+}
+#footer #footer-nav ul li.first a{
+    margin-left: 15px;
+}
+#footer #footer-nav ul li a{
+    display: block;
+    margin-left: 7px;
+    margin-right: 7px;
+}
+#footer #copyright{
+    color: #666666;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    background: url("../../images/footballshirt/footer_copyright_bg.png") no-repeat;
+}
+
+.flash {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 2em;
+    padding: 0.5em;
+}
+
+
+.flash.error {
+    color:#fff;
+    margin-bottom:15px;
+    background:#ff5351 url('../../images/admin/admin-mystore/screen-flash.png') 0 -804px repeat-x;
+}
+.flash.error div{
+    padding:8px 8px 8px 40px;
+    background:transparent url('../../images/admin/admin-mystore/screen-flash.png') 0 -938px no-repeat;
+}
+.flash.notice {
+    color:#fff;
+    margin-bottom:15px;
+    background: url('../../images/admin/admin-mystore/screen-flash.png') 0 -268px repeat-x
+}
+.flash.notice div{
+    padding:8px 8px 8px 40px;
+    background:transparent url('../../images/admin/admin-mystore/screen-flash.png') 0 -402px no-repeat
+}
+
+
+.flash.notice {
+
+    color:#fff;
+    margin-bottom:10px;
+    background: url('../../images/admin/admin-mystore/screen-flash.png') 0 -268px repeat-x
+}

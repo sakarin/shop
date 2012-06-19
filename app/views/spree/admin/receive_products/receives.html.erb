@@ -1,0 +1,50 @@
+
+
+<%= render :partial => 'spree/admin/shared/order_tabs', :locals => { :current => 'Receive Products' } %>
+<h2><%= t(:listing_receive_products) %></h2>
+
+<table style="table-layout:fixed;" class="index" id="listing_orders" data-hook>
+  <thead>
+  <tr data-hook="admin_orders_index_headers">
+
+    <th width="60">Season</th>
+    <th width="150">Team</th>
+    <th width="30">Type</th>
+    <th width="25">Size</th>
+    <th width="130">Name</th>
+    <th width="15">No</th>
+
+    <th width="120">Patch</th>
+    <th width="120">Sleeve</th>
+    <th width="65"><%= t('status') %></th>
+    <th>Purchase History</th>
+
+
+
+  </tr>
+  </thead>
+  <tbody>
+  <% @inventory_units.each do |item| %>
+      <tr data-hook="admin_orders_index_rows">
+
+        <td><%= item.season %></td>
+        <td><%= truncate(item.team.to_s, :length => 25) %></td>
+        <td><%= item.shirt_type %></td>
+        <td><%= item.size %></td>
+        <td><%= item.name %></td>
+        <td><%= item.number %></td>
+        <td><%= truncate(item.patch.to_s, :length => 23) %></td>
+        <td><%= item.sleeve %><%= accurate_title %></td>
+        <td><%= t(item.state) %></td>
+        <td>
+          <% item.receive_products.each do |receive_product| %>
+              <%  next if receive_product.number.nil?  %>
+              -> <%#= link_to receive_product.number, edit_admin_purchase_order_receive_product_path(item.purchase_order, receive_product), :target => '_blank' %>
+
+          <% end %>
+        </td>
+
+      </tr>
+  <% end %>
+  </tbody>
+</table>

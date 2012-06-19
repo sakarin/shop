@@ -1,0 +1,49 @@
+
+
+<h2>PO : <%= @purchase_order.number %></h2>
+
+<p class="admin_line_items_show_details">
+  <h3>
+      supplier : <%= @purchase_order.supplier.name %>
+  </h3>
+
+</p>
+
+<table class="index" style="width:100%;" data-hook="admin_shipment_form_inventory_units">
+  <tr data-hook="shipments_header">
+
+    <th><%= t(:season) %></th>
+    <th><%= t(:team) %></th>
+    <th><%= t(:type) %></th>
+    <th><%= t(:name) %></th>
+    <th><%= t(:number) %></th>
+    <th><%= t(:size) %></th>
+    <th><%= t(:patch) %></th>
+    <th><%= t(:sleeve) %></th>
+    <th><%= t(:po_quantity) %></th>
+
+  </tr>
+
+
+
+  <% @backorder_inventory_units.each do |unit| %>
+      <tr data-hook="shipments_row">
+
+
+        <td style="vertical-align:top; width:80px;"><%= unit.season %></td>
+        <td style="vertical-align:top; width:140px;"><%= unit.team %></td>
+        <td style="vertical-align:top; width:50px;"><%= unit.shirt_type %></td>
+        <td style="vertical-align:top; width:50px;"><%= unit.name %></td>
+        <td style="vertical-align:top; width:50px;"><%= unit.number %></td>
+        <td style="vertical-align:top; width:50px;"><%= unit.size %></td>
+        <td style="vertical-align:top; width:140px;"><%= unit.patch %></td>
+        <td style="vertical-align:top; width:50px;"><%= unit.sleeve %></td>
+
+        <td style="vertical-align:top; width:40px;">
+          <%= unit.quantity.to_i || 0 %>
+
+        </td>
+
+      </tr>
+  <% end %>
+</table>

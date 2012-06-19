@@ -9,4 +9,7 @@ Spree.config do |config|
   # Example:
   # Uncomment to override the default site name.
   # config.site_name = "Spree Demo Site"
+
+    Spree::Config.set(:auto_capture => true)
+
 end

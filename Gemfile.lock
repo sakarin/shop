@@ -1,3 +1,32 @@
+PATH
+  remote: lib/spree-multi-currency
+  specs:
+    multi_currencies (1.0.3)
+      json (>= 1.5.1)
+      money (>= 3.6.1)
+      nokogiri (>= 1.4.4)
+
+PATH
+  remote: lib/spree-multi-domain
+  specs:
+    spree_multi_domain (1.1.1)
+      spree_core (~> 1.1.1)
+
+PATH
+  remote: lib/spree_flexi_variants
+  specs:
+    spree_flexi_variants (1.0.0)
+      carrierwave
+      json
+      rmagick
+      spree_core (~> 1.1.0)
+
+PATH
+  remote: lib/spree_paypal_express
+  specs:
+    spree_paypal_express (1.1.0)
+      spree_core (>= 1.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -53,6 +82,9 @@ GEM
       builder (>= 2.0.0)
     builder (3.0.0)
     cancan (1.6.7)
+    carrierwave (0.6.2)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
     cocaine (0.2.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -61,19 +93,21 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
-    deface (0.8.0)
+    deface (0.9.1)
       nokogiri (~> 1.5.0)
-      rails (>= 3.0.9)
+      rails (~> 3.1)
     devise (2.0.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       railties (~> 3.1)
       warden (~> 1.1.1)
     erubis (2.7.0)
-    execjs (1.3.2)
+    exception_notification (2.6.1)
+      actionmailer (>= 3.0.4)
+    execjs (1.4.0)
       multi_json (~> 1.0)
     ffaker (1.12.1)
-    gyoku (0.4.4)
+    gyoku (0.4.5)
       builder (>= 2.1.2)
     highline (1.6.11)
     hike (1.2.1)
@@ -99,12 +133,12 @@ GEM
     mime-types (1.18)
     money (3.7.1)
       i18n (~> 0.4)
-    multi_json (1.3.5)
+    multi_json (1.3.6)
     multi_xml (0.5.1)
     nested_set (1.7.0)
       activerecord (>= 3.0.0)
       railties (>= 3.0.0)
-    nokogiri (1.5.2)
+    nokogiri (1.5.3)
     nori (1.1.0)
     orm_adapter (0.0.7)
     paperclip (2.7.0)
@@ -112,6 +146,7 @@ GEM
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
+    pdfkit (0.5.2)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
@@ -147,7 +182,9 @@ GEM
       polyamorous (~> 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
-    sass (3.1.18)
+    rmagick (2.13.1)
+    ruby-ole (1.2.11.3)
+    sass (3.1.19)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -160,24 +197,26 @@ GEM
       nokogiri (>= 1.4.0)
       nori (~> 1.1)
       wasabi (~> 2.1)
-    spree (1.1.0)
-      spree_api (= 1.1.0)
-      spree_auth (= 1.1.0)
-      spree_cmd (= 1.1.0)
-      spree_core (= 1.1.0)
-      spree_dash (= 1.1.0)
-      spree_promo (= 1.1.0)
-      spree_sample (= 1.1.0)
-    spree_api (1.1.0)
+    spreadsheet (0.6.5.9)
+      ruby-ole (>= 1.0)
+    spree (1.1.1)
+      spree_api (= 1.1.1)
+      spree_auth (= 1.1.1)
+      spree_cmd (= 1.1.1)
+      spree_core (= 1.1.1)
+      spree_dash (= 1.1.1)
+      spree_promo (= 1.1.1)
+      spree_sample (= 1.1.1)
+    spree_api (1.1.1)
       rabl (= 0.6.5)
-      spree_auth (= 1.1.0)
-      spree_core (= 1.1.0)
-    spree_auth (1.1.0)
+      spree_auth (= 1.1.1)
+      spree_core (= 1.1.1)
+    spree_auth (1.1.1)
       cancan (= 1.6.7)
-      devise (~> 2.0)
-      spree_core (= 1.1.0)
-    spree_cmd (1.1.0)
-    spree_core (1.1.0)
+      devise (~> 2.0.0)
+      spree_core (= 1.1.1)
+    spree_cmd (1.1.1)
+    spree_core (1.1.1)
       activemerchant (= 1.20.4)
       acts_as_list (= 0.1.4)
       aws-sdk (~> 1.3.4)
@@ -192,15 +231,15 @@ GEM
       ransack (~> 0.6.0)
       state_machine (= 1.1.2)
       stringex (~> 1.3.2)
-    spree_dash (1.1.0)
+    spree_dash (1.1.1)
       httparty (~> 0.8.1)
-      spree_auth (= 1.1.0)
-      spree_core (= 1.1.0)
-    spree_promo (1.1.0)
-      spree_auth (= 1.1.0)
-      spree_core (= 1.1.0)
-    spree_sample (1.1.0)
-      spree_core (= 1.1.0)
+      spree_auth (= 1.1.1)
+      spree_core (= 1.1.1)
+    spree_promo (1.1.1)
+      spree_auth (= 1.1.1)
+      spree_core (= 1.1.1)
+    spree_sample (1.1.1)
+      spree_core (= 1.1.1)
     spree_skrill (1.0.2)
       spree_core (>= 1.0.0)
     spree_usa_epay (1.0.2)
@@ -215,6 +254,8 @@ GEM
     stringex (1.3.3)
     thor (0.14.6)
     tilt (1.3.3)
+    to_xls (1.5.0)
+      spreadsheet
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
@@ -225,19 +266,31 @@ GEM
     uuidtools (2.1.2)
     warden (1.1.1)
       rack (>= 1.0)
-    wasabi (2.1.0)
+    wasabi (2.1.1)
       nokogiri (>= 1.4.0)
+    wkhtmltopdf-binary (0.9.5.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  carrierwave
   coffee-rails (~> 3.2.1)
+  exception_notification
   jquery-rails
-  rails (= 3.2.3)
+  multi_currencies!
+  pdfkit
+  rails
+  rmagick
   sass-rails (~> 3.2.3)
+  spreadsheet (~> 0.6.5.9)
   spree
+  spree_flexi_variants!
+  spree_multi_domain!
+  spree_paypal_express!
   spree_skrill
   spree_usa_epay
   sqlite3
+  to_xls
   uglifier (>= 1.0.3)
+  wkhtmltopdf-binary

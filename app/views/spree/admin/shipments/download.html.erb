@@ -1,0 +1,18 @@
+<h2>Listing Shipment Order</h2>
+
+<table class="index" style="width:100%;" data-hook="admin_shipment_form_inventory_units">
+  <tr>
+    <th width="200px;"><%= "#{t('spree.date')}/#{t('spree.time')}" %></th>
+    <th width="200px;"><%= "PDF" %></th>
+    <th></th>
+  </tr>
+  <% @files.each do |file| %>
+      <tr>
+        <td><%= file.updated_at.to_s(:date_time24) if file.created_at %></td>
+        <td><%= link_to_with_icon "pdf", "#{file.name}", "/files/shipments/#{file.name}.pdf" %></td>
+        <td></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= paginate @files %>

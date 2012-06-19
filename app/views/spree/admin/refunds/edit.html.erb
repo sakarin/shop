@@ -1,0 +1,24 @@
+<div class='toolbar order-links'>
+  <% if @refund.can_approve? %>
+      <%= button_link_to t(:approve), fire_admin_purchase_order_refund_path(@purchase_order, @refund, :e => 'approve'), :method => :put, :confirm => t(:are_you_sure) %>
+  <% end %>
+</div>
+
+
+<%= render :partial => 'spree/admin/shared/purchase_order_tabs', :locals => {:current => 'Refund Details'} %>
+
+<% if %w(purchased received).include?(@purchase_order.state) %>
+
+    <h1><%= t(:refund) %> <%= @purchase_order.number %></h1>
+
+    <%= form_for :refund, :url => admin_purchase_order_refund_path(@purchase_order, @refund), :method => :put do |f| %>
+        <%= render :partial => 'form', :locals => {:f => f} %>
+
+        <div data-hook="admin_purchase_order_new_form_buttons">
+          <p class="form-buttons">
+            <%= button t(:update) %>
+            <%= t(:or) %> <%= link_to t(:back), admin_purchase_orders_url %>
+          </p>
+        </div>
+    <% end %>
+<% end %>

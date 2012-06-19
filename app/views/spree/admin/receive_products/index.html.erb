@@ -1,0 +1,33 @@
+<div class='toolbar order-links'>
+  <%= button_link_to t(:new_receive_product), new_admin_purchase_order_receive_product_url(@purchase_order), :icon => 'add', :id => 'admin_receive_product' %>
+</div>
+
+<%= render :partial => 'spree/admin/shared/purchase_order_tabs', :locals => {:current => 'Receive Product Details'} %>
+
+<h1><%= t(:listing_receive_products) %></h1>
+
+<table class="index" id="listing_receive_products" data-hook>
+  <thead>
+  <tr data-hook="admin_receive_products_index_headers">
+
+    <th><%=  t(:created_at) %></th>
+    <th><%= t(:number, :scope => 'activerecord.attributes.spree/order') %></th>
+    <th data-hook="admin_purchase_orders_index_header_actions"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @receive_products.each do |receive_product| %>
+      <tr id="<%= spree_dom_id receive_product %>" data-hook="admin_purchase_orders_index_rows">
+        <td><%= (receive_product.created_at).to_s(:date_time24) %></td>
+        <td><%= link_to receive_product.number, edit_admin_purchase_order_receive_product_path(@purchase_order, receive_product) %></td>
+
+
+
+        <td class='actions' data-hook="admin_purchase_orders_index_row_actions">
+          <%= link_to_edit_url edit_admin_purchase_order_receive_product_path(@purchase_order, receive_product), :title => "admin_edit_#{dom_id(receive_product)}" %>
+          <%= link_to_delete receive_product, :url => admin_purchase_order_receive_product_path(@purchase_order, receive_product) %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

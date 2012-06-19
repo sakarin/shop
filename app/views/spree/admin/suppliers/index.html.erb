@@ -1,0 +1,36 @@
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <%= button_link_to t(:new_supplier), spree.new_admin_supplier_path, :icon => 'add' %>
+    </li>
+  </ul>
+  <br class="clear" />
+</div>
+
+<h1><%= t(:supplier) %></h1>
+
+<table class="index">
+  <thead>
+  <tr>
+    <th><%= t(:name) %></th>
+    <th><%= t(:code) %></th>
+    <th><%= t(:email) %></th>
+
+    <th style="width:150px;"><%= t(:action) %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @suppliers.each do |supplier| %>
+      <tr id="<%= spree_dom_id supplier %>">
+        <td><%= supplier.name %></td>
+        <td><%= supplier.code %></td>
+        <td><%= supplier.email %></td>
+
+        <td>
+          <%= link_to_edit supplier %> &nbsp;
+          <%= link_to_delete supplier %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,28 @@
+<h2><%= t(:listing_refund_products) %></h2>
+
+<table class="index" id="listing_refund_products" data-hook>
+  <thead>
+  <tr data-hook="admin_refund_products_index_headers">
+    <th width="200"><%= t(:created_at) %></th>
+    <th width="200">Refund Number</th>
+    <th width="200">Order Number</th>
+    <th width="200">Amount</th>
+
+    <th data-hook="admin_purchase_orders_index_header_actions">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @refund_products.each do |refund_product| %>
+      <tr id="<%= spree_dom_id refund_product %>" data-hook="admin_purchase_orders_index_rows">
+        <td><%= (refund_product.created_at).to_s(:date_time24) %></td>
+        <td><%= link_to refund_product.number, admin_refund_product_path(refund_product) %></td>
+        <td><%= link_to refund_product.order.number, admin_order_path(refund_product.order) %></td>
+        <td><%= refund_product.amount %></td>
+
+        <td>
+          <%= button_to "paid", fire_admin_refund_product_path(refund_product, :e => 'paid'), :method => :put %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

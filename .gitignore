@@ -19,3 +19,8 @@
 
 # Ignore Rubymind config files
 .idea
+
+# ignore spec/dummy
+/spec/dummy
+
+/public/files

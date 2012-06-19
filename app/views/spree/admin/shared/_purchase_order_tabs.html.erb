@@ -1,0 +1,27 @@
+<% content_for :sidebar do %>
+    <div id="order_tab_summary" data-hook>
+      <h3 id="order_number" data-hook><%= t(:PO) %> #<%= @purchase_order.number %></h3>
+      <h5 id="order_status" data-hook><%= t(:status) %>: <%= t(@purchase_order.state, :scope => :order_state) %></h5>
+      <br class="clear"/>
+      <h5 id="purchase_number" data-hook><%= t(:purchase_num) %>: <%= @purchase_order.purchase_items.size %></h5>
+      <h5 id="receive_number" data-hook><%= t(:receive_num) %>: <%= @purchase_order.receive_products.map(&:receive_items).sum.size %></h5>
+
+      <br class="clear"/>
+    </div>
+    <br class="clear"/>
+
+    <ul class="sidebar" data-hook="admin_order_tabs">
+
+      <li<%== ' class="active"' if current == 'Purchase Order Details' %>>
+        <%= link_to t(:purchase_order_details), edit_admin_purchase_order_url(@purchase_order) %>
+      </li>
+      <li<%== ' class="active"' if current == 'Receive Product Details' %>>
+        <%= link_to t(:receive_product_details), admin_purchase_order_receive_products_url(@purchase_order) %>
+      </li>
+      <li<%== ' class="active"' if current == 'Refund Details' %>>
+        <%= link_to t(:refund_details), admin_purchase_order_refunds_url(@purchase_order) %>
+      </li>
+
+    </ul>
+
+<% end %>

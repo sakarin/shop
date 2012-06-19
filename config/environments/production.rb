@@ -65,6 +65,9 @@ Shop::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
+  # Asset Host Configuration
+  ActionController::Base.asset_host = "77.68.63.19"
+
   config.middleware.use ExceptionNotifier,
                         :email_prefix => "[ERROR]",
                         :sender_address => '"Notifier" <notifier@thefootballshirt.com>',

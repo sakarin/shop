@@ -1,4 +1,12 @@
 PATH
+  remote: lib/spree-multi-currency
+  specs:
+    multi_currencies (1.0.3)
+      json (>= 1.5.1)
+      money (>= 3.6.1)
+      nokogiri (>= 1.4.4)
+
+PATH
   remote: lib/spree-multi-domain
   specs:
     spree_multi_domain (1.1.1)
@@ -270,6 +278,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   exception_notification
   jquery-rails
+  multi_currencies!
   pdfkit
   rails
   rmagick

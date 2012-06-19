@@ -1,0 +1,21 @@
+<div class="sign_in_email">
+  <%= form_for(:user, :url => user_session_path) do |f| %>
+      <p>Sign in (<%= link_to "Register", signup_path %> / <%= link_to "My Account", account_path %> / <%= link_to "Sign out", destroy_user_session_path %>)<br/>
+        Username (Your email address): </p>
+
+      <div class="sign_in_email2">
+        <%= f.text_field('email', :size => 42, :class => 'forms') %>
+      </div>
+      <p class="space_forms">Password (<%= link_to "Forgotten?", new_user_password_path %>):</p>
+
+      <div>
+        <!--class-sign_in_password -->
+        <div class="sign_in_password">
+          <%= f.password_field 'password', :size => 31, :class => 'form2' %>
+        </div>
+
+        <%= image_submit_tag "/assets/shop1/b-SIGN-IN.png" %>
+      </div>
+  <% end %>
+</div>
+

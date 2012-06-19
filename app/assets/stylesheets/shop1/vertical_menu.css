@@ -1,0 +1,273 @@
+/* Page */
+body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol, li, dl, dt, dd, form, a, fieldset, input, th, td {
+    border: 0;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Demo Page Styles */
+body {
+    font: normal 13px Arial, sans-serif;
+}
+
+h2 {
+    font: normal 26px Arial, sans-serif;
+    padding: 20px 0;
+    margin: 0 0 30px 0;
+}
+
+.wrap {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.demo-container {
+    padding: 20px 0;
+    width: 200px;
+    float: left;
+}
+
+.demo-container.right {
+    float: right;
+}
+
+.demo-container h4 {
+    font-size: 14px;
+    margin: 0 0 5px 0;
+}
+
+.clear {
+    clear: both;
+}
+
+/* Vertical Mega Menu Styles */
+.dcjq-vertical-mega-menu .menu {
+    line-height: 16px;
+    position: relative; /* Required */
+}
+
+.dcjq-vertical-mega-menu .menu li a {
+    display: block;
+    color: #000;
+    text-decoration: none;
+}
+
+.dcjq-vertical-mega-menu .menu li a:hover, .dcjq-vertical-mega-menu .menu li.mega-hover a {
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+}
+
+.dcjq-vertical-mega-menu .menu li a.dc-mega {
+    position: relative;
+}
+
+/* Add arrow icon to parent links */
+.dcjq-vertical-mega-menu .menu li a .dc-mega-icon {
+    display: block;
+    position: absolute;
+    top: 14px;
+    right: 15px;
+    width: 6px;
+    height: 8px;
+    /*background: url(/assets/shop1/arrow_right.png) no-repeat -6px 0;*/
+}
+
+.dcjq-vertical-mega-menu .menu li a:hover .dc-mega-icon, .dcjq-vertical-mega-menu .menu li.mega-hover a .dc-mega-icon {
+    background-position: 0 0;
+}
+
+/* Mega menu container */
+.dcjq-vertical-mega-menu .menu li .sub-container {
+    position: absolute; /* Required */
+    overflow: hidden;
+    background: url(/assets/shop1/bg_menu.png) no-repeat 100% 100%; /* Add the drop shadow */
+    padding: 0 13px 17px 0; /* Padding for drop shadow */
+}
+
+.dcjq-vertical-mega-menu .menu li .sub-container .sub {
+    border: none;
+    padding: 15px 15px 5px 15px;
+    background: url(/assets/shop1/inner_menu.png) no-repeat;
+    width: 580px;
+    height: 356px;
+}
+
+.dcjq-vertical-mega-menu .menu li .sub .row {
+    width: 100%;
+    overflow: hidden; /* Clear floats */
+}
+
+.dcjq-vertical-mega-menu .menu li .sub li {
+    float: none;
+    width: 160px;
+    /*font-size: 1em; */
+    font-weight: normal;
+}
+
+.dcjq-vertical-mega-menu .menu li .sub li.mega-hdr {
+    float: left; /* Required */
+    margin: 0 5px 10px 5px;
+}
+
+.dcjq-vertical-mega-menu .menu li .sub a, .dcjq-vertical-mega-menu .menu.left li .sub a {
+    background: none;
+    border: none;
+    text-shadow: none;
+    float: none;
+    color: #000;
+    display: block;
+    text-decoration: none;
+    font-size: 0.9em;
+    margin-bottom: 0;
+}
+
+.dcjq-vertical-mega-menu .menu li .sub li.mega-hdr a.mega-hdr-a {
+    /*background: url(/assets/shop1/bg_nav.png) repeat-x 0 -40px;*/
+    padding: 5px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    /*font-weight: bold; */
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    text-align: center;
+}
+
+.dcjq-vertical-mega-menu .menu li .sub li.mega-hdr a.mega-hdr-a:hover {
+    color: #000;
+    text-shadow: none;
+}
+
+.dcjq-vertical-mega-menu .menu .sub li.mega-hdr li {
+    margin-bottom: 3px;
+}
+
+.dcjq-vertical-mega-menu .menu .sub li a {
+    padding: 3px 3px 3px 15px;
+    /*background: url(/assets/shop1/bullet.png) no-repeat 3px 8px;*/
+    font-weight: normal;
+    text-transform: capitalize;
+    font-size: 11px;
+}
+
+.dcjq-vertical-mega-menu .menu .sub li a:hover {
+    color: #fff;
+}
+
+.dcjq-vertical-mega-menu .menu .sub ul li {
+    padding-right: 0;
+}
+
+/* Custom mega menu styling */
+.dcjq-vertical-mega-menu .menu li#menu-item-1 .sub .row {
+    padding: 10px 10px 0 40px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    background: url(/assets/shop1/mens.png) no-repeat 0 center;
+}
+
+.dcjq-vertical-mega-menu .menu li#menu-item-1 .sub .row.last {
+    background: url(/assets/shop1/ladies.png) no-repeat 0 0;
+}
+
+.dcjq-vertical-mega-menu .menu li#menu-item-1 .sub li.mega-hdr {
+    padding: 75px 0 0;
+}
+
+li#menu-item-4.mega-hdr {
+    background: url(/assets/shop1/nike.png) no-repeat center 0;
+}
+
+li#menu-item-5.mega-hdr {
+    background: url(/assets/shop1/reebok.png) no-repeat center 0;
+}
+
+li#menu-item-6.mega-hdr {
+    background: url(/assets/shop1/adidas_1.jpg) no-repeat center 0;
+}
+
+li#menu-item-7.mega-hdr {
+    background: url(/assets/shop1/gola_1.jpg) no-repeat center 0;
+}
+
+li#menu-item-8.mega-hdr {
+    background: url(/assets/shop1/nike_2.jpg) no-repeat center 0;
+}
+
+li#menu-item-9.mega-hdr {
+    background: url(/assets/shop1/reebok_2.jpg) no-repeat center 0;
+}
+
+li#menu-item-10.mega-hdr {
+    background: url(/assets/shop1/adidas_2.jpg) no-repeat center 0;
+}
+
+li#menu-item-11.mega-hdr {
+    background: url(/assets/shop1/gola_2.jpg) no-repeat center 0;
+}
+
+li#menu-item-3 li.mega-hdr {
+    /*padding: 120px 0 0;*/
+}
+
+li#menu-item-15.mega-hdr {
+    /*background: url(/assets/shop1/bag_1.jpg) no-repeat center 0;*/
+}
+
+li#menu-item-16.mega-hdr {
+    /*background: url(/assets/shop1/bag_2.jpg) no-repeat center 0;*/
+}
+
+li#menu-item-17.mega-hdr {
+    /*background: url(/assets/shop1/bag_3.jpg) no-repeat center 0;*/
+}
+
+li#menu-item-18.mega-hdr {
+    /*background: url(/assets/shop1/bag_4.jpg) no-repeat center 0;*/
+}
+
+/* Styling for menu items with only 2 levels */
+.dcjq-vertical-mega-menu .menu li .sub-container.non-mega .sub {
+    /*padding: 10px;*/
+    /*background: #fff;*/
+}
+
+.dcjq-vertical-mega-menu .menu li .sub-container.non-mega li {
+    padding: 0;
+    margin: 0;
+    width: 150px;
+    float: none;
+}
+
+/* Custom styling for 2 levels */
+.dcjq-vertical-mega-menu .menu li#menu-item-2 .sub-container.non-mega .sub {
+    width: 480px;
+    height: 180px;
+    padding: 20px 10px 10px;
+}
+
+.dcjq-vertical-mega-menu .menu li#menu-item-2 .sub-container.non-mega li {
+    float: left;
+}
+
+li#menu-item-12, li#menu-item-13, li#menu-item-14 {
+    padding: 150px 0 0;
+    margin-right: 10px;
+}
+
+li#menu-item-12 {
+    background: url(/assets/shop1/jacket_1.jpg) no-repeat center 0;
+}
+
+li#menu-item-13 {
+    background: url(/assets/shop1/jacket_2.jpg) no-repeat center 0;
+}
+
+li#menu-item-14 {
+    background: url(/assets/shop1/jacket_3.jpg) no-repeat center 0;
+}
+

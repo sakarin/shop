@@ -1,0 +1,44 @@
+<div id="content" class='show-product'>
+  <% @body_id = 'product-details' %>
+
+
+    <div id="body_content">
+      <div class="top-box-770"></div>
+      <div class="title">
+        <h1><%= accurate_title %></h1>
+      </div>
+      <div class="content content-770" style="padding-bottom: 0;">
+        <div id="product-images">
+          <%= hook :product_images do %>
+              <div id="main-image">
+                <%= render 'image' %>
+              </div>
+              <div id="thumbnails" class="clearfix">
+                <%= render 'thumbnails', :product => @product %>
+                <div class="clear"></div>
+              </div>
+          <% end %>
+        </div>
+        <div id="product-description">
+          <%= hook :product_description do %>
+              <%= product_description(@product) rescue t("product_has_no_description") %>
+          <% end %>
+          <%= hook :product_properties do %>
+              <%#= render 'properties' %>
+          <% end %>
+        </div>
+        <div class="customize">
+
+          <%= hook :cart_form do %>
+              <div id="cart-form">
+                <%= render 'cart_form' %>
+              </div>
+          <% end %>
+
+        </div>
+        <%#= render 'taxons' %>
+      </div>
+      <%= render 'spree/shared/footballshirt/order_description' %>
+      <div class="footer-770"></div>
+    </div>
+  </div>

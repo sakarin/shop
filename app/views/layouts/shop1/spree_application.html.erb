@@ -1,71 +1,74 @@
 <!doctype html>
 
-<!--[if lt IE 7 ]> <html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie ie9" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!--><html lang="en"><!--<![endif]-->
 
+<head>
 
-<head data-hook="inside_head">
-  <%= render :partial => 'spree/shared/head' %>
+  <%= render :partial => 'spree/theme/shop1/head' %>
+
 </head>
 
-<body class="<%= body_class %>" id="<%= @body_id || 'default' %>" data-hook="body">
+<body onload="MM_preloadImages('/assets/shop1/b-SIGN-IN-a.png','/assets/shop1/b-quick-search-a.png','/assets/shop1/b-1-a.png','/assets/shop1/b-2-a.png','/assets/shop1/b-3-a.png','/assets/shop1/b-4-a.png','/assets/shop1/b-5-a.png','/assets/shop1/b-add-to-cart-a.png')">
 
-<div class="container">
+<div id="heading">
 
-  <header id="header" class="row" data-hook>
-    <%#= link_to "eur", currency_path(:eur) %>
-    <%#= link_to "usd", currency_path(:usd) %>
-    <%#= link_to "gbp", currency_path(:gbp) %>
-    <figure id="logo" class="columns alpha six" data-hook>
-      <%= logo %>
-    </figure>
+  <div class="sign_in">
+    <%= render 'spree/theme/shop1/sign_in' %>
+  </div>
 
-    <nav id="top-nav-bar" class="columns omega ten">
-      <ul id="nav-bar" class="inline" data-hook>
-        <%= render :partial => 'spree/shared/nav_bar' %>
-      </ul>
-    </nav>
+  <div class="logo"><a href="#"><img src="/assets/shop1/logo.png" alt="logo" width="230" height="230" border="0"/></a>
+  </div>
 
-    <% if store_menu? %>
-        <nav class="columns alpha omega sixteen">
-          <ul id="main-nav-bar" class="inline" data-hook>
-            <%= render :partial => 'spree/shared/store_menu' %>
-          </ul>
-        </nav>
-    <% end %>
+  <div class="quick_search">
 
-  </header>
+    <div class="quick_search2">
+      <p>Quick Search.</p>
 
-  <div id="wrapper" class="row" data-hook>
+      <div>
+        <div class="quick-search-forms1">
+          <%= render 'spree/theme/shop1/search' %>
+        </div>
 
-    <% if content_for?(:sidebar) %>
-        <aside id="sidebar" class="columns alpha four" data-hook>
-          <%= yield :sidebar %>
-        </aside>
-    <% end %>
+      </div>
 
-    <div id="content" class="columns omega <% if !content_for?(:sidebar) %> sixteen alpha <% else %> twelve <% end %>" data-hook>
-      <%= breadcrumbs(@taxon) %>
-      <%= flash_messages %>
-      <%= yield %>
     </div>
 
   </div>
 
-  <footer id="footer" class="row" data-hook>
-    <div id="footer-left" class="columns alpha eight" data-hook>
-      <p><%= t(:powered_by) %> <%= link_to 'Spree', 'http://spreecommerce.com/' %></p>
-    </div>
-    <div id="footer-right" class="columns omega eight" data-hook></div>
-  </footer>
+  <div class="shopping-cart">
+    <%= render 'spree/theme/shop1/cart_sidebar' %>
+  </div>
 
 </div>
 
-<%= render :partial => 'spree/shared/google_analytics' %>
+<div id="menu_main">
+  <ul class="space_menu">
+    <li><a href="/" title="HOME">HOME</a></li>
+    <li><img class="space_menu2" src="/assets/shop1/line-menu-main.png" width="4" height="35"/></li>
+    <li><a href="/legal-info" title="TERMS&amp;CONDITIONS">TERMS & CONDITIONS</a></li>
+    <li><img class="space_menu2" src="/assets/shop1/line-menu-main.png" width="4" height="35"/></li>
+    <li><a href="/shipping-and-return" title="SHIPPING&amp;RETURN">SHIPPING & RETURN</a></li>
+    <li><img class="space_menu2" src="/assets/shop1/line-menu-main.png" width="4" height="35"/></li>
+    <li><a href="#" title="SPECIAL OFFER">SPECIAL OFFER</a></li>
+    <li><img class="space_menu2" src="/assets/shop1/line-menu-main.png" width="4" height="35"/></li>
+    <li><a href="/faq" title="FAQs">FAQs</a></li>
+    <li><img class="space_menu2" src="/assets/shop1/line-menu-main.png" width="4" height="35"/></li>
+    <li><a href="/about-us" title="CONTACT US">CONTACT US</a></li>
+  </ul>
+</div>
+
+<% if flash.notice %>
+    <div class="flash notice"><%= flash.notice %></div>
+<% end %>
+<% if flash[:error] %>
+    <div class="flash errors"><%= flash[:error] %></div>
+<% end %>
+
+<%= yield %>
+
+
+<%= render :partial => 'spree/theme/shop1/footer' %>
+
+<%= debug(params) if Rails.env.development? %>
 
 </body>
-
 </html>

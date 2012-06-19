@@ -1,0 +1,45 @@
+<%
+   paginated_products = @searcher.products if params.key?(:keywords)
+   paginated_products ||= products
+%>
+
+<%= render "spree/theme/shop1/best_seller" %>
+
+<div class="content_box2">
+
+
+
+  <% if products.empty? %>
+      <%= t(:no_products_found) %>
+  <% elsif params.key?(:keywords) %>
+      <h3><%= t(:search_results, :keywords => h(params[:keywords])) %></h3>
+  <% end %>
+  <img width="691" height="1" src="/assets/shop1/line-latest-products.png" class="space_bottom_top2">
+
+
+
+  <% if products.any? %>
+
+      <% products.each do |product| %>
+          <% if Spree::Config[:show_zero_stock_products] || product.has_stock? %>
+              <div class="box<%= cycle("2","3","2") %>">
+
+                <%= link_to product_image(product, :size => "180x200"), product %>
+                <p> <%= link_to product.name, product %> </p>
+                <p class="text_product"><%= product_price(product) %>
+
+                  <strong class="float_right">
+                    <%= link_to image_tag('/assets/shop1/b-add-to-cart.png', :size => '86x25') , product %>
+                  </strong>
+                </p>
+              </div>
+          <% end %>
+
+      <% end %>
+  <% end %>
+
+
+  <%= will_paginate(paginated_products, :class => 'apple_pagination') %>
+</div>
+
+

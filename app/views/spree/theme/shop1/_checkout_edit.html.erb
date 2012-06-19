@@ -1,0 +1,29 @@
+<div id="content">
+  <div id="body_content">
+    <div class="top-box-960"></div>
+    <div class="title-960">
+      <h1><%= t("checkout")%></h1>
+    </div>
+    <div class="content-960 clearfix">
+      <div id="checkout" class="clearfix">
+        <%= checkout_progress %>
+      </div>
+      <%= render "spree/shared/error_messages", :target => @order %>
+
+      <%= hook :checkout_summary_box do %>
+          <div id="checkout-summary" class="clearfix">
+            <%= render 'summary', :order => @order %>
+            <div class="clear"></div>
+          </div>
+      <% end %>
+
+      <%= form_for @order, :url => update_checkout_path(@order.state), :html => { :id => "checkout_form_#{@order.state}" } do |form| %>
+          <%= render @order.state, :form => form %>
+          <input id="post-final" type="submit" style="display:none"/>
+      <% end %>
+
+      <div class="clear"></div>
+    </div>
+    <div class="footer-960"></div>
+  </div>
+</div>

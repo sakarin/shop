@@ -1,2 +1,5 @@
-# Use this file to load your own seed data from extensions.  
-# See the db/seeds.rb file in the Spree core for some ideas on what you can do here.
+# Loads seed data out of default dir
+default_path = File.join(File.dirname(__FILE__), 'default')
+
+Rake::Task['db:load_dir'].reenable
+Rake::Task['db:load_dir'].invoke(default_path)

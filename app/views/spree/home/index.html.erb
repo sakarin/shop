@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
 
-        <% unless @current_store.default? %>
+        <% if @current_store.nil? %>
             <% if "products" == @current_controller && @taxon %>
                 <%= render "spree/shared/filters" %>
             <% else %>
@@ -17,7 +17,7 @@
 
 
         <% if @products.empty? %>
-            <% unless @current_store.default? %>
+            <% unless @current_store.nil? %>
                 <div id="content">
                   <%= render "spree/theme/#{@current_store.code}/sidebar_left" %>
                   <%= render "spree/theme/#{@current_store.code}/banner" %>
@@ -29,7 +29,7 @@
                 <%= t(:no_products_found) %>
             <% end %>
         <% else %>
-            <% unless @current_store.default? %>
+            <% unless @current_store.nil? %>
                 <div id="content">
                   <%= render "spree/theme/#{@current_store.code}/sidebar_left" %>
                   <%= render "spree/theme/#{@current_store.code}/banner" %>
@@ -38,7 +38,7 @@
                   <%= render "spree/theme/#{@current_store.code}/products_search", :products => @products, :taxon => @taxon %>
                 </div>
             <% else %>
-                <%= render "spree/theme/products", :products => @products, :taxon => @taxon %>
+                <%= render "spree/shared/products", :products => @products, :taxon => @taxon %>
             <% end %>
         <% end %>
 
@@ -46,7 +46,7 @@
 <% else %>
 
 
-        <% unless @current_store.default? %>
+        <% unless @current_store.nil? %>
             <div id="content">
               <%= render "spree/theme/#{@current_store.code}/sidebar_left" %>
               <%= render "spree/theme/#{@current_store.code}/banner" %>
@@ -55,7 +55,7 @@
               <%= render "spree/theme/#{@current_store.code}/products", :products => @products, :taxon => @taxon %>
             </div>
         <% else %>
-            <%= render "spree/theme/products", :products => @products, :taxon => @taxon %>
+            <%= render "spree/shared/products", :products => @products, :taxon => @taxon %>
         <% end %>
 
 

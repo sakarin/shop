@@ -1,0 +1,6 @@
+<%= form_tag products_url, :method => :get, :class =>"search-box3" do %>
+
+    <%= text_field_tag :keywords, params[:keywords], :class => 'form3' %>
+    <%= image_submit_tag "/assets/shop1/b-quick-search.png", :style => "float: right;" %>
+
+<% end %>

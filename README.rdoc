@@ -13,3 +13,4 @@
 
 
 == Deploy
+    rake db:admin:create rake db:admin:create

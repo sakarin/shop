@@ -1,0 +1,26 @@
+<%  @order = current_order(true)  %>
+<% ship_price = 0  %>
+<% sum_quantity = 0 %>
+<% item_no = 1 %>
+
+<% unless @order.line_items.empty? %>
+   <% @order.line_items.each do |line_item| %>
+        <% if item_no == 1 %>
+            <% ship_price = 8 %>
+        <% else %>
+            <% ship_price = ship_price + 6 %>
+        <% end %>
+        <% item_no = item_no + 1 %>
+   <% end %>
+<% end %>
+
+
+<div class="shopping_cart2">
+  <p>Shopping Cart.</p>
+  <div><img src="/assets/shop1/line-shopping-cart.png" width="259" height="1"/></div>
+  <div class="space_bottom_top">Product Price.<strong class="float_right"><%#= order_price(@order) %></strong></div>
+  <div><img src="/assets/shop1/line-shopping-cart.png" width="259" height="1"/></div>
+  <div class="space_bottom_top">Shipping Price.<strong class="float_right"><%= number_to_currency(ship_price) %></strong></div>
+  <div><img src="/assets/shop1/line-shopping-cart.png" width="259" height="1"/></div>
+  <div class="space_bottom_top">Total Price.<strong class="float_right"><%= number_to_currency(@order.total + ship_price) %></strong></div>
+</div>

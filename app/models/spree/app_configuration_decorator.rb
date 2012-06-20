@@ -6,6 +6,13 @@ module Spree
     preference :additional_item_shipping_cost, :integer, :default => 6
     preference :free_shipment_text, :string, :default => "Free Shipping"
 
+    preference :allow_ssl_in_development_and_test, :boolean, :default => false
+    preference :allow_ssl_in_production, :boolean, :default => false
+    preference :allow_ssl_in_staging, :boolean, :default => false
+
+    preference :site_name, :string, :default => 'Demo Shop'
+    preference :site_url, :string, :default => 'demo shop'
+
 
   end
 end

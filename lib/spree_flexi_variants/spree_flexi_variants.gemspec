@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency('json')
   s.add_dependency('carrierwave')
-  s.add_dependency('rmagick');
+  s.add_dependency('image_science')
 
   # need this b/c of controllers/spree/admin/users_controller.
   # it has a reference to User::DestroyWithOrdersError

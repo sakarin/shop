@@ -23,3 +23,5 @@
 # ignore spec/dummy
 /spec/dummy
 
+/public/files/purchases/
+/public/files/purchases/

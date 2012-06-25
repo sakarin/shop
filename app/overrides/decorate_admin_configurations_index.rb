@@ -6,3 +6,12 @@ Deface::Override.new(
     :disabled => false)
 
 
+Deface::Override.new(
+    :virtual_path => "spree/admin/products",
+    :name => "remove_product_from_prototype",
+    :replace => "[data-hook='product-from-prototype']",
+    :text => "Hello world",
+    :disabled => false)
+
+
+

@@ -98,7 +98,7 @@ module Spree
                :money             => (order.total * 100 ).to_i }
 
       # add correct tax amount by subtracting subtotal and shipping otherwise tax = 0 -> need to check adjustments.map
-      opts[:tax] = (order.total*100).to_i - opts.slice(:subtotal, :shipping).values.sum
+      #opts[:tax] = (order.total*100).to_i - opts.slice(:subtotal, :shipping).values.sum
 
       if stage == "checkout"
         opts[:handling] = 0

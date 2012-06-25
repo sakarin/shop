@@ -12,5 +12,6 @@
     bundle exec rails g spree_flexi_variants:install
 
 
-== Deploy
-    rake db:admin:create rake db:admin:create
+    == Deploy
+ bundle exec rake db:seed
+ bundle exec rake db:admin:create

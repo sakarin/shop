@@ -14,5 +14,7 @@ module Spree
     preference :site_url, :string, :default => 'demo shop'
 
 
+
+
   end
 end

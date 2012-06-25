@@ -37,7 +37,7 @@ gem 'spree_flexi_variants', :path => 'lib/spree_flexi_variants'
 
 
 gem "spreadsheet", "~> 0.6.5.9"
-gem 'to_xls'
+gem 'to_xls', "~> 1.0.0"
 
 
 gem "pdfkit"

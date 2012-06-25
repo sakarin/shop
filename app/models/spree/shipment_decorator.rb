@@ -1,10 +1,31 @@
 module Spree
   Shipment.class_eval do
 
+    scope :packet, where(:state => 'packet')
+
+    # shipment state machine (see http://github.com/pluginaweek/state_machine/tree/master for details)
+    state_machine :initial => 'pending', :use_transactions => false do
+
+      event :pend do
+        transition :from => 'ready', :to => 'pending'
+      end
+      event :ready do
+        transition :from => 'pending', :to => 'ready'
+      end
+      event :pack do
+        transition :from => 'ready', :to => 'packet'
+      end
+      event :ship do
+        transition :from => 'packet', :to => 'shipped'
+      end
+
+      after_transition :to => 'shipped', :do => :after_ship
+    end
 
 
 
-    private
+
+
     def generate_shipment_number
       order = Order.find(self.order_id)
       number = order.number.delete("R")
@@ -26,6 +47,19 @@ module Spree
           reload #ensure adjustment is present on later saves
         end
       end
+    end
+
+    def determine_state(order)
+      return 'pending' if self.inventory_units.any? { |unit| unit.backordered? }
+      return 'pending' if self.inventory_units.any? { |unit| unit.refund? }
+      return 'packet'  if state == 'packet'
+      return 'shipped' if state == 'shipped'
+      order.payment_state == 'balance_due' ? 'pending' : 'ready'
+    end
+
+    def after_ship
+      inventory_units.each &:ship
+      ShipmentMailer.shipped_email(self).deliver
     end
 
 

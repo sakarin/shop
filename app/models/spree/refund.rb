@@ -58,7 +58,7 @@ module Spree
           item.update_attributes(:refund_product_id => refund_product.id)
         end
 
-        inventory_units.each &:refund!
+        inventory_units.each &:refund
       end
 
     end

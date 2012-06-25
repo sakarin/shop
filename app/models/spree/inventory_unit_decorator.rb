@@ -35,7 +35,7 @@ module Spree
       event :sold do
         transition :from => ['purchased', 'backordered'], :to => 'sold'
       end
-      event :packet do
+      event :pack do
         transition :from => 'sold', :to => 'packet'
       end
 
@@ -88,7 +88,8 @@ module Spree
     end
 
     def allow_ship?
-      self.packet? && !self.shipment.tracking.nil?
+      #self.packet? && !self.shipment.tracking.nil?
+      self.packet?
     end
 
 

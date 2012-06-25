@@ -1,7 +1,8 @@
 <div class="toolbar" data-hook="toolbar">
   <ul class="actions" data-hook="admin_shipment_edit_buttons">
     <li>
-      <% if @shipment.can_ship? && !@shipment.tracking.nil? %>
+      <% if @shipment.can_ship? && !@shipment.tracking.blank? && !@shipment.tracking.nil? %>
+
         <%= button_link_to t(:ship), fire_admin_order_shipment_path(@order, @shipment, :e => 'ship'), :method => :put, :confirm => t(:are_you_sure) %>
       <% end %>
     </li>

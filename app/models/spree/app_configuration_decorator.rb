@@ -12,6 +12,7 @@ module Spree
 
     preference :site_name, :string, :default => 'Demo Shop'
     preference :site_url, :string, :default => 'demo shop'
+    preference :check_for_spree_alerts, :boolean, :default => false
 
 
 

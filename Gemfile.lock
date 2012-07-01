@@ -9,8 +9,7 @@ PATH
 PATH
   remote: lib/spree-multi-domain
   specs:
-    spree_multi_domain (1.1.1)
-      spree_core (~> 1.1.1)
+    spree_multi_domain (1.0.0)
 
 PATH
   remote: lib/spree_flexi_variants

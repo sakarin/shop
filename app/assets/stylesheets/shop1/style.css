@@ -152,11 +152,11 @@ div#header div#slide-holder div#slide-controls p#slide-nav a.on {
 }
 
 div#header div#slide-holder div#slide-controls p#slide-nav a {
-    background-image: url(/images/store3/silde-nav.png);
+    background-image: url(/assets/shop1/silde-nav.png);
 }
 
 div#nav ul li a {
-    background: url(/images/store3/nav.png) no-repeat;
+    background: url(/assets/shop1/nav.png) no-repeat;
 }
 
 .h_subm_content {

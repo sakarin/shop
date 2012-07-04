@@ -9,7 +9,13 @@
 
 <body onload="MM_preloadImages('/assets/shop1/b-SIGN-IN-a.png','/assets/shop1/b-quick-search-a.png','/assets/shop1/b-1-a.png','/assets/shop1/b-2-a.png','/assets/shop1/b-3-a.png','/assets/shop1/b-4-a.png','/assets/shop1/b-5-a.png','/assets/shop1/b-add-to-cart-a.png')">
 
+
 <div id="heading">
+  <div id="currency">
+    <%= link_to "EUR", currency_path(:eur) %>
+    <%= link_to "USD", currency_path(:usd) %>
+    <%= link_to "GBP", currency_path(:gbp) %>
+  </div>
 
   <div class="sign_in">
     <%= render 'spree/theme/shop1/sign_in' %>

@@ -17,7 +17,7 @@
         <td><%= (refund_product.created_at).to_s(:date_time24) %></td>
         <td><%= link_to refund_product.number, admin_refund_product_path(refund_product) %></td>
         <td><%= link_to refund_product.order.number, admin_order_path(refund_product.order) %></td>
-        <td><%= refund_product.amount %></td>
+        <td><%= number_to_currency refund_product.amount, :base_locale => refund_product.order.base_currency %></td>
 
         <td>
           <%= button_to "paid", fire_admin_refund_product_path(refund_product, :e => 'paid'), :method => :put %>

@@ -17,7 +17,9 @@
 
   <header id="header" class="row" data-hook>
     <figure id="logo" class="columns alpha six" data-hook>
-      <%#= logo %>
+      <%= link_to "EUR", currency_path(:eur) %>
+      <%= link_to "USD", currency_path(:usd) %>
+      <%= link_to "GBP", currency_path(:gbp) %>
     </figure>
 
     <nav id="top-nav-bar" class="columns omega ten">

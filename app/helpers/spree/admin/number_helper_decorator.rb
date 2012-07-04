@@ -8,6 +8,17 @@ module ActionView
         options.symbolize_keys!
         options[:locale] = "currency_#{ Spree::Currency.current.try(:char_code) || I18n.default_locale }"
 
+        #-----------------------------------------------------------------------------------
+        #- hack base currency for admin view
+        if self.controller._prefixes[0].include?("admin") && !@order.nil?
+          base_currency = @order.base_currency
+          options[:locale] = "currency_#{ base_currency.to_s.upcase || I18n.default_locale }"
+        end
+
+        unless options[:base_locale] == nil
+          options[:locale] = "currency_#{ options[:base_locale].to_s.upcase || I18n.default_locale }"
+        end
+        #-----------------------------------------------------------------------------------
 
         defaults = I18n.translate('number.format', :locale => options[:locale], :default => {})
         currency = I18n.translate('number.currency.format', :locale => options[:locale], :default => {})

@@ -23,8 +23,6 @@
                                 :true,
                                 {:disabled => %w(purchased).include?(unit.state),
                                  :class => 'inventory_unit'} %>
-
-              <%#= check_box "units", "#{unit.id}",  {}, "true", "false" %>
             </td>
 
             <td style="vertical-align:top; width:80px;"><%= unit.season %></td>

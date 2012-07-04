@@ -142,6 +142,11 @@ module Spree
 
         @order.special_instructions = @ppx_details.params["note"]
 
+        #---------------------------------------------------------------------------
+        #- Update Base Currency
+        #---------------------------------------------------------------------------
+        @order.base_currency = @ppx_details.params["order_total_currency_id"]
+        #---------------------------------------------------------------------------
 
         if payment_method.preferred_no_shipping
           ship_address = @ppx_details.address

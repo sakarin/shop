@@ -38,7 +38,7 @@ module Spree
       # Get the current locale
       def current( current_locale = nil )
         @current ||= where(:basic => true).first
-
+        @current
       end
 
       def current!(current_locale = nil)

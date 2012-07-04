@@ -59,3 +59,5 @@ gem  'spree_multi_domain', :path => 'lib/spree-multi-domain'
 # git://github.com/martinjlowm/spree-multi-currency.git
 gem  'multi_currencies', :path => 'lib/spree-multi-currency'
 
+gem  'spree_faq', :path => 'lib/spree-faq'
+

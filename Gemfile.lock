@@ -1,4 +1,9 @@
 PATH
+  remote: lib/spree-faq
+  specs:
+    spree_faq (3.0.5)
+
+PATH
   remote: lib/spree-multi-currency
   specs:
     multi_currencies (1.0.3)
@@ -293,6 +298,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   spreadsheet (~> 0.6.5.9)
   spree
+  spree_faq!
   spree_flexi_variants!
   spree_multi_domain!
   spree_paypal_express!

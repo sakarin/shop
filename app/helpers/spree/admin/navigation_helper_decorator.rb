@@ -17,7 +17,11 @@ Spree::Admin::NavigationHelper.module_eval do
         html_options['data-update'] = [action, object_name.singularize].join('_')
       end
       html_options.delete('data-update') unless html_options['data-update']
-      link_to(text_for_button_link(text, html_options), url, html_options_for_button_link(html_options.merge(:id => text.downcase)))
+      if html_options[:id].blank?
+        link_to(text_for_button_link(text, html_options), url, html_options_for_button_link(html_options.merge(:id => text.downcase)))
+      else
+        link_to(text_for_button_link(text, html_options), url, html_options_for_button_link(html_options.merge(:id => html_options[:id].downcase)))
+      end
     end
   end
 
@@ -26,7 +30,7 @@ Spree::Admin::NavigationHelper.module_eval do
     if args.last.is_a?(Hash)
       options = options.merge(args.pop)
     end
-    options[:route] ||=  "admin_#{args.first}"
+    options[:route] ||= "admin_#{args.first}"
 
     destination_url = options[:url] || spree.send("#{options[:route]}_path")
 

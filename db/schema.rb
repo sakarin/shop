@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120703224413) do
+ActiveRecord::Schema.define(:version => 20120704221927) do
 
   create_table "_spree_purchase_items_old_20120531", :force => true do |t|
     t.integer  "purchase_order_id"
@@ -545,6 +545,22 @@ ActiveRecord::Schema.define(:version => 20120703224413) do
   end
 
   add_index "spree_purchase_orders", ["supplier_id"], :name => "index_purchase_orders_on_supplier_id"
+
+  create_table "spree_question_categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "spree_questions", :force => true do |t|
+    t.integer  "question_category_id"
+    t.text     "question"
+    t.text     "answer"
+    t.integer  "position"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
 
   create_table "spree_receive_items", :force => true do |t|
     t.integer  "receive_product_id"

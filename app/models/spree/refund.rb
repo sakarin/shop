@@ -44,6 +44,9 @@ module Spree
                     ")
 
       (refund || []).each do |refund|
+        #Currency.convert(self.original_price, self.original_currency, Currency.current.char_code)
+        #refund
+        #amount = Currency.convert(refund.amount, 'GBP', Currency.current.char_code)
         refund_product = RefundProduct.create(:order_id => refund.id, :amount => refund.amount)
 
         items = InventoryUnit.find_by_sql("
@@ -58,7 +61,7 @@ module Spree
           item.update_attributes(:refund_product_id => refund_product.id)
         end
 
-        inventory_units.each &:refund!
+        inventory_units.each &:refund
       end
 
     end

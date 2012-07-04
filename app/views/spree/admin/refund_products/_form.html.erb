@@ -39,7 +39,7 @@
         <td style="vertical-align:top; width:40px;">
           <%= unit.quantity.to_i %>
         </td>
-        <td><%= unit.line_item.price %></td>
+        <td><%= number_to_currency unit.line_item.price, :base_locale => unit.order.base_currency %></td>
       </tr>
   <% end %>
 </table>

@@ -98,7 +98,7 @@ module Spree
                :money             => (order.total * 100 ).to_i }
 
       # add correct tax amount by subtracting subtotal and shipping otherwise tax = 0 -> need to check adjustments.map
-      opts[:tax] = (order.total*100).to_i - opts.slice(:subtotal, :shipping).values.sum
+      #opts[:tax] = (order.total*100).to_i - opts.slice(:subtotal, :shipping).values.sum
 
       if stage == "checkout"
         opts[:handling] = 0
@@ -142,6 +142,11 @@ module Spree
 
         @order.special_instructions = @ppx_details.params["note"]
 
+        #---------------------------------------------------------------------------
+        #- Update Base Currency
+        #---------------------------------------------------------------------------
+        @order.base_currency = @ppx_details.params["order_total_currency_id"]
+        #---------------------------------------------------------------------------
 
         if payment_method.preferred_no_shipping
           ship_address = @ppx_details.address

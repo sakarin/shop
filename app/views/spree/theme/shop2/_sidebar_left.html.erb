@@ -1,0 +1,71 @@
+<div class="menu_product">
+  <div class="menu_product2">
+    <p>Product Categories</p>
+
+    <div id="menu" style="z-index: 1500">
+
+      <div class="dcjq-vertical-mega-menu">
+
+        <% get_taxonomies.each do |taxonomy| %>
+            <ul id="mega-1" class="menu">
+
+              <% taxonomy.root.children.each do |taxon| %>
+                  <li>
+                    <%= link_to taxon.name, seo_url(taxon) %>
+                    <ul>
+
+
+                      <% #rows = taxon.children.size / 3  %>
+                      <% num = 1 %>
+                      <% point_one = 0 %>
+                      <% point_two = 0 %>
+
+                      <% if (taxon.children.size % 3) == 1 %>
+                          <% point_one = (taxon.children.size / 3) + 1 %>
+                          <% point_two = ((taxon.children.size / 3) * 2) + 1 %>
+                      <% elsif (taxon.children.size % 3) == 2 %>
+                          <% point_one = (taxon.children.size / 3) + 1 %>
+                          <% point_two = point_one * 2 %>
+                      <% else %>
+                          <% point_one = taxon.children.size / 3 %>
+                          <% point_two = point_one * 2 %>
+                      <% end %>
+
+                      <li>
+                        <ul>
+                          <% taxon.children.each do |t| %>
+
+                              <li><%= link_to t.name, seo_url(t) %></li>
+
+                              <% if (num == point_one) or (num == point_two) %>
+                                  </ul>
+                                  </li>
+                                  <li>
+                                    <ul>
+                              <% end %>
+
+                              <% num = num + 1 %>
+                          <% end %>
+                          </ul>
+                          </li>
+
+
+                          </ul>
+                  </li>
+              <% end %>
+
+            </ul>
+        <% end %>
+
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+

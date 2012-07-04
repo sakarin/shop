@@ -39,19 +39,21 @@ module Spree
 
 
 
-      html = render_to_string(:action => "print.html.erb" , :layout => 'report')
+      html = render_to_string(:action => "print.html.erb" , :layout => 'spree/report')
       kit = PDFKit.new(html)
       kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/print.css"
 
       send_data(kit.to_pdf, :filename => "#{@shipment_file.name}.pdf", :type => 'application/pdf')
       kit.to_file("#{Rails.root}/public/files/shipments/#{@shipment_file.name}.pdf")
 
+
+
       (@shipments || []).each do |shipment|
         inventory_units = InventoryUnit.where(:state => 'sold', :shipment_id => shipment.id)
-        (inventory_units || []).each do |item|
-          item.packet
-        end
+        inventory_units.each &:pack!
       end
+
+      @shipments.each &:pack!
 
 
     end

@@ -1,14 +1,14 @@
 <% content_for :sidebar do %>
 
-        <% unless @current_store.default? %>
-            <% if "products" == @current_controller && @taxon %>
-                <%= render "spree/shared/filters" %>
-            <% else %>
-                <%= render "spree/shared/taxonomies" %>
-            <% end %>
+    <% if @current_store.nil? %>
+        <% if "products" == @current_controller && @taxon %>
+            <%= render "spree/shared/filters" %>
         <% else %>
             <%= render "spree/shared/taxonomies" %>
         <% end %>
+    <% else %>
+        <%= render "spree/shared/taxonomies" %>
+    <% end %>
 
 <% end %>
 
@@ -16,47 +16,47 @@
 <% if params[:keywords] %>
 
 
-        <% if @products.empty? %>
-            <% unless @current_store.default? %>
-                <div id="content">
-                  <%= render "spree/theme/#{@current_store.code}/sidebar_left" %>
-                  <%= render "spree/theme/#{@current_store.code}/banner" %>
-                </div>
-                <div id="content">
-                  <%= render "spree/theme/#{@current_store.code}/no_products_search" %>
-                </div>
-            <% else %>
-                <%= t(:no_products_found) %>
-            <% end %>
-        <% else %>
-            <% unless @current_store.default? %>
-                <div id="content">
-                  <%= render "spree/theme/#{@current_store.code}/sidebar_left" %>
-                  <%= render "spree/theme/#{@current_store.code}/banner" %>
-                </div>
-                <div id="content">
-                  <%= render "spree/theme/#{@current_store.code}/products_search", :products => @products, :taxon => @taxon %>
-                </div>
-            <% else %>
-                <%= render "spree/theme/products", :products => @products, :taxon => @taxon %>
-            <% end %>
-        <% end %>
-
-
-<% else %>
-
-
-        <% unless @current_store.default? %>
+    <% if @products.empty? %>
+        <% unless @current_store.nil? %>
             <div id="content">
               <%= render "spree/theme/#{@current_store.code}/sidebar_left" %>
               <%= render "spree/theme/#{@current_store.code}/banner" %>
             </div>
             <div id="content">
-              <%= render "spree/theme/#{@current_store.code}/products", :products => @products, :taxon => @taxon %>
+              <%= render "spree/theme/#{@current_store.code}/no_products_search" %>
             </div>
         <% else %>
-            <%= render "spree/theme/products", :products => @products, :taxon => @taxon %>
+            <%= t(:no_products_found) %>
         <% end %>
+    <% else %>
+        <% unless @current_store.nil? %>
+            <div id="content">
+              <%= render "spree/theme/#{@current_store.code}/sidebar_left" %>
+              <%= render "spree/theme/#{@current_store.code}/banner" %>
+            </div>
+            <div id="content">
+              <%= render "spree/theme/#{@current_store.code}/products_search", :products => @products, :taxon => @taxon %>
+            </div>
+        <% else %>
+            <%= render "spree/shared/products", :products => @products, :taxon => @taxon %>
+        <% end %>
+    <% end %>
+
+
+<% else %>
+
+
+    <% unless @current_store.nil? %>
+        <div id="content">
+          <%= render "spree/theme/#{@current_store.code}/sidebar_left" %>
+          <%= render "spree/theme/#{@current_store.code}/banner" %>
+        </div>
+        <div id="content">
+          <%= render "spree/theme/#{@current_store.code}/products", :products => @products, :taxon => @taxon %>
+        </div>
+    <% else %>
+        <%= render "spree/shared/products", :products => @products, :taxon => @taxon %>
+    <% end %>
 
 
 

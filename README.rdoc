@@ -10,3 +10,13 @@
 
     bundle install
     bundle exec rails g spree_flexi_variants:install
+
+
+    == Deploy
+ bundle exec rake db:seed
+ bundle exec rake db:admin:create
+
+
+== SpreeMultiCurrency
+ http://[domain]/currency/[isocode]
+ <%= link_to "eur", currency_path(:eur) %>

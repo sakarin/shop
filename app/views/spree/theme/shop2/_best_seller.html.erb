@@ -1,0 +1,20 @@
+<div class="content_box1">
+  <img width="192" height="38" src="/assets/shop1/top-10-best-seller.png" class="space_bottom_top">
+  <img width="236" height="1" src="/assets/shop1/line-best-seller.png" class="space_bottom_top2">
+  <!--box1-->
+  <% (@best_selling_variants || []).each_with_index do |v, i| %>
+      <div class="box1">
+        <% product = Product.find(v[0].id) %>
+
+        <%= link_to(image_tag(product.images.first.attachment.url(:mini), :size => "55x78", :class => 'space_box'), product) %>
+        <p>
+
+          <%= link_to product.name, product %>
+        </p>
+        <p class="text_product"><%= product_price(product) %></p>
+        <img width="236" height="1" src="/assets/shop1/line-best-seller.png">
+      </div>
+  <% end %>
+
+
+</div>

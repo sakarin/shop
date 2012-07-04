@@ -30,12 +30,14 @@
         <td style="vertical-align:top; width:50px;"><%= unit.size %></td>
         <td style="vertical-align:top; width:140px;"><%= unit.patch %></td>
         <td style="vertical-align:top; width:50px;"><%= unit.sleeve %></td>
-        <td><%= Spree::LineItem.find_by_order_id_and_variant_id(unit.order_id, unit.variant_id).price %></td>
+        <td><%= number_to_currency Spree::LineItem.find_by_order_id_and_variant_id(unit.order_id, unit.variant_id).price, :base_locale => unit.order.base_currency %></td>
       </tr>
   <% end %>
   <tr>
     <td colspan="8" style="text-align: right;font-weight: bold">Amount :</td>
-    <td style="font-weight: bold"><%= @refund_product.amount %></td>
+    <td style="font-weight: bold">
+        <%= number_to_currency @refund_product.amount, :base_locale => @refund_product.order.base_currency %>
+    </td>
   </tr>
 </table>
 

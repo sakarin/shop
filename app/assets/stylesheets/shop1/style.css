@@ -225,7 +225,7 @@ div#nav ul li a {
 
 .dcjq-vertical-mega-menu ul li a {
     background: url(/images/store3/arrow-menu.png) left no-repeat;
-    padding-left: 10px;
+    /*padding-left: 10px;*/
     padding-right: 25px;
     padding-bottom: 5px;
     padding-top: 5px;

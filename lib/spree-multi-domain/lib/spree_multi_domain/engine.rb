@@ -63,9 +63,11 @@ module SpreeMultiDomain
         end
 
         def get_taxonomies
-          @taxonomies ||= current_store.present? ? Spree::Taxonomy.where(["store_id = ?", current_store.id]) : Spree::Taxonomy
-          @taxonomies = @taxonomies.find(:all, :include => {:root => :children})
+
+          @taxonomies ||= current_store.present? ? Spree::Taxonomy.where("store_id = ?", current_store.id) : Spree::Taxonomy
+          @taxonomies = @taxonomies.includes(:root => :children).joins(:root)
           @taxonomies
+
         end
         
         def add_current_store_id_to_params

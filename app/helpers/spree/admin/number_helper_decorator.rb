@@ -10,9 +10,11 @@ module ActionView
 
         #-----------------------------------------------------------------------------------
         #- hack base currency for admin view
-        if self.controller._prefixes[0].include?("admin") && !@order.nil?
-          base_currency = @order.base_currency
-          options[:locale] = "currency_#{ base_currency.to_s.upcase || I18n.default_locale }"
+        unless self == Spree::ProductFilters
+          if self.controller._prefixes[0].include?("admin") && !@order.nil?
+            base_currency = @order.base_currency
+            options[:locale] = "currency_#{ base_currency.to_s.upcase || I18n.default_locale }"
+          end
         end
 
         unless options[:base_locale] == nil
@@ -22,8 +24,6 @@ module ActionView
 
         defaults = I18n.translate('number.format', :locale => options[:locale], :default => {})
         currency = I18n.translate('number.currency.format', :locale => options[:locale], :default => {})
-
-
 
 
         defaults = DEFAULT_CURRENCY_VALUES.merge(defaults).merge!(currency)

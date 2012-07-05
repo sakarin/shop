@@ -59,10 +59,9 @@ gem  'spree_multi_domain', :path => 'lib/spree-multi-domain'
 # git://github.com/martinjlowm/spree-multi-currency.git
 gem  'multi_currencies', :path => 'lib/spree-multi-currency'
 
-<<<<<<< HEAD
-
-gem 'spree_faq', :path => 'lib/spree-faq'
-=======
 gem  'spree_faq', :path => 'lib/spree-faq'
->>>>>>> hotfix/faq
+
+gem 'spree_static_content', :git => 'git@github.com:spree/spree_static_content.git'
+gem 'spree_editor', :git => 'git://raw.github.com/spree/spree_editor.git'
+gem 'tinymce-rails', '>= 3.4.7.0.1'
 

@@ -3,6 +3,10 @@ SpreeApp
 
 Introduction goes here.
 
+bundle --deployment
+
+bundle install --no-deployment
+
 
 Example
 =======

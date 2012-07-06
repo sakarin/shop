@@ -129,6 +129,7 @@ hr.space{
 	width: 297px;
 	margin-top: 15px;
 	background: url(/assets/shop1/bg-shopping-cart.png);
+    /*font: normal 13px Arial, sans-serif;*/
 }
 .shopping_cart2 {
 	height: 92px;
@@ -321,4 +322,9 @@ p {
 
 #faqs {
   font-size: 12px;
+}
+
+.currency_estimator {
+    float: right;
+    width: 108px;
 }

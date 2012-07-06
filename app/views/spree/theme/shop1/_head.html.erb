@@ -1,8 +1,8 @@
 <title><%#= site_title %></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <%== meta_data_tags %>
-<%= stylesheet_link_tag 'footballshirt/reset.css', 'footballshirt/text.css', 'footballshirt/960.css' %>
-<%= stylesheet_link_tag 'shop1/reset.css', 'shop1/global.css', 'shop1/style.css','pagination','shop1/vertical_menu', 'shop1/screen' %>
+<%#= stylesheet_link_tag 'footballshirt/reset.css', 'footballshirt/text.css', 'footballshirt/960.css' %>
+<%= stylesheet_link_tag 'shop1/reset.css', 'shop1/global.css', 'shop1/style.css','shop1/pagination','shop1/vertical_menu', 'shop1/screen' %>
 <%= csrf_meta_tag %>
 <%#= javascript_include_tag 'jquery-1.4.2.min', 'jquery.validate.min.js', 'rails', 'application',  :cache => 'jquery-core' %>
 <%= javascript_include_tag 'store/all' %>
@@ -18,7 +18,7 @@
     $(document).ready(function($){
         $('#mega-1').dcVerticalMegaMenu({
             rowItems: '3',
-            speed: 'slow',
+            speed: 'fast',
             effect: 'slide',
             direction: 'right'
         });

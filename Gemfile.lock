@@ -1,10 +1,19 @@
 GIT
-  remote: git://raw.github.com/spree/spree_editor.git
+  remote: git://github.com/spree/spree_editor.git
   revision: 9846455f5b48615a328d334e37f619ba7a571ba4
   specs:
     spree_editor (1.0.1)
       spree_core (>= 1.0.0)
       tinymce-rails (>= 3.4.7.0.1)
+
+GIT
+  remote: git://github.com/spree/spree_static_content.git
+  revision: 2b7d51f53bb5376200f0d5af4b009a6cdadef523
+  branch: 1-1-stable
+  specs:
+    spree_static_content (1.1)
+      spree_auth (~> 1.1.0)
+      spree_core (~> 1.1.0)
 
 PATH
   remote: lib/spree-faq
@@ -38,13 +47,6 @@ PATH
   specs:
     spree_paypal_express (1.1.0)
       spree_core (>= 1.0.0)
-
-PATH
-  remote: lib/spree_static_content
-  specs:
-    spree_static_content (1.1)
-      spree_auth (~> 1.1.0)
-      spree_core (~> 1.1.0)
 
 GEM
   remote: https://rubygems.org/

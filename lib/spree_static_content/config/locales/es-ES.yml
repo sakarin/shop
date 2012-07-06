@@ -1,0 +1,18 @@
+---
+es-ES:
+  pages: Pages
+  static_content:
+    static_pages: Páginas estáticas
+    static_pages_desc: Administrar página estática con el editor WYSIWYG.
+    title: Título
+    slug: Slug
+    body: Cuerpo
+    new_page: Nueva página
+    editing_page: Edición de página
+    foreign_link: Enlace externo (URL)
+    show_in_header: Mostrar en la cabecera
+    show_in_footer: Mostrar en el pié de página
+    position: Posición
+    visible: Visible
+    confirm_delete: ¿ Estás seguro ?
+    link: Enlace

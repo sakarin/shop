@@ -61,7 +61,9 @@ gem  'multi_currencies', :path => 'lib/spree-multi-currency'
 
 gem  'spree_faq', :path => 'lib/spree-faq'
 
-gem 'spree_static_content', :git => 'git://github.com/spree/spree_static_content.git', :branch => '1-1-stable'
+
+gem 'spree_static_content', :git => 'git@github.com:spree/spree_static_content.git', :branch => '1-1-stable'
+
 #gem 'spree_static_content', :path => 'lib/spree_static_content'
 gem 'spree_editor', :git => 'git://github.com/spree/spree_editor.git'
 gem 'tinymce-rails', '>= 3.4.7.0.1'

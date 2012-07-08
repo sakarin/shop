@@ -10,11 +10,11 @@ module ActionView
 
         #-----------------------------------------------------------------------------------
         #- hack base currency for admin view
-        unless self == Spree::ProductFilters
-          if self.controller._prefixes[0].include?("admin") && !@order.nil?
+
+        if @_controller.class.superclass.superclass == Spree::Admin::BaseController && !@order.nil?
             base_currency = @order.base_currency
             options[:locale] = "currency_#{ base_currency.to_s.upcase || I18n.default_locale }"
-          end
+          #end
         end
 
         unless options[:base_locale] == nil

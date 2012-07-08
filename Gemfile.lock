@@ -7,7 +7,7 @@ GIT
       tinymce-rails (>= 3.4.7.0.1)
 
 GIT
-  remote: git://github.com/spree/spree_static_content.git
+  remote: git@github.com:spree/spree_static_content.git
   revision: 2b7d51f53bb5376200f0d5af4b009a6cdadef523
   branch: 1-1-stable
   specs:

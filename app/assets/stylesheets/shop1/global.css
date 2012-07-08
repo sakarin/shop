@@ -264,6 +264,7 @@ h1 {
 }
 .box2 {
 	width: 180px;
+    height: 292px;
 	float: left;
 	margin-bottom: 55px;
 	overflow: hidden;
@@ -271,6 +272,7 @@ h1 {
 }
 .box3 {
 	width: 180px;
+    height: 292px;
 	float: left;
 	overflow: hidden;
 	margin: 23px 75px 55px;
@@ -280,6 +282,10 @@ h1 {
 	width: 690px;
 	float: right;
 }
+.product-desc{
+    height: 42px;
+}
+
 
 
 

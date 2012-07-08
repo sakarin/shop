@@ -243,3 +243,16 @@ ul {
 .dcjq-vertical-mega-menu .menu {
     font-size: 12px;
 }
+
+.customize #cart-form .add-to-cart input.title{
+    padding-left: 0;
+    padding-right: 0;
+    min-height: 0;
+}
+.customize #cart-form #product-price span.price.selling{
+    color: #cc3333;
+    font-size: 22px;
+}
+.customize #cart-form input{
+
+}

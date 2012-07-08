@@ -11,23 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120704235263) do
-
-  create_table "_spree_purchase_items_old_20120531", :force => true do |t|
-    t.integer  "purchase_order_id"
-    t.integer  "inventory_unit_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-    t.string   "state"
-  end
-
-  create_table "_spree_receive_products_old_20120531", :force => true do |t|
-    t.string   "number"
-    t.integer  "purchase_order_id"
-    t.string   "state"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-  end
+ActiveRecord::Schema.define(:version => 20120708003519) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -250,7 +234,6 @@ ActiveRecord::Schema.define(:version => 20120704235263) do
     t.string   "size",                    :limit => 15,  :default => ""
     t.string   "patch",                   :limit => 100, :default => ""
     t.string   "sleeve",                  :limit => 10,  :default => ""
-    t.integer  "po_version",                             :default => 0
     t.integer  "refund_product_id"
   end
 
@@ -401,12 +384,12 @@ ActiveRecord::Schema.define(:version => 20120704235263) do
   add_index "spree_pending_promotions", ["user_id"], :name => "index_spree_pending_promotions_on_user_id"
 
   create_table "spree_preferences", :force => true do |t|
-    t.string   "name",       :limit => 100
-    t.integer  "owner_id",   :limit => 30
-    t.string   "owner_type", :limit => 50
-    t.text     "value",      :limit => 255
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.string   "name"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.text     "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "key"
     t.string   "value_type"
   end
@@ -595,6 +578,7 @@ ActiveRecord::Schema.define(:version => 20120704235263) do
   create_table "spree_receive_products", :force => true do |t|
     t.string   "number"
     t.integer  "purchase_order_id"
+    t.string   "state"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
@@ -723,6 +707,7 @@ ActiveRecord::Schema.define(:version => 20120704235263) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "default",    :default => false
     t.string   "email"
+    t.text     "seo_title"
   end
 
   create_table "spree_suppliers", :force => true do |t|
@@ -802,15 +787,15 @@ ActiveRecord::Schema.define(:version => 20120704235263) do
   end
 
   create_table "spree_users", :force => true do |t|
-    t.string   "encrypted_password",     :limit => 128
-    t.string   "password_salt",          :limit => 128
+    t.string   "encrypted_password"
+    t.string   "password_salt"
     t.string   "email"
     t.string   "remember_token"
     t.string   "persistence_token"
     t.string   "reset_password_token"
     t.string   "perishable_token"
-    t.integer  "sign_in_count",                         :default => 0, :null => false
-    t.integer  "failed_attempts",                       :default => 0, :null => false
+    t.integer  "sign_in_count",                        :default => 0, :null => false
+    t.integer  "failed_attempts",                      :default => 0, :null => false
     t.datetime "last_request_at"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -819,8 +804,8 @@ ActiveRecord::Schema.define(:version => 20120704235263) do
     t.string   "login"
     t.integer  "ship_address_id"
     t.integer  "bill_address_id"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.string   "authentication_token"
     t.string   "unlock_token"
     t.datetime "locked_at"

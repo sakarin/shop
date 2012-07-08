@@ -129,6 +129,7 @@ hr.space{
 	width: 297px;
 	margin-top: 15px;
 	background: url(/assets/shop1/bg-shopping-cart.png);
+    /*font: normal 13px Arial, sans-serif;*/
 }
 .shopping_cart2 {
 	height: 92px;
@@ -263,6 +264,7 @@ h1 {
 }
 .box2 {
 	width: 180px;
+    height: 292px;
 	float: left;
 	margin-bottom: 55px;
 	overflow: hidden;
@@ -270,6 +272,7 @@ h1 {
 }
 .box3 {
 	width: 180px;
+    height: 292px;
 	float: left;
 	overflow: hidden;
 	margin: 23px 75px 55px;
@@ -279,6 +282,10 @@ h1 {
 	width: 690px;
 	float: right;
 }
+.product-desc{
+    height: 42px;
+}
+
 
 
 
@@ -321,4 +328,9 @@ p {
 
 #faqs {
   font-size: 12px;
+}
+
+.currency_estimator {
+    float: right;
+    width: 108px;
 }

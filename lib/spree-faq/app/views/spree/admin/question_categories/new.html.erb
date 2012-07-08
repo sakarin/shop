@@ -1,0 +1,11 @@
+<%= form_for @question_category, :url => collection_url do |f| %>
+  <%= render "spree/shared/error_messages", :target => f.object %>
+  <fieldset>
+      <%= f.field_container :name do %>
+          <%= f.label :name, t("name") %> <span class="required">*</span><br />
+          <%= f.text_field :name, :class => 'fullwidth title'  %>  
+          <%= f.error_message_on :name %>
+      <% end %>
+      <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+  </fieldset>
+<% end %>

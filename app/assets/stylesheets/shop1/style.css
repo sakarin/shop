@@ -11,7 +11,7 @@ body {
     height: 100%;
     color: #a4a4a4;
     cursor: default;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 16px;
     text-align: center;
     background-color: #000;
@@ -177,7 +177,7 @@ div#nav ul li a {
     margin-top: 0px;
     padding-bottom: 20px;
     color: #CCC;
-    background: url(/images/store3/inner_menu.png) no-repeat;
+    background: url(/assets/shop1/inner_menu.png) no-repeat;
     overflow: hidden;
     padding-top: 5px;
     padding-left: 20px;
@@ -197,7 +197,7 @@ div#nav ul li a {
 }
 
 .space_bottom_top_menu {
-    background: url(/images/store3/line-menu-product.png) no-repeat bottom;
+    background: url(/assets/shop1/line-menu-product.png) no-repeat bottom;
     padding-bottom: 5px;
     margin-bottom: 2px;
     margin-top: 5px;
@@ -216,7 +216,7 @@ div#nav ul li a {
 }
 
 .dcjq-vertical-mega-menu ul li,.dcjq-vertical-mega-menu ul li li li {
-    background: url(/images/store3/line-menu-product.png) no-repeat bottom;
+    background: url(/assets/shop1/line-menu-product.png) no-repeat bottom;
     text-align: left;
 }
 .dcjq-vertical-mega-menu ul li li{
@@ -224,8 +224,8 @@ div#nav ul li a {
 }
 
 .dcjq-vertical-mega-menu ul li a {
-    background: url(/images/store3/arrow-menu.png) left no-repeat;
-    /*padding-left: 10px;*/
+    background: url(/assets/shop1/arrow-menu.png) left no-repeat;
+    padding-left: 10px;
     padding-right: 25px;
     padding-bottom: 5px;
     padding-top: 5px;

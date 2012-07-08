@@ -39,7 +39,7 @@ module Spree
 
 
 
-      html = render_to_string(:action => "print.html.erb" , :layout => 'spree/report')
+      html = render_to_string(:action => "print.html.erb" , :layout => 'report')
       kit = PDFKit.new(html)
       kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/print.css"
 

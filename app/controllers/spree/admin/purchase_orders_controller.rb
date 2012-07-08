@@ -139,7 +139,8 @@ module Spree
         load_purchasing_order_file_generate_file
         ToXls::ArrayWriter.new(@backorder_inventory_units, :name => 'purchase_order', :columns => [:season, :team, :shirt_type, :name, :number, :size, :sleeve, :patch, :quantity], :headers => ['Season', 'Team', 'Type', 'Number', 'Number', 'Size', 'Sleeve', 'Patch', 'Quantity']).write_io("#{Rails.root}/public/files/purchases/#{@purchase_order.number}.xls")
 
-        html = render_to_string(:action => "show.html.erb" , :layout => 'spree/report')
+        html = render_to_string(:action => "show.html.erb" , :layout => 'report')
+
         kit = PDFKit.new(html)
         kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/print.css"
 

@@ -1,14 +1,21 @@
-<title><%#= site_title %></title>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<%== meta_data_tags %>
+<meta charset="utf-8">
+
+<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+
+
 <%#= stylesheet_link_tag 'footballshirt/reset.css', 'footballshirt/text.css', 'footballshirt/960.css' %>
 <%= stylesheet_link_tag 'shop1/reset.css', 'shop1/global.css', 'shop1/style.css','shop1/pagination','shop1/vertical_menu', 'shop1/screen' %>
 <%= csrf_meta_tag %>
-<%#= javascript_include_tag 'jquery-1.4.2.min', 'jquery.validate.min.js', 'rails', 'application',  :cache => 'jquery-core' %>
+
 <%= javascript_include_tag 'store/all' %>
 <%= javascript_include_tag 'shop1/scripts', 'shop1/jquery.hoverIntent.minified','shop1/jquery.dcverticalmegamenu.1.3' %>
 
 
+<title><%= site_title %></title>
 
 
 <script type="text/javascript">
@@ -25,9 +32,11 @@
     });
 </script>
 
-<% unless I18n.locale.to_s[0..1] == 'en' %>
-  <%= javascript_include_tag ['localization/messages_', I18n.locale.to_s[0..1], '.js'].join %>
-<% end %>
 
+
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 
 <%= yield :head %>

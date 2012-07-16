@@ -10,7 +10,7 @@ class AddShirtPropertiesToInventoryUnit < ActiveRecord::Migration
     add_column :spree_inventory_units, :patch, :string, :default => "", :limit => 100
     add_column :spree_inventory_units, :sleeve, :string, :default => "", :limit => 10
 
-    add_column :spree_inventory_units, :po_version, :integer
+
 
   end
 end

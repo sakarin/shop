@@ -1,6 +1,11 @@
 <%= form_tag products_url, :method => :get, :class =>"search-box3" do %>
 
-    <%= text_field_tag :keywords, params[:keywords], :class => 'form3' %>
-    <%= image_submit_tag "/assets/shop1/b-quick-search.png", :style => "float: right;" %>
+    <div class="input-append">
+      <input class="span3" id="appendedInputButton" size="50" placeholder="Search ..." type="text"><%= submit_tag "Go!", :class => "btn btn-primary" %>
+
+
+    </div>
+
+
 
 <% end %>

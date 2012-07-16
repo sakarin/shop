@@ -4,6 +4,7 @@ body {
 	margin-right: 0px;
 	margin-bottom: 0px;
 	font: 12px/1.2 Arial, Helvetica, sans-serif;
+    /*font-family: "Ubuntu", sans-serif;*/
 	color: #FFF;
 	/*background: #FFF url(/assets/shop1/bg.jpg);*/
     background: #010300 url(/assets/shop1/bg_border.jpg) center top no-repeat;
@@ -115,13 +116,13 @@ hr.space{
 .quick_search2 {
 	height: 45px;
 	width: 265px;
-	margin: 3px 12px 4px 18px;
+	margin: 12px 14px 4px 14px;
 }
 .quick-search-forms1 {
 	float: left;
 	height: 19px;
 	width: 270px;
-	background: url(/assets/shop1/bg-quick_search-forms.png) no-repeat;
+	/*background: url(/assets/shop1/bg-quick_search-forms.png) no-repeat;*/
 }
 .shopping-cart {
 	float: right;

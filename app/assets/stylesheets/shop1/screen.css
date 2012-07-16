@@ -443,7 +443,7 @@ ul#nav li a{
     width: 100%;
 }
 #body_content .content .customize #cart-form #product-customizations fieldset ol li input{
-    width: 100%
+    /*width: 100%*/
 }
 #body_content .content .customize #cart-form #ad_hoc_options fieldset label {
     width: 100%;

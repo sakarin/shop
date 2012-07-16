@@ -505,19 +505,19 @@ ul#nav li a{
 #body_content .content-960 button,
 #body_content .content-960 a.button,
 #body_content .content-960 input.button{
-    border-radius: 1.5em;
-    background: #EFEFEF url(../../images/footballshirt/body_content/bg-button.png) center left repeat-x !important;
-    border-style: solid;
-    border-width: 1px !important;
-    border-color: #ddd #999 !important;
-    padding: 10px 17px;
-    text-decoration: none;
-    text-transform: lowercase;
-    width: auto;
-    height: auto;
-    cursor: pointer;
-    color: #333333;
-    margin-top: 15px;
+    /*border-radius: 1.5em;*/
+    /*background: #EFEFEF url(../../images/footballshirt/body_content/bg-button.png) center left repeat-x !important;*/
+    /*border-style: solid;*/
+    /*border-width: 1px !important;*/
+    /*border-color: #ddd #999 !important;*/
+    /*padding: 10px 17px;*/
+    /*text-decoration: none;*/
+    /*text-transform: lowercase;*/
+    /*width: auto;*/
+    /*height: auto;*/
+    /*cursor: pointer;*/
+    /*color: #333333;*/
+    /*margin-top: 15px;*/
 }
 div#checkout{
     position: relative;

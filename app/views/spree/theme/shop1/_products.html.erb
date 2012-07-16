@@ -27,10 +27,8 @@
                 <%= link_to product_image(product, :size => "180x200"), product %>
                 <p class="product-desc"> <%= link_to product.name, product %> </p>
                 <p class="text_product"><%= number_to_currency product.price %>
+                  <%= link_to "Add To Cart", product, :class => "btn btn-primary" %>
 
-                  <strong class="float_right">
-                    <%= link_to image_tag('/assets/shop1/b-add-to-cart.png', :size => '86x25') , product %>
-                  </strong>
                 </p>
               </div>
           <% end %>

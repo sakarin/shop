@@ -80,10 +80,10 @@ a:hover, a:active, a.selected{
 .sign_in_email .sign_in_password {
 	float: left;
 	height: 19px;
-	width: 239px;
+	/*width: 239px;*/
 	margin-top: 2px;
 	margin-bottom: 15px;
-	background: url(/assets/shop1/bg-sign-in-password1.png);
+	/*background: url(/assets/shop1/bg-sign-in-password1.png);*/
 }
 .logo {
 	float: left;

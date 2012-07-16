@@ -567,7 +567,7 @@ ol.progress-steps li span {
 ol.progress-steps li.current-first span {
     padding-left: 14px;
 }
-div#checkout-summary {
+/*div#checkout-summary {
     background-color: #C3C9DF;
     float: right;
     margin-top: 10px;
@@ -576,7 +576,7 @@ div#checkout-summary {
     margin-top: 50px;
     display: block;
     border-radius: 10px;
-}
+} */
 br[clear=left] {
     clear: left;
 }
@@ -807,3 +807,185 @@ ul.answers li div.answer{
     background: url('../../images/admin/admin-mystore/screen-flash.png') 0 -268px repeat-x
 }
 
+/* ------------------- */
+/*
+*   --------------------- css style from bootstrap insert by yai for form tags only ---------------------------
+*/
+
+.customize input,
+.customize button,
+.customize select,
+.customize textarea {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.customize label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+
+
+
+#body_content .content .customize #cart-form #product-customizations fieldset ol li label{
+
+    /*remove screen.css line 443-445 (this class)*/
+}
+
+#product-customizations h3,
+#ad_hoc_options h3,
+#product-price h6{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: none;
+}
+#cart-form #ad_hoc_options select.ad-hoc-option-select{
+    min-width: 310px;
+}
+#product-customizations ol li input[type="text"]{
+    width: 300px;
+}
+#cart-form #ad_hoc_options dl dd{
+    margin-bottom: 15px;
+}
+#cart-form #ad_hoc_options dl dt,
+#product-customizations ol li label{
+    margin-bottom: 5px;
+    text-align: left;
+    padding-left: 40px;
+}
+#body_content .content .customize{
+    margin-left: 250px;
+    margin-right:250px;
+}
+#product-price{
+    text-align: left;
+    margin-bottom: 15px;
+    margin-left: 40px;
+}
+#product-price span.price{
+    color: #C33;
+    font-size: 22px;
+}
+
+
+
+#billing, #shipping, #shipping_method, #payment, #order_details, #order_summary {
+    margin-top: 10px;
+    border: 1px solid #D9D9DB;
+    padding: 10px;
+}
+
+.content-960 .twelve.columns{
+    width: 656px;
+    float: left;
+}
+
+div#checkout-summary {
+
+    float: right;
+    margin-top: 18px;
+    padding: 20px;
+    width: 180px;
+    display: block;
+}
+
+.content-960  .twelve.columns  .edit_order .btn{
+    float: left;
+}
+
+.content-960  .twelve.columns  .edit_order{
+    text-align: left;
+}
+
+#checkout-summary {
+    text-align: center;
+    border: 1px solid #d9d9db;
+    margin-top: 23px;
+    margin-left: 0;
+
+}
+/* line 696, ../../../../../.rbenv/versions/1.9.3-p125/lib/ruby/gems/1.9.1/gems/spree_core-1.1.1/app/assets/stylesheets/store/screen.css.scss */
+#checkout-summary h3 {
+    text-transform: uppercase;
+    font-size: 14px;
+    border-bottom: 1px solid #d9d9db;
+}
+/* line 702, ../../../../../.rbenv/versions/1.9.3-p125/lib/ruby/gems/1.9.1/gems/spree_core-1.1.1/app/assets/stylesheets/store/screen.css.scss */
+#checkout-summary table {
+    width: 100%;
+}
+/* line 713, ../../../../../.rbenv/versions/1.9.3-p125/lib/ruby/gems/1.9.1/gems/spree_core-1.1.1/app/assets/stylesheets/store/screen.css.scss */
+#checkout-summary table tr[data-hook="order_total"] {
+    border-bottom: none;
+}
+/* line 717, ../../../../../.rbenv/versions/1.9.3-p125/lib/ruby/gems/1.9.1/gems/spree_core-1.1.1/app/assets/stylesheets/store/screen.css.scss */
+#checkout-summary table #summary-order-total {
+    font-size: 14px;
+}
+
+/*--------------------------------------*/
+/* Checkout
+/*--------------------------------------*/
+/* line 649, ../../../../../.rbenv/versions/1.9.3-p125/lib/ruby/gems/1.9.1/gems/spree_core-1.1.1/app/assets/stylesheets/store/screen.css.scss */
+.progress-steps {
+    list-style: decimal inside;
+    overflow: auto;
+}
+/* line 653, ../../../../../.rbenv/versions/1.9.3-p125/lib/ruby/gems/1.9.1/gems/spree_core-1.1.1/app/assets/stylesheets/store/screen.css.scss */
+.progress-steps li {
+    float: left;
+    margin-right: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px 20px;
+    color: #727276;
+}
+/* line 661, ../../../../../.rbenv/versions/1.9.3-p125/lib/ruby/gems/1.9.1/gems/spree_core-1.1.1/app/assets/stylesheets/store/screen.css.scss */
+.progress-steps li.current-first, .progress-steps li.current {
+    background-color: #00adee;
+    color: white;
+}
+/* line 666, ../../../../../.rbenv/versions/1.9.3-p125/lib/ruby/gems/1.9.1/gems/spree_core-1.1.1/app/assets/stylesheets/store/screen.css.scss */
+.progress-steps li.completed-first, .progress-steps li.completed {
+    background-color: #d9d9db;
+    color: white;
+}
+/* line 670, ../../../../../.rbenv/versions/1.9.3-p125/lib/ruby/gems/1.9.1/gems/spree_core-1.1.1/app/assets/stylesheets/store/screen.css.scss */
+.progress-steps li.completed-first a, .progress-steps li.completed a {
+    color: white;
+}
+/* line 674, ../../../../../.rbenv/versions/1.9.3-p125/lib/ruby/gems/1.9.1/gems/spree_core-1.1.1/app/assets/stylesheets/store/screen.css.scss */
+.progress-steps li.completed-first:hover, .progress-steps li.completed:hover {
+    background-color: #00adee;
+    color: white;
+}
+/* line 678, ../../../../../.rbenv/versions/1.9.3-p125/lib/ruby/gems/1.9.1/gems/spree_core-1.1.1/app/assets/stylesheets/store/screen.css.scss */
+.progress-steps li.completed-first:hover a, .progress-steps li.completed:hover a {
+    color: white;
+}
+/* line 681, ../../../../../.rbenv/versions/1.9.3-p125/lib/ruby/gems/1.9.1/gems/spree_core-1.1.1/app/assets/stylesheets/store/screen.css.scss */
+.progress-steps li.completed-first:hover a:hover, .progress-steps li.completed:hover a:hover {
+    color: white !important;
+}
+
+.account-summary-show table{
+    width: 100%;
+    margin-top: 20px;
+
+}
+
+fieldset#order_summary{
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+fieldset#order_summary #order table{
+    margin-top: 20px;
+}
+.currency_estimator{
+    width: 300px;
+}
+.currency_estimator span{float: right;display: block;margin-right: 5px;}

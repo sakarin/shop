@@ -27,7 +27,7 @@
                     <%= render :partial => 'form', :locals => {:order_form => order_form} %>
                   </div>
 
-                  <div class="grid_16">
+                  <div class="clearfix">
                     <div class="grid_8" data-hook="cart_buttons">
                       <%= button_tag :class => 'btn btn-primary', :id => 'update-button' do %>
                           <%= t(:update) %>
@@ -35,7 +35,7 @@
                       <%= link_to t(:checkout), checkout_path, :class => 'btn btn-primary', :id => 'checkout-link' %>
                     </div>
 
-                    <div id="subtotal" data-hook class="grid_8">
+                    <div id="subtotal" data-hook class="grid_8" style="float: right;">
                       <h5><%= t(:subtotal) %>: <span class="order-total"><%= order_subtotal(@order) %></span></h5>
                     </div>
                   </div>
@@ -45,7 +45,7 @@
           </div>
           <div id="empty-cart" data-hook>
             <%= form_tag empty_cart_path, :method => :put do %>
-                <p id="clear_cart_link" data-hook>
+                <p id="clear_cart_link" data-hook style="text-align: right;">
                   <%= submit_tag t(:empty_cart), :class => 'btn btn-primary' %>
                   <%= t(:or) %>
                   <%= link_to t(:continue_shopping), products_path, :class => 'btn btn-primary' %>

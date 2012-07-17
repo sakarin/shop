@@ -9,13 +9,26 @@
 
 
   <div id="body_content">
-    <div class="top-box-770"></div>
-    <div class="title">
-      <h1><%= accurate_title %></h1>
-    </div>
-    <div class="content content-770" style="padding-bottom: 0;">
 
-    </div>
+
+
+      <% if @taxon.children.empty? || !params[:keywords].blank? %>
+          <div id="content">
+            <%= render "spree/theme/#{@current_store.code}/sidebar_left" %>
+
+
+          <div class="content_box2">
+            <h2 class="taxon-title"><%= accurate_title %></h2>
+            <%= render :partial => 'spree/theme/shop1/products', :locals => {:products => @products, :taxon => @taxon} %>
+          </div>
+          </div>
+      <% else %>
+          <div data-hook="taxon_children">
+            <%= render :partial => 'taxon', :collection => @taxon.children %>
+          </div>
+      <% end %>
+
+
 
     <div class="footer-770"></div>
   </div>

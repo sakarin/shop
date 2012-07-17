@@ -3,15 +3,6 @@
    paginated_products ||= products
 %>
 
-<%= render "spree/theme/shop1/best_seller" %>
-
-<div class="content_box2">
-
-
-
-  <img width="176" height="38" src="/assets/shop1/latest-products.png" class="space_bottom_top">
-  <img width="691" height="1" src="/assets/shop1/line-latest-products.png" class="space_bottom_top2">
-
   <% if products.empty? %>
       <%= t(:no_products_found) %>
   <% elsif params.key?(:keywords) %>
@@ -38,7 +29,7 @@
 
 
   <%= paginate(paginated_products) %>
-</div>
+
 
 
 

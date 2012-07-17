@@ -52,7 +52,16 @@
           <%= render "spree/theme/#{@current_store.code}/banner" %>
         </div>
         <div id="content">
-          <%= render "spree/theme/#{@current_store.code}/products", :products => @products, :taxon => @taxon %>
+
+
+          <%= render "spree/theme/shop1/best_seller" %>
+
+          <div class="content_box2">
+            <img width="176" height="38" src="/assets/shop1/latest-products.png" class="space_bottom_top">
+            <img width="691" height="1" src="/assets/shop1/line-latest-products.png" class="space_bottom_top2">
+            <%= render "spree/theme/#{@current_store.code}/products", :products => @products, :taxon => @taxon %>
+          </div>
+
         </div>
     <% else %>
         <%= render "spree/shared/products", :products => @products, :taxon => @taxon %>

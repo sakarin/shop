@@ -27,7 +27,7 @@ Shop::Application.routes.draw do
     match '/confirm/orders/:order_id/checkout/paypal_confirm(.:format)' => 'paypal_confirm#paypal', :via => [:get, :post]
 
     namespace :admin do
-
+      resources :excels
       resources :suppliers
       resources :purchase_orders do
         resources :receive_products

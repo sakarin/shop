@@ -171,8 +171,7 @@ module Spree
           @order.bill_address ||= order_ship_address
         end
 
-        #Hack shipment not update
-        @order.shipment.update!(@order)
+
 
         @order.save
 
@@ -181,6 +180,9 @@ module Spree
         else
           paypal_finish
         end
+
+        #Hack shipment not update
+        @order.shipment.update!(@order)
 
       else
         gateway_error(@ppx_details)

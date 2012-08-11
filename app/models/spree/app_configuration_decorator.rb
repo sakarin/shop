@@ -17,6 +17,8 @@ module Spree
     preference :default_meta_description, :string, :default => 'demo site'
     preference :default_meta_keywords, :string, :default => 'demo'
 
+    preference :price_per_letter, :decimal, :default => 3.0
+
 
 
 

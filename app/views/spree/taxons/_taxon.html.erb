@@ -1,4 +1,14 @@
-<div class="taxon" data-hook="taxon">
-  <h5 class="subtaxon-title"><%= link_to taxon.name, seo_url(taxon), :class => 'breadcrumbs' %></h5>
-  <%= render :partial => 'spree/shared/products', :locals => { :products => taxon_preview(taxon), :taxon => taxon } %>
-</div>
+<% unless @current_store.default? %>
+
+    <div class="taxon" data-hook="taxon">
+      <h5 class="subtaxon-title"><%= link_to taxon.name, seo_url(taxon), :class => 'breadcrumbs' %></h5>
+      <%= render :partial => "spree/theme/#{@current_store.code}/list_products_all_taxon", :locals => {:products => taxon_preview(taxon), :taxon => taxon} %>
+
+    </div>
+
+<% else %>
+    <div class="taxon" data-hook="taxon">
+      <h5 class="subtaxon-title"><%= link_to taxon.name, seo_url(taxon), :class => 'breadcrumbs' %></h5>
+      <%= render :partial => 'spree/shared/products', :locals => {:products => taxon_preview(taxon), :taxon => taxon} %>
+    </div>
+<% end %>

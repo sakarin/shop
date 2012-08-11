@@ -14,7 +14,11 @@ module ActionView
         if @_controller.class.superclass.superclass == Spree::Admin::BaseController && !@order.nil?
             base_currency = @order.base_currency
             options[:locale] = "currency_#{ base_currency.to_s.upcase || I18n.default_locale }"
-          #end
+        end
+
+        if @_controller.class.superclass.superclass == Spree::BaseController && !@order.nil?
+          base_currency = @order.base_currency
+          options[:locale] = "currency_#{ base_currency.to_s.upcase || I18n.default_locale }"
         end
 
         unless options[:base_locale] == nil

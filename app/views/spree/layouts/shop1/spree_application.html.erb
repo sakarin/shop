@@ -16,15 +16,25 @@
 
     <span>
     <%= link_to "EUR", currency_path(:eur) %>
-    <%= link_to "USD", currency_path(:usd) %>
-    <%= link_to "GBP", currency_path(:gbp) %>
+      <%= link_to "USD", currency_path(:usd) %>
+      <%= link_to "GBP", currency_path(:gbp) %>
         </span>
     <span>Currency Estimator : </span>
   </div>
 
   <div class="sign_in">
     <%= render 'spree/theme/shop1/sign_in' %>
+
+    <div class="facebook-twitter" style="padding-top: 15px; text-align: left;vertical-align: top;">
+
+      <span>
+         <a href="http://www.facebook.com/thefootballshirtdotcom"><%= image_tag ('facebook.png') %></a>
+         <a href="https://twitter.com/#!/thefootballshir"><%= image_tag ('twitter.png') %></a>
+      </span>
+
+    </div>
   </div>
+
 
   <div class="logo"><a href="#"><img src="/assets/shop1/logo.png" alt="logo" width="230" height="230" border="0"/></a>
   </div>
@@ -48,7 +58,6 @@
   <div class="shopping-cart">
     <%= render 'spree/theme/shop1/cart_sidebar' %>
   </div>
-
 
 
 </div>
@@ -81,7 +90,6 @@
 
 
 <%= render :partial => 'spree/theme/shop1/footer' %>
-
 
 
 </body>

@@ -41,7 +41,7 @@ module Spree
 
         # Hack product customizations for Name and Number
         # Hack By Dekpump
-        current_item.price   = variant.price + povs.map(&:price_modifier).compact.sum + (product_customizations.map {|pc| pc.price(variant)}.sum == 6 ? 3 : product_customizations.map {|pc| pc.price(variant)}.sum    )
+        current_item.price   = variant.price + povs.map(&:price_modifier).compact.sum + Spree::Currency.conversion_to_current(product_customizations.map {|pc| pc.price(variant)}.sum == 6 ? 3 : product_customizations.map {|pc| pc.price(variant)}.sum)
 
         self.line_items << current_item
       end

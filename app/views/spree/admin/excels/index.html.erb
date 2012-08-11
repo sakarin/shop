@@ -1,5 +1,10 @@
-<h1><%= "Import Tracking Number" %></h1>
-<% form_for :excel, :html => {:multipart => true} do |f| %>
+<h1>Import Tracking Number</h1>
+<%= form_for :excel, :html => { :multipart => true } do |f| %>
+
     <%= f.file_field :attachment %>
-    <%= submit_tag "Import" %>
+
+    <p class="form-buttons" data-hook="buttons">
+    <%= button t(:import) %>
+    </p>
 <% end %>
+

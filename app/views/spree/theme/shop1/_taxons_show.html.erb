@@ -4,29 +4,33 @@
 
 </div>
 
-<div id="content" class='show-product'>
+<div id="content3" class='show-product'>
   <% @body_id = 'product-details' %>
 
 
   <div id="body_content">
 
 
-
-      <% if @taxon.children.empty? || !params[:keywords].blank? %>
-          <div id="content">
-            <%= render "spree/theme/#{@current_store.code}/sidebar_left" %>
+    <% if @taxon.children.empty? || !params[:keywords].blank? %>
+        <div id="content">
+          <%= render "spree/theme/#{@current_store.code}/sidebar_left" %>
+          <%= render "spree/theme/#{@current_store.code}/banner" %>
 
 
           <div class="content_box2">
             <h2 class="taxon-title"><%= accurate_title %></h2>
             <%= render :partial => 'spree/theme/shop1/products', :locals => {:products => @products, :taxon => @taxon} %>
           </div>
-          </div>
-      <% else %>
+        </div>
+    <% else %>
+        <div id="content">
+          <%= render "spree/theme/#{@current_store.code}/sidebar_left" %>
+
           <div data-hook="taxon_children">
             <%= render :partial => 'taxon', :collection => @taxon.children %>
           </div>
-      <% end %>
+        </div>
+    <% end %>
 
 
 

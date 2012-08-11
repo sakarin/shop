@@ -8,6 +8,8 @@ body {
 	color: #FFF;
 	/*background: #FFF url(/assets/shop1/bg.jpg);*/
     background: #010300 url(/assets/shop1/bg_border.jpg) center top no-repeat;
+    background-attachment: fixed;
+    background-color: black;
 }
 a {
 	color: #FFFFFF;

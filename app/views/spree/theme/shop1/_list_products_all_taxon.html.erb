@@ -1,0 +1,49 @@
+<%
+  paginated_products = @searcher.products if params.key?(:keywords)
+  paginated_products ||= products
+%>
+
+
+            <div class="content content-770 clearfix">
+                <h2 class="list-taxon" style="color: #333;"><%= link_to taxon.name, seo_url(taxon), :class => 'breadcrumbs' %></h2>
+
+                <% if products.empty? %>
+                    <%= t(:no_products_found) %>
+                <% elsif params.key?(:keywords) %>
+                    <h3><%= t(:search_results, :keywords => h(params[:keywords])) %></h3>
+                <% end %>
+
+
+                <% if products.any? %>
+                <ul class="product-listing">
+                  <% products.each do |product| %>
+                    <% if Spree::Config[:show_zero_stock_products] || product.has_stock? %>
+                      <li id="product_<%= product.id %>">
+                        <div class="grid_4 grid-product-list">
+                            <div class="product-entry clearfix">
+                        <%= hook :products_list_item, {:product => product} do %>
+                          <%= link_to product_image(product), product %>
+                          <%= link_to raw("<span class='item-title'>" + product.name + "</span>"+ " <span class='price'>#{product_price(product)}</span>" + "<span class='add-to-cart'></span>"), product %>
+                        <% end %>
+                            </div>
+                        </div>
+                      </li>
+                    <% end %>
+                  <% end %>
+                </ul>
+                <% end %>
+
+                <div class="clear"></div>
+            </div>
+
+
+
+<% if paginated_products.respond_to?(:total_pages)
+      params.delete(:search)
+      params.delete(:taxon)
+
+%>
+<%= will_paginate(paginated_products,
+                    :previous_label => "&#171; #{t('previous')}",
+                    :next_label => "#{t('next')} &#187;") %>
+<% end %>

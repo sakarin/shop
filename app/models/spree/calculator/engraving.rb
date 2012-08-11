@@ -1,7 +1,10 @@
 module Spree
   class Calculator::Engraving < Calculator
+
     preference :price_per_letter, :decimal
     attr_accessible :preferred_price_per_letter
+
+
 
     def self.description
       "One Time Constant Calculator"
@@ -26,9 +29,9 @@ module Spree
       opt_name = product_customization.customized_product_options.detect { |cpo| cpo.customizable_product_option.name == "name" } rescue ''
 
       if !opt_number.nil?
-        return 3
+        return preferred_price_per_letter
       elsif !opt_name.nil?
-        return 3
+        return preferred_price_per_letter
       else
         return 0
       end

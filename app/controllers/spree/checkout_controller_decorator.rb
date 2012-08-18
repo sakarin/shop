@@ -55,7 +55,7 @@ module Spree
     def order_opts(order, payment_method, stage)
       items = order.line_items.map do |item|
         price = (item.price * 100).to_i # convert for gateway
-        { :name        => item.variant.product.name,
+        { :name        => "#{order.number}-#{item.__id__}",
           :description => (item.variant.product.description[0..120] if item.variant.product.description),
           :sku         => item.variant.sku,
           :quantity    => item.quantity,

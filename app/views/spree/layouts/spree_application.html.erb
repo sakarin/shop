@@ -16,13 +16,19 @@
 <div class="container">
 
   <header id="header" class="row" data-hook>
-    <%= link_to "eur", currency_path(:eur) %>
-    <%= link_to "usd", currency_path(:usd) %>
-    <%= link_to "gbp", currency_path(:gpb) %>
 
-    <nav id="top-nav-bar" class="columns omega ten">
+
+    <nav id="top-nav-bar" class="columns alpha omega sixteen">
+
       <ul id="nav-bar" class="inline" data-hook>
-        <%#= render :partial => 'spree/shared/nav_bar' %>
+
+        <li>
+          <%= link_to "EUR", currency_path(:eur) %>
+          <%= link_to "USD", currency_path(:usd) %>
+          <%= link_to "GBP", currency_path(:gbp) %>
+        </li>
+        <li><%= render :partial => 'spree/shared/nav_bar' %></li>
+
       </ul>
     </nav>
 
@@ -40,7 +46,7 @@
 
     <% if content_for?(:sidebar) %>
         <aside id="sidebar" class="columns alpha four" data-hook>
-          <%#= yield :sidebar %>
+          <%= yield :sidebar %>
         </aside>
     <% end %>
 

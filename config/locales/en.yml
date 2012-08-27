@@ -40,3 +40,26 @@ en:
   refund_product: Refund
   import: Import
 
+  user_payment_states:
+    balance_due: balance due
+    completed: completed
+    checkout: checkout
+    credit_owed: waiting for refund
+    failed: failed
+    paid: paid
+    pending: processing
+    processing: processing
+    void: void
+
+  user_shipment_states:
+    backorder: processing
+    partial: partial packet
+    pending: processing
+    ready: ready
+    shipped: shipped
+
+  payment_states:
+    credit_owed: waiting for refund
+
+
+

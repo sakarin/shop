@@ -4,7 +4,9 @@
       <h5 id="order_status" data-hook><%= t(:status) %>: <%= t(@purchase_order.state, :scope => :order_state) %></h5>
       <br class="clear"/>
       <h5 id="purchase_number" data-hook><%= t(:purchase_num) %>: <%= @purchase_order.purchase_items.size %></h5>
-      <h5 id="receive_number" data-hook><%= t(:receive_num) %>: <%= @purchase_order.receive_products.map(&:receive_items).sum.size %></h5>
+      <h5 id="receive_number" data-hook>
+        <%= t(:receive_num) %>: <%= @purchase_order.receive_products.map(&:receive_items).sum == 0 ? @purchase_order.receive_products.map(&:receive_items).sum : @purchase_order.receive_products.map(&:receive_items).sum.size %>
+      </h5>
 
       <br class="clear"/>
     </div>

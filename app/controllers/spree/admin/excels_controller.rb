@@ -9,12 +9,14 @@ module Spree
 
       end
 
-
+      # Excel Format
+      # row[0] = shipment number
+      # row[1] = tracking number
       def create
         @excel = Excel.new(params[:excel])
         if @excel.save
           # In this example the model MyFile has_attached_file :attachment
-          excel_path = "#{RAILS_ROOT}/public/files/excels/#{@excel.id}/#{@excel.attachment_file_name}"
+          excel_path = "#{Rails.root}/public/files/excels/#{@excel.id}/#{@excel.attachment_file_name}"
           @workbook = Spreadsheet.open(excel_path)
 
           # Get the first worksheet in the Excel file
@@ -29,15 +31,15 @@ module Spree
             # check empty row, but this not work:
             break if row[0].blank?
 
-            @shipment = Shipment.find_by_number(row[3].to_s)
+            @shipment = Shipment.find_by_number(row[0].to_s)
             unless @shipment.nil?
               @shipment.send('ship')
-              @shipment.update_attributes(:tracking => row[0].to_s)
+              @shipment.update_attributes(:tracking => row[1].to_s)
 
             end
 
-            #logger.debug "---------------------------------------"
-            #logger.debug "#{row[0]}-#{row[1]}-#{row[2]}-#{row[3]}"
+            logger.debug "---------------------------------------"
+            logger.debug "#{row[0]} : #{row[1]}"
           end
 
           flash[:notice] = I18n.t(:successfully_created, :resource => 'excels')

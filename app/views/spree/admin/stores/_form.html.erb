@@ -21,15 +21,28 @@
     </td>
   </tr>
   <tr>
+    <td><label><%= t("shop_for_vip") %></label></td>
+    <td>
+      <label class="sub">
+        <%= radio_button(:store, :shop_for_vip, true ) %>
+        <%= t("yes") %>
+      </label> &nbsp;
+      <label class="sub">
+        <%= radio_button(:store, :shop_for_vip, false ) %>
+        <%= t("no") %>
+      </label>
+    </td>
+  </tr>
+  <tr>
     <td><label><%=t("send_mails_as")%></label></td>
     <td><%= text_field :store, :email, {"style" => "width:200px"} %></td>
   </tr>
   <tr>
     <td><label><%=t("domains")%></label></td>
-    <td><%= text_area :store, :domains, {:cols => 60, :rows => 4} %></td>
+    <td><%= text_area :store, :domains, {"style" => "width:400px; height: 120px;"} %></td>
   </tr>
   <tr>
     <td><label><%= t("default_seo_title") %></label></td>
-    <td><%= text_area :store, :seo_title, {:cols => 60, :rows => 2}  %></td>
+    <td><%= text_area :store, :seo_title,  {"style" => "width:400px; height: 120px;"}  %></td>
   </tr>
 </table>

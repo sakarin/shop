@@ -14,13 +14,12 @@ module Spree
       if Rails.env == "production"
         redirect_to "http://" + @store.domains + path + "?" + "#{@_env['QUERY_STRING']}"
       else
-        logger.debug "----------------------------------------------------------------------------"
-        logger.debug "@store.domains : #{@store.domains}"
-        logger.debug "request.host_with_port : #{request.host_with_port}"
-        logger.debug "request.port : #{request.port}"
-        logger.debug "----------------------------------------------------------------------------"
+        #logger.debug "----------------------------------------------------------------------------"
+        #logger.debug "@store.domains : #{@store.domains}"
+        #logger.debug "request.host_with_port : #{request.host_with_port}"
+        #logger.debug "request.port : #{request.port}"
+        #logger.debug "----------------------------------------------------------------------------"
 
-        #redirect_to "http://" + @store.domains  + path + "?" + "#{@_env['QUERY_STRING']}"
         redirect_to "http://" + @store.domains + ":"+ request.port.to_s + path + "?" + "#{@_env['QUERY_STRING']}"
       end
 

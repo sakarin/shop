@@ -1,8 +1,9 @@
 module Spree
   class Excel < ActiveRecord::Base
+    attr_accessible :attachment
 
     validates_attachment_content_type :attachment, :content_type => 'application/vnd.ms-excel'
-    has_attached_file :attachment, :path => ":rails_root/public/files/excel/:id/:basename.:extension"
+    has_attached_file :attachment, :path => "#{Rails.root}/public/files/excels/:id/:basename.:extension"
 
   end
 end

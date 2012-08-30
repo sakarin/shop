@@ -32,6 +32,35 @@ module Spree
       end.compact.sort_by { |r| r[:cost] }
     end
 
+
+
+    #def update!
+    #  update_totals
+    #  update_payment_state
+    #
+    #  # give each of the shipments a chance to update themselves
+    #  shipments.each { |shipment| shipment.update!(self) } #(&:update!)
+    #  update_shipment_state
+    #  update_adjustments
+    #  # update totals a second time in case updated adjustments have an effect on the total
+    #  update_totals
+    #  update_attributes_without_callbacks({
+    #                                          :payment_state => payment_state,
+    #                                          :shipment_state => shipment_state,
+    #                                          :item_total => read_attribute(:item_total),
+    #                                          :adjustment_total => adjustment_total,
+    #                                          :payment_total => payment_total,
+    #                                          :total => read_attribute(:total)
+    #                                      })
+    #
+    #  #ensure checkout payment always matches order total
+    #  if payment and payment.checkout? and payment.amount != total
+    #    payment.update_attributes_without_callbacks(:amount => total)
+    #  end
+    #
+    #  update_hooks.each { |hook| self.send hook }
+    #end
+
     def update!
       update_totals
       update_payment_state
@@ -46,7 +75,7 @@ module Spree
                                               :payment_state => payment_state,
                                               :shipment_state => shipment_state,
                                               :item_total => read_attribute(:item_total),
-                                              :adjustment_total => adjustment_total,
+                                              :adjustment_total => read_attribute(:adjustment_total),
                                               :payment_total => payment_total,
                                               :total => read_attribute(:total)
                                           })

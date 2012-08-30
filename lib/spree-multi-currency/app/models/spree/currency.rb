@@ -36,12 +36,12 @@ module Spree
     class << self
 
       # Get the current locale
-      def current( current_locale = nil )
+      def current(current_locale = nil )
         @current ||= where(:basic => true).first
         @current
       end
 
-      def current!(current_locale = nil)
+      def current!(current_locale= nil)
         @current = current_locale.is_a?(Currency) ? current_locale : locale(current_locale||I18n.locale).first
         @current
       end

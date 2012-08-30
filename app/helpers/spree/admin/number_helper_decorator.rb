@@ -2,26 +2,27 @@ module ActionView
   module Helpers
     module NumberHelper
 
+
       def number_to_currency(number, options = {})
         return nil if number.nil?
 
         options.symbolize_keys!
-        options[:locale] = "currency_#{ Spree::Currency.current.try(:char_code) || I18n.default_locale }"
+
 
         #-----------------------------------------------------------------------------------
         #- hack base currency for admin view
 
         if @_controller.class.superclass.superclass == Spree::Admin::BaseController && !@order.nil?
-            base_currency = @order.base_currency
-            options[:locale] = "currency_#{ base_currency.to_s.upcase || I18n.default_locale }"
-        end
-
-        if @_controller.class.superclass.superclass == Spree::BaseController && !@order.nil?
           base_currency = @order.base_currency
           options[:locale] = "currency_#{ base_currency.to_s.upcase || I18n.default_locale }"
+        elsif @_controller.class.superclass.superclass == Spree::BaseController && !@order.nil?
+          base_currency = @order.base_currency
+          options[:locale] = "currency_#{ base_currency.to_s.upcase || I18n.default_locale }"
+        else
+          options[:locale] = "currency_#{ Spree::Currency.current.try(:char_code) || I18n.default_locale }"
         end
 
-        unless options[:base_locale] == nil
+        unless options[:base_locale].nil?
           options[:locale] = "currency_#{ options[:base_locale].to_s.upcase || I18n.default_locale }"
         end
         #-----------------------------------------------------------------------------------

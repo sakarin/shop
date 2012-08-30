@@ -3,5 +3,9 @@ module Spree
 
     extend MultiCurrency
     multi_currency :amount
+
+
+
+
   end
 end

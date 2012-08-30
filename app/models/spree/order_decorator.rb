@@ -17,17 +17,23 @@ module Spree
 
     def available_payment_methods
 
-      @payment_methods = PaymentMethod.available(:front_end)
+      # For Development
+      @available_payment_methods = PaymentMethod.available(:front_end)
 
-      payment_ids = Array.new
-      @payment_methods.each do |payment_method|
-        payment_ids << payment_method.id
-      end
-      id = payment_ids.sample(1)
-      @available_payment_methods ||= PaymentMethod.find(id)
+      # For Production
+      #@payment_methods = PaymentMethod.available(:front_end)
+      #
+      #payment_ids = Array.new
+      #@payment_methods.each do |payment_method|
+      #  payment_ids << payment_method.id
+      #end
+      #id = payment_ids.sample(1)
+      #@available_payment_methods ||= PaymentMethod.find(id)
 
 
     end
+
+
 
 
     def add_variant(variant, quantity = 1, ad_hoc_option_value_ids=[], product_customizations=[])

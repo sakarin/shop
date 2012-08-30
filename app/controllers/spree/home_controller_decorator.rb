@@ -1,6 +1,6 @@
 module Spree
   HomeController.class_eval do
-    #load_and_authorize_resource
+
 
     before_filter :determine_store
 
@@ -9,8 +9,13 @@ module Spree
 
     def determine_store
 
-      if @current_store && current_user.nil?
+      #if @current_store && current_user.nil?
+      if @current_store.shop_for_vip? && current_user.nil?
         redirect_to login_path
+      elsif @current_store.shop_for_vip? && !current_user.has_role?('vip')
+        redirect_to destroy_user_session_path
+      else
+
       end
 
 

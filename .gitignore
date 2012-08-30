@@ -23,7 +23,7 @@
 # ignore spec/dummy
 /spec/dummy
 
-/public/files/purchases/*
+
 /public/files/shipments/*
 /public/files/excels/*
 

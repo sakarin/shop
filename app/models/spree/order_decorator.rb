@@ -18,18 +18,17 @@ module Spree
     def available_payment_methods
 
       # For Development
-      @available_payment_methods = PaymentMethod.available(:front_end)
+      #@available_payment_methods = PaymentMethod.available(:front_end)
 
       # For Production
-      #@payment_methods = PaymentMethod.available(:front_end)
-      #
-      #payment_ids = Array.new
-      #@payment_methods.each do |payment_method|
-      #  payment_ids << payment_method.id
-      #end
-      #id = payment_ids.sample(1)
-      #@available_payment_methods ||= PaymentMethod.find(id)
+      @payment_methods = PaymentMethod.available(:front_end)
 
+      payment_ids = Array.new
+      @payment_methods.each do |payment_method|
+        payment_ids << payment_method.id
+      end
+      id = payment_ids.sample(1)
+      @available_payment_methods ||= PaymentMethod.find(id)
 
     end
 

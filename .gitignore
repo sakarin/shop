@@ -24,6 +24,6 @@
 /spec/dummy
 
 
-/public/files/shipments/*
-/public/files/excels/*
+/public/files/shipments/
+/public/files/excels/
 

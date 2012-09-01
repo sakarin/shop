@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818030032) do
+ActiveRecord::Schema.define(:version => 20120831225239) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -309,14 +309,14 @@ ActiveRecord::Schema.define(:version => 20120818030032) do
 
   create_table "spree_orders", :force => true do |t|
     t.string   "number",               :limit => 15
-    t.decimal  "item_total",                         :precision => 8, :scale => 2, :default => 0.0, :null => false
-    t.decimal  "total",                              :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "item_total",                         :precision => 8, :scale => 2, :default => 0.0,   :null => false
+    t.decimal  "total",                              :precision => 8, :scale => 2, :default => 0.0,   :null => false
     t.string   "state"
-    t.decimal  "adjustment_total",                   :precision => 8, :scale => 2, :default => 0.0, :null => false
-    t.decimal  "credit_total",                       :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "adjustment_total",                   :precision => 8, :scale => 2, :default => 0.0,   :null => false
+    t.decimal  "credit_total",                       :precision => 8, :scale => 2, :default => 0.0,   :null => false
     t.integer  "user_id"
-    t.datetime "created_at",                                                                        :null => false
-    t.datetime "updated_at",                                                                        :null => false
+    t.datetime "created_at",                                                                          :null => false
+    t.datetime "updated_at",                                                                          :null => false
     t.datetime "completed_at"
     t.integer  "bill_address_id"
     t.integer  "ship_address_id"
@@ -327,7 +327,7 @@ ActiveRecord::Schema.define(:version => 20120818030032) do
     t.string   "email"
     t.text     "special_instructions"
     t.integer  "store_id"
-    t.string   "base_currency"
+    t.string   "base_currency",                                                    :default => "GBP"
   end
 
   add_index "spree_orders", ["number"], :name => "index_orders_on_number"

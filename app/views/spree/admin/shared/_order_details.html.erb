@@ -29,9 +29,9 @@
         <td colspan="3"><strong><%= adjustment.label %></strong></td>
         <td class="total">
           <span>
-            <%#=  Spree::Currency.conversion_to_current(adjustment.amount) %>
-            <%#=  number_to_currency adjustment.amount, :base_locale => @order.base_currency %>
+
             <%= number_to_currency adjustment.amount %>
+
           </span>
         </td>
       </tr>

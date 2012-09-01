@@ -43,14 +43,16 @@ module Spree
 
       def current!(current_locale= nil)
         @current = current_locale.is_a?(Currency) ? current_locale : locale(current_locale||I18n.locale).first
+
         @current
       end
 
       def load_rate(options= {})
         #---------------------------------------------------------------------------------------------------------------
         #- Fix Bug Press Remove This line
-        #current(options[:locale] || I18n.locale)
+        #current!(options[:locale] || I18n.locale)
         #---------------------------------------------------------------------------------------------------------------
+
         basic
 
         if @rate = @current.currency_converters.get_rate(options[:date] || Time.now)
@@ -76,6 +78,26 @@ module Spree
         Rails.logger.error " [ Currency ] :#{ex.inspect}"
         value
       end
+
+      #def conversion_to_currency(value, options = {})
+      #  #load_rate(options)
+      #
+      #  unless options.blank?
+      #    @current = Currency.find_by_char_code(options[:locale])
+      #  end
+      #
+      #  basic
+      #
+      #  if @rate = @current.currency_converters.get_rate(options[:date] || Time.now)
+      #    add_rate(@basic.char_code, @current.char_code, @rate.nominal/@rate.value.to_f)
+      #    add_rate(@current.char_code, @basic.char_code, @rate.value.to_f)
+      #  end
+      #
+      #  convert(value, @basic.char_code, @current.char_code)
+      #rescue => ex
+      #  Rails.logger.error " [ Currency ] :#{ex.inspect}"
+      #  value
+      #end
 
       # Converts the currency value of the current locale to the basic currency.
       # In the parameters you can specify the locale you wish to convert FROM.

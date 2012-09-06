@@ -1,0 +1,34 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^thefootballshirt.com [NC]
+RewriteRule ^(.*)$ http://www.thefootballshirt.com/$1 [L,R=301]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^tshirt-shopping.com [NC]
+RewriteRule ^(.*)$ http://www.tshirt-shopping.com/$1 [L,R=301]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^t-shirtshoponline.com [NC]
+RewriteRule ^(.*)$ http://www.t-shirtshoponline.com/$1 [L,R=301]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^t-shirtshopping [NC]
+RewriteRule ^(.*)$ http://www.t-shirtshopping/$1 [L,R=301]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^t-shirtsstore.com [NC]
+RewriteRule ^(.*)$ http://www.t-shirtsstore.com/$1 [L,R=301]
+</IfModule>

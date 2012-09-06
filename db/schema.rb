@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120831225239) do
+ActiveRecord::Schema.define(:version => 20120905224123) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -351,6 +351,13 @@ ActiveRecord::Schema.define(:version => 20120831225239) do
   end
 
   add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
+
+  create_table "spree_pages_stores", :id => false, :force => true do |t|
+    t.integer  "page_id"
+    t.integer  "store_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"

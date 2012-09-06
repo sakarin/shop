@@ -23,6 +23,7 @@ module SpreeMultiDomain
 
           if current_store && !@view.controller.is_a?(Spree::Admin::BaseController)
             store_layout = "spree/layouts/#{current_store.code}/spree_application"
+            logger.debug "loyout_rendered : #{store_layout}"
           end
 
           begin
@@ -80,6 +81,7 @@ module SpreeMultiDomain
             included_without_multi_domain(receiver)
 
             receiver.send :helper, 'spree/products'
+
             receiver.send :helper, 'spree/taxons'
             receiver.send :before_filter, 'add_current_store_id_to_params'
             receiver.send :helper_method, 'current_store'

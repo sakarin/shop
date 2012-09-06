@@ -1,0 +1,71 @@
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+<div class="toolbar" data-hook="toolbar">
+  <ul class="actions">
+    <li id="new_product_link">
+      <%= button_link_to t(:new_product), new_object_url, {:remote => false, :icon => 'add', :id => 'admin_new_product'} %>
+    </li>
+  </ul>
+  <br class="clear" />
+</div>
+
+<h1><%= t(:listing_products) %></h1>
+
+<div id="new_product" data-hook></div>
+
+<table class="index" id="listing_products">
+  <tr data-hook="admin_products_index_headers">
+    <th><%= t(:sku) %></th>
+    <th><%= sort_link @search,:name, t(:name), { :default_order => "desc" }, {:title => 'admin_products_listing_name_title'} %></th>
+    <th><%= sort_link @search,:master_price, t(:master_price), {}, {:title => 'admin_products_listing_price_title'} %></th>
+    <th data-hook="admin_products_index_header_actions"></th>
+  </tr>
+<% @collection.each do |product| %>
+  <tr <%= "style='color: red;'" if product.deleted? %> id="<%= spree_dom_id product %>" data-hook="admin_products_index_rows">
+    <td><%= product.sku rescue '' %></td>
+    <td><%= link_to product.try(:name), edit_admin_product_path(product) %></td>
+    <td><%= number_to_currency product.price rescue '' %></td>
+    <td class="actions" data-hook="admin_products_index_row_actions">
+      <%= link_to_edit product, :class => 'edit' unless product.deleted? %>
+      &nbsp;
+      <%= link_to_clone product, :class => 'clone' %>
+      &nbsp;
+      <%= link_to_delete product unless product.deleted? %>
+    </td>
+  </tr>
+<% end %>
+</table>
+<%= paginate @products %>
+
+<% content_for :sidebar do %>
+  <div data-hook="admin_products_sidebar">
+    <%= search_form_for [:admin, @search] do |f| %>
+      <div class="box">
+        <h3><%= t(:search) %></h3>
+
+        <%- locals = {:f => f} %>
+        <div data-hook="admin_products_index_search">
+          <p>
+            <%= f.label :name_cont, t(:name) %><br />
+            <%= f.text_field :name_cont, :size => 15 %>
+          </p>
+          <p>
+            <%= f.label :variants_including_master_sku_cont, t(:sku) %><br />
+            <%= f.text_field :variants_including_master_sku_cont, :size => 15 %>
+          </p>
+          <p>
+            <%= f.label :deleted_at_null, t(:show_deleted) %><br />
+            <%= f.check_box :deleted_at_null, {:checked => params[:q][:deleted_at_null].blank?}, '', '1' %>
+          </p>
+        </div>
+
+        <div data-hook="admin_products_index_search_buttons">
+          <p class="form-buttons">
+            <%= button t(:search) %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+

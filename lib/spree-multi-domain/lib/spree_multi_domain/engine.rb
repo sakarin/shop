@@ -23,7 +23,7 @@ module SpreeMultiDomain
 
           if current_store && !@view.controller.is_a?(Spree::Admin::BaseController)
             store_layout = "spree/layouts/#{current_store.code}/spree_application"
-            logger.debug "loyout_rendered : #{store_layout}"
+
           end
 
           begin

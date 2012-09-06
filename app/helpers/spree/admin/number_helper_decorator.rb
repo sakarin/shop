@@ -18,13 +18,15 @@ module ActionView
         elsif @_controller.class.superclass.superclass == Spree::BaseController && !@order.nil?
           base_currency = @order.base_currency
           options[:locale] = "currency_#{ base_currency.to_s.upcase || I18n.default_locale }"
+        elsif !options[:base_locale].blank?
+          options[:locale] = "currency_#{ options[:base_locale].to_s.upcase || I18n.default_locale }"
         else
           options[:locale] = "currency_#{ Spree::Currency.current.try(:char_code) || I18n.default_locale }"
         end
 
-        unless options[:base_locale].nil?
-          options[:locale] = "currency_#{ options[:base_locale].to_s.upcase || I18n.default_locale }"
-        end
+        #unless options[:base_locale].nil?
+        #  options[:locale] = "currency_#{ options[:base_locale].to_s.upcase || I18n.default_locale }"
+        #end
         #-----------------------------------------------------------------------------------
 
         defaults = I18n.translate('number.format', :locale => options[:locale], :default => {})

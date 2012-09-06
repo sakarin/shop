@@ -2,14 +2,14 @@
   <div id="body_content">
     <div class="top-box-960"></div>
     <div class="title-960">
-      <h1><%= t('frequently_asked_questions') %></h1>
+      <div style="font-size: 20px;"><%= t('frequently_asked_questions') %></div>
     </div>
-    <div class="content-960">
+    <div class="content-960" style="padding-top: 0px;">
       <div id="faqs">
         <% @categories.each do |category| %>
-            <div id="<%= dom_id category -%>" class="category">
-              <h2><%= h category.name %></h2>
-              <ul class="answers">
+            <div id="<%= dom_id category -%>" class="category" style="text-align: left;">
+              <div id="faq-category"><%= h category.name %></div>
+              <ul class="answers" >
                 <% category.questions.each do |question| %>
                     <li>
                       <a class="question" id="<%= dom_id question -%>" href="#<%= "answer_#{question.id}" %>">

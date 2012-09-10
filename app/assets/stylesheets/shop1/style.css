@@ -142,7 +142,7 @@ div#header div#slide-holder div#slide-controls p#slide-nav a {
     background-repeat: no-repeat;
 }
 
-.order-description{
+.order-description {
     text-align: left;
     padding-left: 40px;
     padding-right: 40px;
@@ -205,7 +205,6 @@ div#nav ul li a {
     font-size: 11px;
 }
 
-
 /*------------------------------*/
 .dcjq-vertical-mega-menu .menu {
     -moz-border-bottom-colors: none;
@@ -216,11 +215,12 @@ div#nav ul li a {
     position: relative;
 }
 
-.dcjq-vertical-mega-menu ul li,.dcjq-vertical-mega-menu ul li li li {
+.dcjq-vertical-mega-menu ul li, .dcjq-vertical-mega-menu ul li li li {
     background: url(/assets/shop1/line-menu-product.png) no-repeat bottom;
     text-align: left;
 }
-.dcjq-vertical-mega-menu ul li li{
+
+.dcjq-vertical-mega-menu ul li li {
     background: none;
 }
 
@@ -245,20 +245,22 @@ ul {
     font-size: 12px;
 }
 
-.customize #cart-form .add-to-cart input.title{
+.customize #cart-form .add-to-cart input.title {
     padding-left: 0;
     padding-right: 0;
     min-height: 0;
 }
-.customize #cart-form #product-price span.price.selling{
+
+.customize #cart-form #product-price span.price.selling {
     color: #cc3333;
     font-size: 22px;
 }
-.customize #cart-form input{
+
+.customize #cart-form input {
 
 }
 
-.add-to-cart{
+.add-to-cart {
     float: right;
 }
 

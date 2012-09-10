@@ -1,6 +1,7 @@
 class Spree::StaticContentController < Spree::BaseController
-
+  helper 'spree/base'
   helper "spree/products"
+
   layout :determine_layout
 
   def show

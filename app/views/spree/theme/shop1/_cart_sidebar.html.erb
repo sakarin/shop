@@ -16,11 +16,11 @@
 
 
 <div class="shopping_cart2">
-  <p>Shopping Cart.</p>
+  <p><%= link_to "Shopping Cart", cart_path %></p>
   <div><img src="/assets/shop1/line-shopping-cart.png" width="259" height="1"/></div>
   <div class="space_bottom_top">Product Price.<strong class="float_right"><%= number_to_currency @order.item_total  %></strong></div>
   <div><img src="/assets/shop1/line-shopping-cart.png" width="259" height="1"/></div>
-  <div class="space_bottom_top">Shipping Price.<strong class="float_right"><%= number_to_currency(ship_price) %></strong></div>
+  <div class="space_bottom_top">Shipping Price.<strong class="float_right"><%#= number_to_currency(ship_price) %><span style="color: #8b0000;">Free</span></strong></div>
   <div><img src="/assets/shop1/line-shopping-cart.png" width="259" height="1"/></div>
   <div class="space_bottom_top">Total Price.<strong class="float_right"><%= order_subtotal(@order) %></strong></div>
 </div>

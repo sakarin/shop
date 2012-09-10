@@ -4,30 +4,35 @@
     <div id="methods">
       <p class="field radios">
         <% @order.rate_hash.each do |shipping_method| %>
-          <label>
-            <%= radio_button(:order, :shipping_method_id, shipping_method[:id]) %>
-            <% if Spree::Config[:shipment_inc_vat] %>
-              <%= shipping_method[:name] %> <%= format_price (1 + Spree::TaxRate.default) * shipping_method[:cost] %>
-            <% else %>
-            <%= shipping_method[:name] %> <%= number_to_currency shipping_method[:cost] %>
-            <% end %>
+            <label>
+              <%= radio_button(:order, :shipping_method_id, shipping_method[:id]) %>
 
-            <%#= product.shipping_category %>
-          </label>
+              <% if shipping_method[:cost] <= 0 %>
+                  Free Shipping
+              <% else %>
+                  <%= shipping_method[:name] %><%= number_to_currency shipping_method[:cost] %>
+
+              <% end %>
+
+              <%#= product.shipping_category %>
+            </label>
         <% end %>
       </p>
     </div>
     <% if Spree::Config[:shipping_instructions] && @order.rate_hash.present? %>
-      <p id="minstrs" data-hook>
-        <%= form.label :special_instructions, t(:shipping_instructions) %><br />
-        <%= form.text_area :special_instructions, :cols => 40, :rows => 7 %>
-      </p>
+        <p id="minstrs" data-hook>
+          <%= form.label :special_instructions, t(:shipping_instructions) %><br/>
+          <%= form.text_area :special_instructions, :cols => 40, :rows => 7 %>
+        </p>
     <% end %>
   </div>
 </fieldset>
 
-<br />
+<br/>
 
-<div class="form-buttons" data-hook="buttons">
+<div class="form-buttons" data-hook="cart_buttons">
   <%= submit_tag t(:save_and_continue), :class => 'btn btn-primary' %>
+</div>
+<div class="grid_8" data-hook="cart_buttons">
+  <%= link_to "Shopping Cart", cart_path, :class => 'btn btn-primary' %>
 </div>

@@ -32,4 +32,7 @@
       <%= submit_tag t(:save_and_continue), :class => 'btn btn-primary' %>
       <script>disableSaveOnClick();</script>
     </div>
+    <div class="grid_8" data-hook="cart_buttons">
+      <%= link_to "Shopping Cart", cart_path, :class => 'btn btn-primary' %>
+    </div>
 <% end %>

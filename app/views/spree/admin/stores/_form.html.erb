@@ -7,19 +7,7 @@
     <td><label><%=t("code")%></label></td>
     <td><%= text_field :store, :code, {"style" => "width:50px"} %></td>
   </tr>
-  <tr>
-    <td><label><%= t("default") %></label></td>
-    <td>
-      <label class="sub">
-        <%= radio_button(:store, :default, true ) %>
-        <%= t("yes") %>
-      </label> &nbsp;
-      <label class="sub">
-        <%= radio_button(:store, :default, false ) %>
-        <%= t("no") %>
-      </label>
-    </td>
-  </tr>
+
   <tr>
     <td><label><%= t("shop_for_vip") %></label></td>
     <td>

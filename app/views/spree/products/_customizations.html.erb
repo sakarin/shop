@@ -1,6 +1,6 @@
 <% if @product.product_customization_types && !@product.product_customization_types.empty? %>
 
-  <div id="product-customizations">
+  <div id="product-customizations" style="padding-top: 30px;">
 
     <%# for finding optional partials %>
     <% lookup=ActionView::LookupContext.new(ActionController::Base.view_paths, {:formats => [:html]}) %>

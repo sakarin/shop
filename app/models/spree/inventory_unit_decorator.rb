@@ -67,19 +67,28 @@ module Spree
       end
     end
 
+    #def self.increase(order, variant, quantity, line_item)
+    #  back_order = 0
+    #  sold = 0
+    #  if !line_item.product.shipping_category.nil? && line_item.product.shipping_category.name == Spree::Config[:free_shipment_text]
+    #    sold = quantity
+    #  else
+    #    back_order = quantity
+    #  end
+    #  #create units if configured
+    #  if Spree::Config[:create_inventory_units]
+    #    create_units(order, variant, sold, back_order, line_item)
+    #  end
+    #end
+
     def self.increase(order, variant, quantity, line_item)
-      back_order = 0
-      sold = 0
-      if !line_item.product.shipping_category.nil? && line_item.product.shipping_category.name == Spree::Config[:free_shipment_text]
-        sold = quantity
-      else
-        back_order = quantity
-      end
+      back_order = quantity
+      sold = quantity - back_order
+
       #create units if configured
       if Spree::Config[:create_inventory_units]
         create_units(order, variant, sold, back_order, line_item)
       end
-
     end
 
     def after_refund

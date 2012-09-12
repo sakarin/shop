@@ -3,9 +3,9 @@ module Spree
 
 
     def show
-      @currency = Currency.find_by_char_code(@order.base_currency)
-      Currency.current!(@currency)
-      respond_with(@order)
+      #@currency = Currency.find_by_char_code(@order.base_currency)
+      #Currency.current!(@currency)
+      #respond_with(@order)
     end
 
   end

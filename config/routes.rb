@@ -25,6 +25,7 @@ Shop::Application.routes.draw do
     match 'admin/shipments/download', :to => "admin/shipments#download"
 
     match '/confirm/orders/:order_id/checkout/paypal_confirm(.:format)' => 'paypal_confirm#paypal', :via => [:get, :post]
+    match '/paypal_invoice' => 'paypal_confirm#paypal_invoice', :via => [:get]
 
     namespace :admin do
       resources :excels

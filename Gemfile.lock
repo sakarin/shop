@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/solisoft/paypal_nvp.git
+  revision: 5ba1832b29560fa5d3f4ba046bc544dedff1981c
+  specs:
+    paypal_nvp (0.2.2)
+
+GIT
   remote: git://github.com/spree/spree_editor.git
   revision: 9846455f5b48615a328d334e37f619ba7a571ba4
   specs:
@@ -263,8 +269,6 @@ GEM
       spree_core (= 1.1.1)
     spree_sample (1.1.1)
       spree_core (= 1.1.1)
-    spree_skrill (1.0.2)
-      spree_core (>= 1.0.0)
     spree_usa_epay (1.0.2)
       savon
       spree_core (>= 1.0.0)
@@ -309,6 +313,7 @@ DEPENDENCIES
   multi_currencies!
   mysql2 (= 0.3.10)
   paperclip (~> 2.7.0)
+  paypal_nvp!
   pdfkit
   rails (= 3.2.3)
   sass-rails (~> 3.2.3)
@@ -319,7 +324,6 @@ DEPENDENCIES
   spree_flexi_variants!
   spree_multi_domain!
   spree_paypal_express!
-  spree_skrill
   spree_static_content!
   spree_usa_epay
   sqlite3

@@ -1,0 +1,13 @@
+# All those fields are mandatory
+
+sandbox:
+  url:  "https://api-3t.sandbox.paypal.com/nvp/Invoice/CreateInvoice"
+  user: "sakari_1300775282_biz_api1.webwarestudios.com"
+  pass: "1300775293"
+  cert:  "AySCJRcHAWgcwH.25t16UO8xzdBwAFqQgGLGbyEbP5tO4ie9LWhEFA1K"
+
+live:
+  url:  "https://api-3t.paypal.com/nvp"
+  user: "o.bonn_1237393081_biz_api1.solisoft.net"
+  pass: "1237393093"
+  cert:  "AU2Yv5COwWPCfeYLv34Z766F-gfNAzX6LaQE6VZkHMRq35Gmite-bMXu"

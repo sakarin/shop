@@ -6,7 +6,8 @@
             <p>
               <label>
                 <%= radio_button_tag "order[payments_attributes][][payment_method_id]", method.id, method == @order.payment_method %>
-                <%= t(method.name, :scope => :payment_methods, :default => method.name) %>
+                <%#= t(method.name, :scope => :payment_methods, :default => method.name) %>
+                PayPal
               </label>
             </p>
         <% end %>

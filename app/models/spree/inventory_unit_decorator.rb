@@ -14,6 +14,7 @@ module Spree
 
     scope :packet, where(:state => 'packet')
     scope :pending, where(:state => 'pending')
+    scope :backorder, where(:state => 'backordered')
 
     scope :backorder_inventory_units, where("state LIKE 'backordered' AND po_version = 0").select("id, count(variant_id) as quantity, po_version, variant_id, name, number, size, patch, season, team, shirt_type, sleeve, state").group('variant_id, name, number, size, patch, season, team, shirt_type, sleeve')
 
@@ -129,7 +130,7 @@ module Spree
       if option_name.empty?
         unless item.variant.product.product_properties.empty?
           for product_property in item.variant.product.product_properties
-            if product_property.property.presentation.downcase == "shirt-name"
+            if product_property.property.name.downcase == "shirt-name"
               option_name = product_property.value
             end
           end
@@ -154,7 +155,7 @@ module Spree
       if option_number.empty?
         unless item.variant.product.product_properties.empty?
           for product_property in item.variant.product.product_properties
-            if product_property.property.presentation.downcase == "shirt-number"
+            if product_property.property.name.downcase == "shirt-number"
               option_number = product_property.value
             end
           end

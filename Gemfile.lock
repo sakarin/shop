@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/PerfectlyNormal/tinymce-rails-imageupload.git
+  revision: a9bf1a70df786bfd5ce57f8a0efc9ee8e0717f96
+  specs:
+    tinymce-rails-imageupload (3.5.6.3)
+      railties (>= 3.1)
+      tinymce-rails (>= 3.4.9)
+
+GIT
   remote: git://github.com/solisoft/paypal_nvp.git
   revision: 5ba1832b29560fa5d3f4ba046bc544dedff1981c
   specs:
@@ -329,6 +337,7 @@ DEPENDENCIES
   sqlite3
   therubyracer
   tinymce-rails (>= 3.4.7.0.1)
+  tinymce-rails-imageupload!
   to_xls (~> 1.0.0)
   uglifier (>= 1.0.3)
   wkhtmltopdf-binary

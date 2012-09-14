@@ -7,7 +7,11 @@ Shop::Application.routes.draw do
   # We ask that you don't use the :as option here, as Spree relies on it being the default of "spree"
   mount Spree::Core::Engine, :at => '/'
 
+
+
   Spree::Core::Engine.routes.prepend do
+
+    post '/tinymce_assets' => 'tinymce_assets#create'
 
     match '/admin', :to => 'admin/orders#index', :as => :admin
 

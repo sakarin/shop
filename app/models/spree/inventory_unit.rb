@@ -5,7 +5,7 @@ module Spree
     belongs_to :shipment
     belongs_to :return_authorization
 
-    scope :backorder, where(:state => 'backordered')
+    #scope :backorder, where(:state => 'backordered')
 
     # state machine (see http://github.com/pluginaweek/state_machine/tree/master for details)
     #state_machine :initial => 'on_hand' do

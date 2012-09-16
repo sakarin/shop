@@ -1,6 +1,9 @@
 module Spree
   Shipment.class_eval do
 
+    scope :shipped, where(:state => 'shipped')
+    scope :ready, where(:state => 'ready')
+    scope :pending, where(:state => 'pending')
     scope :packet, where(:state => 'packet')
 
     # shipment state machine (see http://github.com/pluginaweek/state_machine/tree/master for details)
@@ -50,6 +53,11 @@ module Spree
     end
 
     def determine_state(order)
+      self.inventory_units.each do |unit|
+        unit.backordered?
+
+      end
+
       return 'pending' if self.inventory_units.any? { |unit| unit.backordered? }
       return 'pending' if self.inventory_units.any? { |unit| unit.refund? }
       return 'packet'  if state == 'packet'
@@ -60,6 +68,11 @@ module Spree
     def after_ship
       inventory_units.each &:ship
       ShipmentMailer.shipped_email(self).deliver
+    end
+
+    def require_inventory
+      #return false unless Spree::Config[:track_inventory_levels]
+      #order.completed? && !order.canceled?
     end
 
 

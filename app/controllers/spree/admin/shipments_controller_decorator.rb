@@ -51,9 +51,11 @@ module Spree
       (@shipments || []).each do |shipment|
         inventory_units = InventoryUnit.where(:state => 'sold', :shipment_id => shipment.id)
         inventory_units.each &:pack!
+
+        shipment.pack
       end
 
-      @shipments.each &:pack!
+      #@shipments.each &:pack!
 
 
     end

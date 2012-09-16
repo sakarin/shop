@@ -35,6 +35,8 @@ module Spree
 
 
 
+
+
     def add_variant(variant, quantity = 1, ad_hoc_option_value_ids=[], product_customizations=[])
       current_item = contains?(variant, ad_hoc_option_value_ids, product_customizations)
       if current_item
@@ -81,6 +83,34 @@ module Spree
       current_item
     end
 
+    private
+    def update_shipment_state
+      self.shipment_state =
+          case shipments.count
+            when 0
+              nil
+            when shipments.shipped.count
+              'shipped'
+            when shipments.ready.count
+              'ready'
+            when shipments.pending.count
+              'pending'
+            when shipments.packet.count
+              'packet'
+            else
+              'partial'
+          end
+      self.shipment_state = 'backorder' if backordered?
+
+      if old_shipment_state = self.changed_attributes['shipment_state']
+        self.state_changes.create({
+                                      :previous_state => old_shipment_state,
+                                      :next_state     => self.shipment_state,
+                                      :name           => 'shipment',
+                                      :user_id        => (User.respond_to?(:current) && User.current && User.current.id) || self.user_id
+                                  }, :without_protection => true)
+      end
+    end
 
 
 

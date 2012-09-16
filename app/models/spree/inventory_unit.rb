@@ -52,15 +52,15 @@ module Spree
     #  end
     #end
     #
-    #def self.decrease(order, variant, quantity)
-    #  if Spree::Config[:track_inventory_levels]
-    #    variant.increment!(:count_on_hand, quantity)
-    #  end
-    #
-    #  if Spree::Config[:create_inventory_units]
-    #    destroy_units(order, variant, quantity)
-    #  end
-    #end
+    def self.decrease(order, variant, quantity)
+      #if Spree::Config[:track_inventory_levels]
+      #  variant.increment!(:count_on_hand, quantity)
+      #end
+      #
+      #if Spree::Config[:create_inventory_units]
+      #  destroy_units(order, variant, quantity)
+      #end
+    end
 
     # find the specified quantity of units with the specified status
     def self.find_by_status(variant, quantity, status)

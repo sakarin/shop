@@ -33,9 +33,12 @@ module Spree
 
             @shipment = Shipment.find_by_number(row[0].to_s)
             unless @shipment.nil?
-              @shipment.send('ship')
-              @shipment.update_attributes(:tracking => row[1].to_s)
 
+              @shipment.update_attributes(:tracking => row[1].to_s)
+              @shipment.reload
+
+              @shipment.send('ship')
+              #@shipment.ship
             end
 
             logger.debug "---------------------------------------"

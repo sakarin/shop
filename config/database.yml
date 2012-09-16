@@ -14,8 +14,8 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  ๒database: shop_development
-  database: _shop_production
+  database: shop_production
+  #database: _shop_production
   pool: 5
   username: root
   password: "root"

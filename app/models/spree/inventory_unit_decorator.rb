@@ -240,6 +240,11 @@ module Spree
              :patch => option_patch, :season => option_season, :team => option_team, :shirt_type => option_type, :sleeve => option_sleeve}, :without_protection => true
         ) }
 
+      # update shipment state
+      shipment.reload
+      shipment.update!(order)
+      order.update!
+
 
     end
 

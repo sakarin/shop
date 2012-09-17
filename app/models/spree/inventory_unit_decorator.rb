@@ -16,9 +16,9 @@ module Spree
     scope :pending, where(:state => 'pending')
     scope :backorder, where(:state => 'backordered')
 
-    scope :backorder_inventory_units, where("state LIKE 'backordered' AND po_version = 0").select("id, count(variant_id) as quantity, po_version, variant_id, name, number, size, patch, season, team, shirt_type, sleeve, state").group('variant_id, name, number, size, patch, season, team, shirt_type, sleeve')
+    #scope :backorder_inventory_units, where("state LIKE 'backordered' AND po_version = 0").select("id, count(variant_id) as quantity, po_version, variant_id, name, number, size, patch, season, team, shirt_type, sleeve, state").group('variant_id, name, number, size, patch, season, team, shirt_type, sleeve')
 
-    scope :pending_inventory_units, where("state LIKE 'backordered' AND po_version > 0 ").select("id, count(variant_id) as quantity, po_version, variant_id, name, number, size, patch, season, team, shirt_type, sleeve, state").group('variant_id, name, number, size, patch, season, team, shirt_type, sleeve')
+    #scope :pending_inventory_units, where("state LIKE 'backordered' AND po_version > 0 ").select("id, count(variant_id) as quantity, po_version, variant_id, name, number, size, patch, season, team, shirt_type, sleeve, state").group('variant_id, name, number, size, patch, season, team, shirt_type, sleeve')
 
 
     # state machine (see http://github.com/pluginaweek/state_machine/tree/master for details)
@@ -54,6 +54,9 @@ module Spree
       after_transition :on => :fill_backorder, :do => :update_order
       after_transition :on => :refund, :do => :after_refund
     end
+
+
+
 
 
     # Assigns inventory to a newly completed order.

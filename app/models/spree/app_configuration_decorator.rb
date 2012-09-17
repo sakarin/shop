@@ -10,8 +10,8 @@ module Spree
     preference :allow_ssl_in_production, :boolean, :default => false
     preference :allow_ssl_in_staging, :boolean, :default => false
 
-    preference :site_name, :string, :default => 'Demo Shop'
-    preference :site_url, :string, :default => 'demo shop'
+    preference :site_name, :string, :default => 'Shop'
+    preference :site_url, :string, :default => 'shop'
     preference :check_for_spree_alerts, :boolean, :default => false
 
     preference :default_meta_description, :string, :default => 'demo site'

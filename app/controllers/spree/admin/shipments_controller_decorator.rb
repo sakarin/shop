@@ -18,7 +18,7 @@ module Spree
       end
 
       @search = Order.where("shipment_state != 'shipped'").search(params[:q])
-      @orders = @search.result.includes([:user, :shipments, :payments]).page(params[:page]).per(Spree::Config[:orders_per_page])
+      @orders = @search.result.includes([:user, :shipments, :payments]).order('spree_payments.updated_at ASC').page(params[:page]).per(Spree::Config[:orders_per_page])
 
       respond_with(@orders)
 
@@ -55,7 +55,6 @@ module Spree
         shipment.pack
       end
 
-      #@shipments.each &:pack!
 
 
     end

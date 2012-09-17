@@ -187,13 +187,32 @@ module Spree
       #end
 
       def load_inventory_units
-        @backorder_inventory_units = InventoryUnit.backorder_inventory_units
-        @pending_inventory_units = InventoryUnit.pending_inventory_units
+        backorder_inventory_units
+        pending_inventory_units
       end
 
       def load_suppliers
         @suppliers = Supplier.all
       end
+
+
+      def backorder_inventory_units
+        @backorder_inventory_units ||= Spree::InventoryUnit.find_by_sql(
+            "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
+              INNER JOIN spree_orders ON spree_inventory_units.order_id = spree_orders.id
+              WHERE spree_orders.payment_state LIKE 'paid' AND spree_inventory_units.state LIKE 'backordered' AND spree_inventory_units.po_version = 0
+              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve")
+
+      end
+
+      def pending_inventory_units
+        @pending_inventory_units ||= Spree::InventoryUnit.find_by_sql(
+            "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
+              INNER JOIN spree_orders ON spree_inventory_units.order_id = spree_orders.id
+              WHERE spree_orders.payment_state LIKE 'paid' AND spree_inventory_units.state LIKE 'backordered' AND spree_inventory_units.po_version > 0
+              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve")
+      end
+
 
       def load_purchasing_order_file_generate_file
         @backorder_inventory_units = InventoryUnit.find_by_sql(

@@ -35,16 +35,24 @@ module Spree
             @unit = InventoryUnit.find(unit[0])
             max = (params[:unit_quantity][unit[0]]).to_i
             # find inventory unit with max quantity
-            @units = InventoryUnit.where(:state => @unit.state, :variant_id => @unit.variant_id, :name => @unit.name,
-                                         :number => @unit.number, :size => @unit.size, :patch => @unit.patch,
-                                         :season => @unit.season, :team => @unit.team, :shirt_type => @unit.shirt_type,
-                                         :sleeve => @unit.sleeve, :po_version => @unit.po_version).limit(max)
+            if @unit.po_version == 0
+              @units = InventoryUnit.where(:state => @unit.state, :variant_id => @unit.variant_id, :name => @unit.name,
+                                           :number => @unit.number, :size => @unit.size, :patch => @unit.patch,
+                                           :season => @unit.season, :team => @unit.team, :shirt_type => @unit.shirt_type,
+                                           :sleeve => @unit.sleeve, :po_version => 0).limit(max)
 
-            (@units || []).each do |inventory_unit|
-              if PurchaseItem.create(:purchase_order_id => @purchase_order.id, :inventory_unit_id => inventory_unit.id)
+              (@units || []).each do |inventory_unit|
+                PurchaseItem.create(:purchase_order_id => @purchase_order.id, :inventory_unit_id => inventory_unit.id)
+              end
+            else
+              @units = InventoryUnit.where("state = ? AND variant_id = ? AND name = ? AND number = ? AND size = ? AND patch = ? AND season = ? AND team = ? AND shirt_type = ? AND sleeve = ? AND po_version <> ?",
+                                           @unit.state, @unit.variant_id, @unit.name, @unit.number, @unit.size, @unit.patch, @unit.season, @unit.team, @unit.shirt_type, @unit.sleeve, 0 ).limit(max)
 
+              (@units || []).each do |inventory_unit|
+                PurchaseItem.create(:purchase_order_id => @purchase_order.id, :inventory_unit_id => inventory_unit.id)
               end
             end
+
           end
 
           flash[:notice] = flash_message_for(@purchase_order, :successfully_created)

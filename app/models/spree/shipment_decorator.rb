@@ -59,9 +59,11 @@ module Spree
       end
 
       return 'pending' if self.inventory_units.any? { |unit| unit.backordered? }
+      return 'pending' if self.inventory_units.any? { |unit| unit.purchased? }
       return 'pending' if self.inventory_units.any? { |unit| unit.refund? }
       return 'packet'  if state == 'packet'
       return 'shipped' if state == 'shipped'
+      return 'returned'  if state == 'returned'
       order.payment_state == 'balance_due' ? 'pending' : 'ready'
     end
 

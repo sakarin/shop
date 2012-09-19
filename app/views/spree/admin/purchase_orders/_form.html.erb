@@ -1,5 +1,22 @@
 <%= render :partial => 'spree/shared/error_messages', :locals => {:target => @purchase_order} %>
 
+<script language="javascript">
+    function toggle(source) {
+//        alert($('.inventory_unit').length);
+//        checkboxes = document.getElementsByName('units[]');
+        checkboxes = $('.inventory_unit');
+
+        for (var i in checkboxes) {
+
+            checkboxes[i].checked = source.checked;
+        }
+
+
+
+
+    }
+</script>
+
 <p class="admin_line_items_show_details">
   <%= f.label :supplier, t("supplier_name") %> <br/>
   <%= f.collection_select(:supplier_id, @suppliers, :id, :name) %>
@@ -7,7 +24,7 @@
 
 <table class="index" style="width:100%;" data-hook="admin_shipment_form_inventory_units">
   <tr data-hook="shipments_header">
-    <th style="width:20px;"></th>
+    <th style="width:20px;"><input type="checkbox" onClick='toggle(this)'/></th>
     <th><%= t(:season) %></th>
     <th><%= t(:team) %></th>
     <th><%= t(:type) %></th>

@@ -42,13 +42,35 @@ module Spree
                                            :sleeve => @unit.sleeve, :po_version => 0).limit(max)
 
               (@units || []).each do |inventory_unit|
+                logger.debug "-----------------------------------------------------------------------------------------"
+                logger.debug "purchase item : #{inventory_unit.id}"
+
                 PurchaseItem.create(:purchase_order_id => @purchase_order.id, :inventory_unit_id => inventory_unit.id)
               end
             else
-              @units = InventoryUnit.where("state = ? AND variant_id = ? AND name = ? AND number = ? AND size = ? AND patch = ? AND season = ? AND team = ? AND shirt_type = ? AND sleeve = ? AND po_version <> ?",
-                                           @unit.state, @unit.variant_id, @unit.name, @unit.number, @unit.size, @unit.patch, @unit.season, @unit.team, @unit.shirt_type, @unit.sleeve, 0 ).limit(max)
+              #"SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
+              #INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
+              #INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
+              #WHERE spree_purchase_orders.id = #{@purchase_order.id} AND spree_inventory_units.po_version > 0
+              #GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve, spree_purchase_items.purchase_order_id
+              #ORDER BY team ASC, name ASC, id ASC"
+
+              #@units = InventoryUnit.find_by_sql(
+              #    "SELECT spree_inventory_units.* FROM spree_inventory_units
+              #INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
+              #INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
+              #WHERE spree_inventory_units.state = '#{@unit.state}' AND spree_inventory_units.variant_id = #{@unit.variant_id}  AND spree_inventory_units.name = '#{@unit.name}'
+              #  AND spree_inventory_units.number = '#{@unit.number}' AND spree_inventory_units.size = '#{@unit.size}' AND spree_inventory_units.patch = '#{@unit.patch}'
+              #  AND spree_inventory_units.season = '#{@unit.season}' AND spree_inventory_units.team = '#{@unit.team}' AND spree_inventory_units.shirt_type = '#{@unit.shirt_type}'
+              #  AND spree_inventory_units.sleeve = '#{@unit.sleeve}' AND spree_inventory_units.po_version > 0
+              #GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve, spree_purchase_items.purchase_order_id
+              #ORDER BY team ASC, name ASC, id ASC LIMIT #{max}")
+
+              @units = InventoryUnit.where("state = ? AND variant_id = ? AND name = ? AND number = ? AND size = ? AND patch = ? AND season = ? AND team = ? AND shirt_type = ? AND sleeve = ? AND po_version >0 AND id >= ?",
+                                           @unit.state, @unit.variant_id, @unit.name, @unit.number, @unit.size, @unit.patch, @unit.season, @unit.team, @unit.shirt_type, @unit.sleeve, @unit.id).limit(max)
 
               (@units || []).each do |inventory_unit|
+                inventory_unit
                 PurchaseItem.create(:purchase_order_id => @purchase_order.id, :inventory_unit_id => inventory_unit.id)
               end
             end
@@ -65,6 +87,9 @@ module Spree
       end
 
       def edit
+        #@items = @purchase_order.inventory_units
+        #load_purchase_with_items
+
         load_purchasing_order
         respond_with(@purchase_order)
       end
@@ -189,24 +214,6 @@ module Spree
         @purchase_order
       end
 
-      #def generate_excel_file
-      #  load_purchasing_order_file_generate_file
-      #  ToXls::ArrayWriter.new(@backorder_inventory_units, :name => 'purchase_order', :columns => [:season, :team, :shirt_type, :name, :number, :size, :sleeve, :patch, :quantity], :headers => ['Season', 'Team', 'Type', 'Number', 'Number', 'Size', 'Sleeve', 'Patch', 'Quantity']).write_io("#{Rails.root}/public/files/purchases/#{@purchase_order.number}.xls")
-      #
-      #end
-      #
-      #def generate_pdf_file
-      #
-      #  load_purchasing_order_file_generate_file
-      #
-      #  html = render_to_string(:action => "show.html.erb" , :layout => 'report')
-      #  kit = PDFKit.new(html)
-      #  kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/print.css"
-      #
-      #  send_data(kit.to_pdf, :filename => "#{@purchase_order.number}.pdf", :type => 'application/pdf')
-      #  kit.to_file("#{Rails.root}/public/files/purchases/#{@purchase_order.number}.pdf")
-      #end
-
       def load_inventory_units
         backorder_inventory_units
         pending_inventory_units
@@ -216,7 +223,19 @@ module Spree
         @suppliers = Supplier.all
       end
 
+      def load_purchasing_order_file_generate_file
+        @backorder_inventory_units = InventoryUnit.find_by_sql(
+            "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
+              INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
+              INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
+              WHERE spree_purchase_orders.id = #{@purchase_order.id}
+              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve
+             ORDER BY team ASC, name ASC, id ASC")
 
+      end
+
+
+      # Load data for new
       def backorder_inventory_units
         @backorder_inventory_units ||= Spree::InventoryUnit.find_by_sql(
             "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
@@ -231,32 +250,16 @@ module Spree
         @pending_inventory_units ||= Spree::InventoryUnit.find_by_sql(
             "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
               INNER JOIN spree_orders ON spree_inventory_units.order_id = spree_orders.id
+              INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
+              INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
               WHERE spree_orders.payment_state LIKE 'paid' AND spree_inventory_units.state LIKE 'backordered' AND spree_inventory_units.po_version > 0
-              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve
+              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve, spree_purchase_items.purchase_order_id
               ORDER BY team ASC, name ASC ,id ASC")
       end
 
 
-      def load_purchasing_order_file_generate_file
-        @backorder_inventory_units = InventoryUnit.find_by_sql(
-            "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
-              INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
-              INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
-              WHERE spree_purchase_orders.id = #{@purchase_order.id}
-              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve
-             ORDER BY team ASC, name ASC, id ASC")
-
-      end
-
+      # Load data for edit
       def load_purchasing_order
-        @pending_inventory_units = InventoryUnit.find_by_sql(
-            "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
-              INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
-              INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
-              WHERE spree_purchase_orders.id = #{@purchase_order.id} AND spree_inventory_units.po_version > 0
-              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve
-              ORDER BY team ASC, name ASC, id ASC")
-
         @backorder_inventory_units = InventoryUnit.find_by_sql(
             "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
               INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
@@ -265,9 +268,39 @@ module Spree
               GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve
               ORDER BY team ASC, name ASC, id ASC")
 
+        @pending_inventory_units = InventoryUnit.find_by_sql(
+            "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
+              INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
+              INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
+              WHERE spree_purchase_orders.id = #{@purchase_order.id} AND spree_inventory_units.po_version > 0
+              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve, spree_purchase_items.purchase_order_id
+              ORDER BY team ASC, name ASC, id ASC")
+
+      end
+
+      def load_purchase_with_items
+        str_sql =""
+        @items.each do |item|
+          unless @items.last == item
+            str_sql +=  "#{item.id}, "
+          else
+            str_sql += "#{item.id}"
+          end
+        end
+
+       @pu = PurchaseOrder.find_by_sql(
+              "SELECT spree_purchase_orders.id, COUNT( spree_purchase_orders.id ) AS quantity
+              FROM spree_purchase_orders
+              INNER JOIN spree_purchase_items ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
+              WHERE spree_purchase_items.inventory_unit_id
+              IN ( #{str_sql} )
+              GROUP BY spree_purchase_orders.id")
+
+
       end
 
 
     end
   end
+
 end

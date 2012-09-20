@@ -36,6 +36,8 @@ module Spree
     scope :purchased, where(:state => 'purchased')
     scope :received, where(:state => 'received')
 
+    scope :by_inventory_unit, lambda { |id| joins(:purchase_items).where("spree_purchase_items.inventory_unit_id = ?", id)}
+
     # shipment state machine (see http://github.com/pluginaweek/state_machine/tree/master for details)
     state_machine :initial => 'wait_printing', :use_transactions => false do
       event :purchased do

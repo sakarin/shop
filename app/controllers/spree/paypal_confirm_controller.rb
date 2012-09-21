@@ -25,6 +25,20 @@ module Spree
 
     end
 
+    def generate_last_purchase_order_id
+        PurchaseItem.order("id DESC").each do |item|
+          @purchase_item = Spree::PurchaseItem.find_by_sql("SELECT * FROM spree_purchase_items WHERE inventory_unit_id = #{item.inventory_unit_id} AND id < #{item.id}  ORDER BY id DESC" ).first
+          unless @purchase_item.nil?
+            @item = PurchaseItem.find(item.id)
+            @item.update_attributes(:last_purchase_order_id => @purchase_item.purchase_order_id )
+            @item.reload
+          end
+
+
+        end
+
+    end
+
     def paypal_invoice
       orders = Order.complete
 

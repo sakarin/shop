@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120914010740) do
+ActiveRecord::Schema.define(:version => 20120921064237) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -553,8 +553,9 @@ ActiveRecord::Schema.define(:version => 20120914010740) do
   create_table "spree_purchase_items", :force => true do |t|
     t.integer  "purchase_order_id"
     t.integer  "inventory_unit_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.integer  "last_purchase_order_id", :default => 0, :null => false
   end
 
   add_index "spree_purchase_items", ["inventory_unit_id"], :name => "index_purchase_items_on_inventory_unit_id"

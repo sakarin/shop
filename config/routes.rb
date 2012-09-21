@@ -30,6 +30,7 @@ Shop::Application.routes.draw do
 
     match '/confirm/orders/:order_id/checkout/paypal_confirm(.:format)' => 'paypal_confirm#paypal', :via => [:get, :post]
     match '/paypal_invoice' => 'paypal_confirm#paypal_invoice', :via => [:get]
+    match '/generate_last_purchase_order' => 'paypal_confirm#generate_last_purchase_order_id', :via => [:get]
 
     namespace :admin do
       resources :excels

@@ -52,6 +52,9 @@ module Spree
       end
 
       after_transition :on => :fill_backorder, :do => :update_order
+      after_transition :on => :sold, :do => :update_order
+      after_transition :on => :pack, :do => :update_order
+
       after_transition :on => :refund, :do => :after_refund
     end
 

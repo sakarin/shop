@@ -48,23 +48,6 @@ module Spree
                 PurchaseItem.create(:purchase_order_id => @purchase_order.id, :inventory_unit_id => inventory_unit.id)
               end
             else
-              #"SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
-              #INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
-              #INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
-              #WHERE spree_purchase_orders.id = #{@purchase_order.id} AND spree_inventory_units.po_version > 0
-              #GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve, spree_purchase_items.purchase_order_id
-              #ORDER BY team ASC, name ASC, id ASC"
-
-              #@units = InventoryUnit.find_by_sql(
-              #    "SELECT spree_inventory_units.* FROM spree_inventory_units
-              #INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
-              #INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
-              #WHERE spree_inventory_units.state = '#{@unit.state}' AND spree_inventory_units.variant_id = #{@unit.variant_id}  AND spree_inventory_units.name = '#{@unit.name}'
-              #  AND spree_inventory_units.number = '#{@unit.number}' AND spree_inventory_units.size = '#{@unit.size}' AND spree_inventory_units.patch = '#{@unit.patch}'
-              #  AND spree_inventory_units.season = '#{@unit.season}' AND spree_inventory_units.team = '#{@unit.team}' AND spree_inventory_units.shirt_type = '#{@unit.shirt_type}'
-              #  AND spree_inventory_units.sleeve = '#{@unit.sleeve}' AND spree_inventory_units.po_version > 0
-              #GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve, spree_purchase_items.purchase_order_id
-              #ORDER BY team ASC, name ASC, id ASC LIMIT #{max}")
 
               @units = InventoryUnit.where("state = ? AND variant_id = ? AND name = ? AND number = ? AND size = ? AND patch = ? AND season = ? AND team = ? AND shirt_type = ? AND sleeve = ? AND po_version >0 AND id >= ?",
                                            @unit.state, @unit.variant_id, @unit.name, @unit.number, @unit.size, @unit.patch, @unit.season, @unit.team, @unit.shirt_type, @unit.sleeve, @unit.id).limit(max)
@@ -95,44 +78,44 @@ module Spree
       end
 
       def update
-        if @purchase_order.update_attribute(:supplier_id, params[:purchase_order][:supplier_id])
-
-          inventory_unit_ids =@purchase_order.inventory_unit_ids
-
-          # remove inventory_unit all in purchase_order
-          (@purchase_order.purchase_items || []).each do |unit|
-            unit.destroy
-          end
-
-          # create purchase_items
-          (params[:units] || []).each do |unit|
-            @unit = InventoryUnit.find(unit[0])
-            max = (params[:unit_quantity][unit[0]]).to_i
-            # find inventory unit with max quantity
-            @units = InventoryUnit.where(:state => @unit.state, :variant_id => @unit.variant_id, :name => @unit.name,
-                                         :number => @unit.number, :size => @unit.size, :patch => @unit.patch,
-                                         :season => @unit.season, :team => @unit.team, :shirt_type => @unit.shirt_type,
-                                         :sleeve => @unit.sleeve, :po_version => @unit.po_version).limit(max)
-
-            (@units || []).each do |inventory_unit|
-              PurchaseItem.create(:purchase_order_id => @purchase_order.id, :inventory_unit_id => inventory_unit.id)
-            end
-          end
-
-          # update old inventory_units
-          (inventory_unit_ids || []).each do |item|
-            unit = InventoryUnit.find(item)
-            determine_unit_po_version(unit)
-          end
-
-
-          flash[:notice] = flash_message_for(@purchase_order, :successfully_updated)
-          respond_with(@purchase_order) do |format|
-            format.html { redirect_to admin_purchase_orders_path }
-          end
-        else
-          respond_with(@purchase_order) { |format| format.html { render :action => 'edit' } }
-        end
+        #if @purchase_order.update_attribute(:supplier_id, params[:purchase_order][:supplier_id])
+        #
+        #  inventory_unit_ids =@purchase_order.inventory_unit_ids
+        #
+        #  # remove inventory_unit all in purchase_order
+        #  (@purchase_order.purchase_items || []).each do |unit|
+        #    unit.destroy
+        #  end
+        #
+        #  # create purchase_items
+        #  (params[:units] || []).each do |unit|
+        #    @unit = InventoryUnit.find(unit[0])
+        #    max = (params[:unit_quantity][unit[0]]).to_i
+        #    # find inventory unit with max quantity
+        #    @units = InventoryUnit.where(:state => @unit.state, :variant_id => @unit.variant_id, :name => @unit.name,
+        #                                 :number => @unit.number, :size => @unit.size, :patch => @unit.patch,
+        #                                 :season => @unit.season, :team => @unit.team, :shirt_type => @unit.shirt_type,
+        #                                 :sleeve => @unit.sleeve, :po_version => @unit.po_version).limit(max)
+        #
+        #    (@units || []).each do |inventory_unit|
+        #      PurchaseItem.create(:purchase_order_id => @purchase_order.id, :inventory_unit_id => inventory_unit.id)
+        #    end
+        #  end
+        #
+        #  # update old inventory_units
+        #  (inventory_unit_ids || []).each do |item|
+        #    unit = InventoryUnit.find(item)
+        #    determine_unit_po_version(unit)
+        #  end
+        #
+        #
+        #  flash[:notice] = flash_message_for(@purchase_order, :successfully_updated)
+        #  respond_with(@purchase_order) do |format|
+        #    format.html { redirect_to admin_purchase_orders_path }
+        #  end
+        #else
+        #  respond_with(@purchase_order) { |format| format.html { render :action => 'edit' } }
+        #end
       end
 
 
@@ -273,7 +256,7 @@ module Spree
               INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
               INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
               WHERE spree_purchase_orders.id = #{@purchase_order.id} AND spree_inventory_units.po_version > 0
-              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve, spree_purchase_items.purchase_order_id
+              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve, spree_purchase_items.last_purchase_order_id
               ORDER BY team ASC, name ASC, id ASC")
 
       end
@@ -295,8 +278,6 @@ module Spree
               WHERE spree_purchase_items.inventory_unit_id
               IN ( #{str_sql} )
               GROUP BY spree_purchase_orders.id")
-
-
       end
 
 

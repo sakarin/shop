@@ -224,12 +224,21 @@ module Spree
 
       end
 
+      #def pending_inventory_units
+      #  @pending_inventory_units ||= Spree::InventoryUnit.find_by_sql(
+      #      "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
+      #        INNER JOIN spree_orders ON spree_inventory_units.order_id = spree_orders.id
+      #        INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
+      #        INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
+      #        WHERE spree_orders.payment_state LIKE 'paid' AND spree_inventory_units.state LIKE 'backordered' AND spree_inventory_units.po_version > 0
+      #        GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve
+      #        ORDER BY season ASC, team ASC, shirt_type ASC, name ASC ,id ASC")
+      #end
+
       def pending_inventory_units
         @pending_inventory_units ||= Spree::InventoryUnit.find_by_sql(
             "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
               INNER JOIN spree_orders ON spree_inventory_units.order_id = spree_orders.id
-              INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
-              INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
               WHERE spree_orders.payment_state LIKE 'paid' AND spree_inventory_units.state LIKE 'backordered' AND spree_inventory_units.po_version > 0
               GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve
               ORDER BY season ASC, team ASC, shirt_type ASC, name ASC ,id ASC")

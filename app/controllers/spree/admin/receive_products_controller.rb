@@ -32,11 +32,12 @@ module Spree
             @unit = InventoryUnit.find(unit[0])
             max = (params[:unit_quantity][unit[0]]).to_i
             # find inventory unit with max quantity
-            @units = InventoryUnit.where(:state => @unit.state, :variant_id => @unit.variant_id, :name => @unit.name, :number => @unit.number, :size => @unit.size, :patch => @unit.patch, :season => @unit.season, :team => @unit.team, :shirt_type => @unit.shirt_type, :sleeve => @unit.sleeve).limit(max)
+            #@units = InventoryUnit.where(:state => @unit.state, :variant_id => @unit.variant_id, :name => @unit.name, :number => @unit.number, :size => @unit.size, :patch => @unit.patch, :season => @unit.season, :team => @unit.team, :shirt_type => @unit.shirt_type, :sleeve => @unit.sleeve).limit(max)
+            @units = InventoryUnit.where("order_id = ? AND id >= ?", @unit.order_id, @unit.id).limit(max)
 
             (@units || []).each do |inventory_unit|
-               ReceiveItem.create(:receive_product_id => @receive_product.id, :inventory_unit_id => inventory_unit.id)
-               inventory_unit.sold
+              ReceiveItem.create(:receive_product_id => @receive_product.id, :inventory_unit_id => inventory_unit.id)
+              inventory_unit.sold
             end
           end
 
@@ -67,7 +68,8 @@ module Spree
           @unit = InventoryUnit.find(unit[0])
           max = (params[:unit_quantity][unit[0]]).to_i
           # find inventory unit with max quantity
-          @units = InventoryUnit.where(:state => @unit.state, :variant_id => @unit.variant_id, :name => @unit.name, :number => @unit.number, :size => @unit.size, :patch => @unit.patch, :season => @unit.season, :team => @unit.team, :shirt_type => @unit.shirt_type, :sleeve => @unit.sleeve).limit(max)
+          #@units = InventoryUnit.where(:state => @unit.state, :variant_id => @unit.variant_id, :name => @unit.name, :number => @unit.number, :size => @unit.size, :patch => @unit.patch, :season => @unit.season, :team => @unit.team, :shirt_type => @unit.shirt_type, :sleeve => @unit.sleeve).limit(max)
+          @units = InventoryUnit.where("order_id = ? AND id >= ?", @unit.order_id, @unit.id).limit(max)
 
           (@units || []).each do |inventory_unit|
             ReceiveItem.create(:receive_product_id => @receive_product.id, :inventory_unit_id => inventory_unit.id)
@@ -107,7 +109,6 @@ module Spree
       end
 
 
-
       private
 
       def determine_unit_po_version(unit)
@@ -132,41 +133,88 @@ module Spree
         @receive_product
       end
 
+      #def load_receive_item
+      #  @pending_inventory_units = InventoryUnit.find_by_sql(
+      #      "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
+      #        INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
+      #        INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
+      #        WHERE spree_purchase_orders.id = #{@purchase_order.id} AND spree_inventory_units.po_version > 0
+      #              AND spree_inventory_units.state LIKE 'purchased'
+      #        GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve")
+      #
+      #  @backorder_inventory_units = InventoryUnit.find_by_sql(
+      #      "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
+      #        INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
+      #        INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
+      #        WHERE spree_purchase_orders.id = #{@purchase_order.id} AND spree_inventory_units.po_version = 0
+      #              AND spree_inventory_units.state LIKE 'purchased'
+      #        GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve")
+      #
+      #end
+
       def load_receive_item
         @pending_inventory_units = InventoryUnit.find_by_sql(
-            "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
-              INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
-              INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
-              WHERE spree_purchase_orders.id = #{@purchase_order.id} AND spree_inventory_units.po_version > 0
-                    AND spree_inventory_units.state LIKE 'purchased'
-              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve")
+            "SELECT spree_inventory_units . * , COUNT( spree_inventory_units.variant_id ) AS quantity FROM spree_inventory_units
+            INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
+            INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
+            INNER JOIN spree_payments ON spree_payments.order_id = spree_inventory_units.order_id
+            WHERE spree_purchase_orders.id = #{@purchase_order.id}
+            AND spree_inventory_units.po_version > 0
+            AND spree_inventory_units.state LIKE  'purchased'
+            GROUP BY order_id
+            ORDER BY spree_payments.updated_at DESC")
 
         @backorder_inventory_units = InventoryUnit.find_by_sql(
-            "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
-              INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
-              INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
-              WHERE spree_purchase_orders.id = #{@purchase_order.id} AND spree_inventory_units.po_version = 0
-                    AND spree_inventory_units.state LIKE 'purchased'
-              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve")
+            "SELECT spree_inventory_units . * , COUNT( spree_inventory_units.variant_id ) AS quantity FROM spree_inventory_units
+            INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
+            INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
+            INNER JOIN spree_payments ON spree_payments.order_id = spree_inventory_units.order_id
+            WHERE spree_purchase_orders.id = #{@purchase_order.id}
+            AND spree_inventory_units.po_version = 0
+            AND spree_inventory_units.state LIKE  'purchased'
+            GROUP BY order_id
+            ORDER BY spree_payments.updated_at DESC")
 
       end
 
 
+      #def load_receive_item_by_receive_product
+      #  @pending_inventory_units = InventoryUnit.find_by_sql(
+      #      "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
+      #        INNER JOIN spree_receive_items ON spree_receive_items.inventory_unit_id = spree_inventory_units.id
+      #        INNER JOIN spree_receive_products ON spree_receive_products.id = spree_receive_items.receive_product_id
+      #        WHERE spree_receive_products.id = #{@receive_product.id} AND spree_inventory_units.po_version > 0
+      #        GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve")
+      #
+      #  @backorder_inventory_units = InventoryUnit.find_by_sql(
+      #      "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
+      #        INNER JOIN spree_receive_items ON spree_receive_items.inventory_unit_id = spree_inventory_units.id
+      #        INNER JOIN spree_receive_products ON spree_receive_products.id = spree_receive_items.receive_product_id
+      #        WHERE spree_receive_products.id = #{@receive_product.id} AND spree_inventory_units.po_version = 0
+      #        GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve")
+      #
+      #end
+
       def load_receive_item_by_receive_product
         @pending_inventory_units = InventoryUnit.find_by_sql(
-            "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
-              INNER JOIN spree_receive_items ON spree_receive_items.inventory_unit_id = spree_inventory_units.id
-              INNER JOIN spree_receive_products ON spree_receive_products.id = spree_receive_items.receive_product_id
-              WHERE spree_receive_products.id = #{@receive_product.id} AND spree_inventory_units.po_version > 0
-              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve")
+            "SELECT spree_inventory_units . * , COUNT( spree_inventory_units.variant_id ) AS quantity FROM spree_inventory_units
+            INNER JOIN spree_receive_items ON spree_receive_items.inventory_unit_id = spree_inventory_units.id
+            INNER JOIN spree_receive_products ON spree_receive_products.id = spree_receive_items.receive_product_id
+            INNER JOIN spree_payments ON spree_payments.order_id = spree_inventory_units.order_id
+            WHERE spree_receive_products.id = #{@receive_product.id}
+            AND spree_inventory_units.po_version > 0
+            GROUP BY order_id
+            ORDER BY spree_payments.updated_at DESC")
 
         @backorder_inventory_units = InventoryUnit.find_by_sql(
-            "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
-              INNER JOIN spree_receive_items ON spree_receive_items.inventory_unit_id = spree_inventory_units.id
-              INNER JOIN spree_receive_products ON spree_receive_products.id = spree_receive_items.receive_product_id
-              WHERE spree_receive_products.id = #{@receive_product.id} AND spree_inventory_units.po_version = 0
-              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve")
-
+            "SELECT spree_inventory_units . * , COUNT( spree_inventory_units.variant_id ) AS quantity FROM spree_inventory_units
+            INNER JOIN spree_receive_items ON spree_receive_items.inventory_unit_id = spree_inventory_units.id
+            INNER JOIN spree_receive_products ON spree_receive_products.id = spree_receive_items.receive_product_id
+            INNER JOIN spree_payments ON spree_payments.order_id = spree_inventory_units.order_id
+            WHERE spree_receive_products.id = #{@receive_product.id}
+            AND spree_inventory_units.po_version = 0
+            GROUP BY order_id
+            ORDER BY spree_payments.updated_at DESC")
       end
 
     end

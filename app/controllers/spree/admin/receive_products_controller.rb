@@ -166,7 +166,7 @@ module Spree
             AND spree_inventory_units.po_version > 0
             AND spree_inventory_units.state LIKE  'purchased'
             GROUP BY order_id, variant_id, name, number, size, patch, season, team, shirt_type, sleeve
-            ORDER BY spree_payments.updated_at DESC")
+            ORDER BY spree_payments.updated_at ASC")
 
         @backorder_inventory_units = InventoryUnit.find_by_sql(
             "SELECT spree_inventory_units . * , COUNT( spree_inventory_units.variant_id ) AS quantity FROM spree_inventory_units
@@ -177,7 +177,7 @@ module Spree
             AND spree_inventory_units.po_version = 0
             AND spree_inventory_units.state LIKE  'purchased'
             GROUP BY order_id, variant_id, name, number, size, patch, season, team, shirt_type, sleeve
-            ORDER BY spree_payments.updated_at DESC")
+            ORDER BY spree_payments.updated_at ASC")
 
       end
 
@@ -208,7 +208,7 @@ module Spree
             WHERE spree_receive_products.id = #{@receive_product.id}
             AND spree_inventory_units.po_version > 0
             GROUP BY order_id, variant_id, name, number, size, patch, season, team, shirt_type, sleeve
-            ORDER BY spree_payments.updated_at DESC")
+            ORDER BY spree_payments.updated_at ASC")
 
         @backorder_inventory_units = InventoryUnit.find_by_sql(
             "SELECT spree_inventory_units . * , COUNT( spree_inventory_units.variant_id ) AS quantity FROM spree_inventory_units
@@ -218,7 +218,7 @@ module Spree
             WHERE spree_receive_products.id = #{@receive_product.id}
             AND spree_inventory_units.po_version = 0
             GROUP BY order_id, variant_id, name, number, size, patch, season, team, shirt_type, sleeve
-            ORDER BY spree_payments.updated_at DESC")
+            ORDER BY spree_payments.updated_at ASC")
       end
 
     end

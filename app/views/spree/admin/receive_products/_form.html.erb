@@ -4,6 +4,7 @@
 <table class="index" style="width:100%;" data-hook="admin_shipment_form_inventory_units">
   <tr data-hook="shipments_header">
     <th style="width:20px;"></th>
+    <th><%= t(:order) %></th>
     <th><%= t(:season) %></th>
     <th><%= t(:team) %></th>
     <th><%= t(:type) %></th>
@@ -26,7 +27,7 @@
 
           <%#= check_box "units", "#{unit.id}",  {}, "true", "false" %>
         </td>
-
+        <td style="vertical-align:top; width:50px;"><%= link_to unit.order.number, admin_order_path(unit.order) %></td>
         <td style="vertical-align:top; width:80px;"><%= unit.season %></td>
         <td style="vertical-align:top; width:140px;"><%= unit.team %></td>
         <td style="vertical-align:top; width:50px;"><%= unit.shirt_type %></td>
@@ -59,7 +60,7 @@
 
 
         </td>
-
+        <td style="vertical-align:top; width:50px;"><%= link_to unit.order.number, admin_order_path(unit.order) %></td>
         <td style="vertical-align:top; width:80px;"><%= unit.season %></td>
         <td style="vertical-align:top; width:140px;"><%= unit.team %></td>
         <td style="vertical-align:top; width:50px;"><%= unit.shirt_type %></td>

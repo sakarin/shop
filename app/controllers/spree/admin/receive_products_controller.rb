@@ -33,7 +33,9 @@ module Spree
             max = (params[:unit_quantity][unit[0]]).to_i
             # find inventory unit with max quantity
             #@units = InventoryUnit.where(:state => @unit.state, :variant_id => @unit.variant_id, :name => @unit.name, :number => @unit.number, :size => @unit.size, :patch => @unit.patch, :season => @unit.season, :team => @unit.team, :shirt_type => @unit.shirt_type, :sleeve => @unit.sleeve).limit(max)
-            @units = InventoryUnit.where("order_id = ? AND id >= ?", @unit.order_id, @unit.id).limit(max)
+            @units = InventoryUnit.where("state = ? AND variant_id = ? AND name = ? AND number = ? AND size = ? AND patch = ? AND season = ? AND team = ? AND shirt_type = ? AND sleeve = ? AND order_id = ? AND id >= ?",
+                                         @unit.state, @unit.variant_id, @unit.name, @unit.number, @unit.size, @unit.patch, @unit.season, @unit.team, @unit.shirt_type, @unit.sleeve, @unit.order_id, @unit.id).limit(max)
+
 
             (@units || []).each do |inventory_unit|
               ReceiveItem.create(:receive_product_id => @receive_product.id, :inventory_unit_id => inventory_unit.id)
@@ -69,7 +71,9 @@ module Spree
           max = (params[:unit_quantity][unit[0]]).to_i
           # find inventory unit with max quantity
           #@units = InventoryUnit.where(:state => @unit.state, :variant_id => @unit.variant_id, :name => @unit.name, :number => @unit.number, :size => @unit.size, :patch => @unit.patch, :season => @unit.season, :team => @unit.team, :shirt_type => @unit.shirt_type, :sleeve => @unit.sleeve).limit(max)
-          @units = InventoryUnit.where("order_id = ? AND id >= ?", @unit.order_id, @unit.id).limit(max)
+          @units = InventoryUnit.where("state = ? AND variant_id = ? AND name = ? AND number = ? AND size = ? AND patch = ? AND season = ? AND team = ? AND shirt_type = ? AND sleeve = ? AND order_id = ? AND id >= ?",
+                                       @unit.state, @unit.variant_id, @unit.name, @unit.number, @unit.size, @unit.patch, @unit.season, @unit.team, @unit.shirt_type, @unit.sleeve, @unit.order_id, @unit.id).limit(max)
+
 
           (@units || []).each do |inventory_unit|
             ReceiveItem.create(:receive_product_id => @receive_product.id, :inventory_unit_id => inventory_unit.id)
@@ -161,7 +165,7 @@ module Spree
             WHERE spree_purchase_orders.id = #{@purchase_order.id}
             AND spree_inventory_units.po_version > 0
             AND spree_inventory_units.state LIKE  'purchased'
-            GROUP BY order_id
+            GROUP BY order_id, variant_id, name, number, size, patch, season, team, shirt_type, sleeve
             ORDER BY spree_payments.updated_at DESC")
 
         @backorder_inventory_units = InventoryUnit.find_by_sql(
@@ -172,7 +176,7 @@ module Spree
             WHERE spree_purchase_orders.id = #{@purchase_order.id}
             AND spree_inventory_units.po_version = 0
             AND spree_inventory_units.state LIKE  'purchased'
-            GROUP BY order_id
+            GROUP BY order_id, variant_id, name, number, size, patch, season, team, shirt_type, sleeve
             ORDER BY spree_payments.updated_at DESC")
 
       end
@@ -203,7 +207,7 @@ module Spree
             INNER JOIN spree_payments ON spree_payments.order_id = spree_inventory_units.order_id
             WHERE spree_receive_products.id = #{@receive_product.id}
             AND spree_inventory_units.po_version > 0
-            GROUP BY order_id
+            GROUP BY order_id, variant_id, name, number, size, patch, season, team, shirt_type, sleeve
             ORDER BY spree_payments.updated_at DESC")
 
         @backorder_inventory_units = InventoryUnit.find_by_sql(
@@ -213,7 +217,7 @@ module Spree
             INNER JOIN spree_payments ON spree_payments.order_id = spree_inventory_units.order_id
             WHERE spree_receive_products.id = #{@receive_product.id}
             AND spree_inventory_units.po_version = 0
-            GROUP BY order_id
+            GROUP BY order_id, variant_id, name, number, size, patch, season, team, shirt_type, sleeve
             ORDER BY spree_payments.updated_at DESC")
       end
 

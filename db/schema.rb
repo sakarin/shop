@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120921064237) do
+ActiveRecord::Schema.define(:version => 20120927030709) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -628,14 +628,15 @@ ActiveRecord::Schema.define(:version => 20120921064237) do
     t.string   "order_id"
     t.datetime "created_at",                                                :null => false
     t.datetime "updated_at",                                                :null => false
+    t.integer  "refund_id"
   end
 
   create_table "spree_refunds", :force => true do |t|
     t.string   "number"
-    t.integer  "purchase_order_id"
+    t.integer  "order_id"
     t.string   "state"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "spree_return_authorizations", :force => true do |t|

@@ -1,6 +1,11 @@
 module Spree
   Order.class_eval do
 
+    has_many :refunds, :dependent => :destroy
+
+
+
+
     def available_shipping_methods(display_on = nil)
       ShippingMethod.all
     end

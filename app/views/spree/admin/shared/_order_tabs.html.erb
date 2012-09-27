@@ -32,6 +32,9 @@
           <li<%== ' class="active"' if current == 'Payments' %>>
             <%= link_to t(:payment), @order.line_items.empty? || !@order.completed? ? 'javascript:$("form").submit();' : new_admin_order_payment_url(@order) %>
           </li>
+          <li<%== ' class="active"' if current == 'Refund Orders' %>>
+            <%= link_to t(:refund_order), "/admin/orders/#{@order.number}/refunds" %>
+          </li>
 
       <% else %>
           <li<%== ' class="active"' if current == 'Order Details' %>>
@@ -48,6 +51,9 @@
           </li>
           <li<%== ' class="active"' if current == 'Purchase Orders' %>>
             <%= link_to t(:purchase_orders), "/admin/orders/#{@order.number}/purchase_orders" %>
+          </li>
+          <li<%== ' class="active"' if current == 'Refund Orders' %>>
+            <%= link_to t(:refund_order), admin_order_refunds_path(@order) %>
           </li>
           <!--<li<%== ' class="active"' if current == 'Receive Products' %>>-->
             <!--<%= link_to t(:receive_products), "/admin/orders/#{@order.number}/receive_orders" %>-->

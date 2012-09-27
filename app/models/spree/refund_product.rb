@@ -7,6 +7,8 @@ module Spree
     before_save :force_positive_amount
     after_create :process_create_credit
 
+    belongs_to :refund
+
     make_permalink :field => :number
 
     def to_param
@@ -20,7 +22,7 @@ module Spree
     scope :authorized, where(:state => 'authorized')
 
 
-    attr_accessible :order_id, :amount, :reason
+    attr_accessible :order_id, :amount, :reason, :refund_id
 
     state_machine :initial => 'authorized' do
       after_transition :to => 'paid', :do => :process_paid

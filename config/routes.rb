@@ -37,6 +37,14 @@ Shop::Application.routes.draw do
       resources :suppliers
       resources :purchase_orders do
         resources :receive_products
+        #resources :refunds do
+        #  member do
+        #    put :fire
+        #  end
+        #end
+      end
+
+      resources :orders do
         resources :refunds do
           member do
             put :fire

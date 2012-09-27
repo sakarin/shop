@@ -44,7 +44,7 @@ module Spree
         transition :to => 'shipped', :if => :allow_ship?
       end
       event :refund do
-        transition :from => 'backordered', :to => 'refund'
+        transition :from => ['backordered', 'sold', 'purchased', 'ship'], :to => 'refund'
       end
 
       event :return do

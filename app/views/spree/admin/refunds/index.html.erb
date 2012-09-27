@@ -1,8 +1,8 @@
 <div class='toolbar order-links'>
-  <%= button_link_to t(:new_refund), new_admin_purchase_order_refund_url(@purchase_order), :icon => 'add', :id => 'admin_refund' %>
+  <%= button_link_to t(:new_refund), new_admin_order_refund_url(@order), :icon => 'add', :id => 'admin_refund' %>
 </div>
 
-<%= render :partial => 'spree/admin/shared/purchase_order_tabs', :locals => {:current => 'Refund Details'} %>
+<%= render :partial => 'spree/admin/shared/order_tabs', :locals => {:current => 'Refund Orders'} %>
 
 <h2><%= t(:listing_refunds) %></h2>
 
@@ -13,22 +13,23 @@
     <th><%=  t(:created_at) %></th>
 
     <th><%= t(:number, :scope => 'activerecord.attributes.spree/order') %></th>
+    <th>Refund Amount</th>
 
     <th><%=  t(:state, :scope => 'activerecord.attributes.spree/order') %></th>
 
-    <th data-hook="admin_purchase_orders_index_header_actions"></th>
+    <th data-hook="admin_orders_index_header_actions"></th>
   </tr>
   </thead>
   <tbody>
   <% @refunds.each do |refund| %>
-      <tr data-hook="admin_purchase_orders_index_rows">
+      <tr data-hook="admin_orders_index_rows">
         <td><%= (refund.created_at).to_s(:date_time24) %></td>
-        <td><%= link_to refund.number, edit_admin_purchase_order_refund_path(@purchase_order, refund) %></td>
+        <td><%= link_to refund.number, edit_admin_order_refund_path(@order, refund) %></td>
+        <td><%= number_to_currency refund.refund_product.amount , :locale => @order.base_currency unless refund.refund_product.nil?  %></td>
+        <td><%= t("order_state.#{refund.state.downcase}") %></td>
 
-        <td><%= t("purchase_order_state.#{refund.state.downcase}") %></td>
-
-        <td class='actions' data-hook="admin_purchase_orders_index_row_actions">
-          <%= link_to_edit_url edit_admin_purchase_order_refund_path(@purchase_order, refund), :title => "admin_edit_#{dom_id(refund)}" %>
+        <td class='actions' data-hook="admin_orders_index_row_actions">
+          <%= link_to_edit_url edit_admin_order_refund_path(@order, refund), :title => "admin_edit_#{dom_id(refund)}" %>
           <%= link_to_delete refund, :url => "" %>
         </td>
       </tr>

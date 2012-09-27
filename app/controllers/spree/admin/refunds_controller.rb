@@ -2,19 +2,20 @@ module Spree
   module Admin
     class RefundsController < Spree::Admin::BaseController
 
-      before_filter :load_purchase_order
+      #before_filter :load_purchase_order
+      before_filter :load_order
       before_filter :load_refund, :only => [:edit, :update, :destroy, :fire]
 
 
       respond_to :html
 
       def index
-        @refunds = @purchase_order.refunds
+        @refunds = @order.refunds
         respond_with(@refunds)
       end
 
       def new
-        load_purchase_order_item
+        load_refund_item
       end
 
       def create
@@ -22,13 +23,17 @@ module Spree
 
         if @refund.save
 
-
           # get inventory from new
           (params[:units] || []).each do |unit|
             @unit = InventoryUnit.find(unit[0])
             max = (params[:unit_quantity][unit[0]]).to_i
             # find inventory unit with max quantity
-            @units = InventoryUnit.where(:state => @unit.state, :variant_id => @unit.variant_id, :name => @unit.name, :number => @unit.number, :size => @unit.size, :patch => @unit.patch, :season => @unit.season, :team => @unit.team, :shirt_type => @unit.shirt_type, :sleeve => @unit.sleeve).limit(max)
+            #@units = InventoryUnit.where(:state => @unit.state, :variant_id => @unit.variant_id, :name => @unit.name,
+            #                             :number => @unit.number, :size => @unit.size, :patch => @unit.patch, :season => @unit.season,
+            #                             :team => @unit.team, :shirt_type => @unit.shirt_type, :sleeve => @unit.sleeve).limit(max)
+
+            @units = InventoryUnit.where("state = ? AND variant_id = ? AND name = ? AND number = ? AND size = ? AND patch = ? AND season = ? AND team = ? AND shirt_type = ? AND sleeve = ? AND order_id = ? AND id >= ?",
+                                         @unit.state, @unit.variant_id, @unit.name, @unit.number, @unit.size, @unit.patch, @unit.season, @unit.team, @unit.shirt_type, @unit.sleeve, @unit.order_id, @unit.id).limit(max)
 
             (@units || []).each do |inventory_unit|
               RefundItem.create(:refund_id => @refund.id, :inventory_unit_id => inventory_unit.id)
@@ -37,7 +42,7 @@ module Spree
 
           flash[:notice] = flash_message_for(@refund, :successfully_created)
           respond_with(@refund) do |format|
-            format.html { redirect_to edit_admin_purchase_order_refund_path(@purchase_order, @refund) }
+            format.html { redirect_to edit_admin_order_refund_path(@order, @refund) }
           end
         else
           respond_with(@refund) { |format| format.html { render :action => 'new' } }
@@ -72,11 +77,11 @@ module Spree
       private
 
       def build_refund
-        @refund = @purchase_order.refunds.build
+        @refund = @order.refunds.build
       end
 
-      def load_purchase_order
-        @purchase_order = PurchaseOrder.find_by_number(params[:purchase_order_id]) if params[:purchase_order_id]
+      def load_order
+        @order = Order.find_by_number(params[:order_id]) if params[:order_id]
       end
 
       def load_refund
@@ -84,22 +89,20 @@ module Spree
         @refund
       end
 
-      def load_purchase_order_item
+      def load_refund_item
         @pending_inventory_units = InventoryUnit.find_by_sql(
-            "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
-              INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
-              INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
-              WHERE spree_purchase_orders.id = #{@purchase_order.id} AND spree_inventory_units.po_version > 0
-                    AND spree_inventory_units.state LIKE 'backordered'
-              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve")
+            "SELECT spree_inventory_units . * , COUNT( spree_inventory_units.variant_id ) AS quantity FROM spree_inventory_units
+            WHERE spree_inventory_units.order_id = #{@order.id}
+            AND spree_inventory_units.po_version > 0
+            AND spree_inventory_units.state NOT LIKE  'refund'
+            GROUP BY order_id, variant_id, name, number, size, patch, season, team, shirt_type, sleeve ")
 
         @backorder_inventory_units = InventoryUnit.find_by_sql(
-            "SELECT spree_inventory_units.*, count(spree_inventory_units.variant_id) as quantity FROM spree_inventory_units
-              INNER JOIN spree_purchase_items ON spree_purchase_items.inventory_unit_id = spree_inventory_units.id
-              INNER JOIN spree_purchase_orders ON spree_purchase_orders.id = spree_purchase_items.purchase_order_id
-              WHERE spree_purchase_orders.id = #{@purchase_order.id} AND spree_inventory_units.po_version = 0
-                    AND spree_inventory_units.state LIKE 'backordered'
-              GROUP BY variant_id, name, number, size, patch, season, team, shirt_type, sleeve")
+            "SELECT spree_inventory_units . * , COUNT( spree_inventory_units.variant_id ) AS quantity FROM spree_inventory_units
+            WHERE spree_inventory_units.order_id = #{@order.id}
+            AND spree_inventory_units.po_version = 0
+            AND spree_inventory_units.state NOT LIKE  'refund'
+            GROUP BY order_id, variant_id, name, number, size, patch, season, team, shirt_type, sleeve ")
 
       end
 

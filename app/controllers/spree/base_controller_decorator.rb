@@ -6,6 +6,15 @@ Spree::BaseController.class_eval do
     return unauthorized
   end
 
+  def clear
+    @orders = Spree::Order.where("state != 'complete'")
+    @orders.each do |order|
+      order.destroy
+    end
+
+
+  end
+
   private
     # Needs to be overriden so that we use Spree's Ability rather than anyone else's.
     def current_ability

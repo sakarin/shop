@@ -32,6 +32,8 @@ Shop::Application.routes.draw do
     match '/paypal_invoice' => 'paypal_confirm#paypal_invoice', :via => [:get]
     match '/generate_last_purchase_order' => 'paypal_confirm#generate_last_purchase_order_id', :via => [:get]
 
+    match '/admin/orders_clear' => 'admin/base#clear', :via => [:get]
+
     namespace :admin do
       resources :excels
       resources :suppliers
@@ -45,6 +47,7 @@ Shop::Application.routes.draw do
       end
 
       resources :orders do
+
         resources :refunds do
           member do
             put :fire

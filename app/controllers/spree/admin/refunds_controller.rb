@@ -11,6 +11,9 @@ module Spree
 
       def index
         @refunds = @order.refunds
+
+
+
         respond_with(@refunds)
       end
 
@@ -82,6 +85,10 @@ module Spree
 
       def load_order
         @order = Order.find_by_number(params[:order_id]) if params[:order_id]
+
+        # change currency
+        @currency = Currency.find_by_char_code(@order.base_currency)
+        Currency.current!(@currency)
       end
 
       def load_refund

@@ -56,6 +56,11 @@
 
 <h2><%= t(:metadata) %></h2>
 <div data-hook="admin_product_form_meta">
+  <%= f.field_container :title do %>
+      <%= f.label :title, t(:page_title) %><br />
+      <%= f.text_field :title, :class => 'fullwidth' %>
+  <% end %>
+
   <%= f.field_container :meta_keywords do %>
       <%= f.label :meta_keywords, t(:meta_keywords) %><br />
       <%= f.text_field :meta_keywords, :class => 'fullwidth' %>

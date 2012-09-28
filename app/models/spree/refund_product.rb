@@ -54,6 +54,8 @@ module Spree
     def process_create_credit
 
       adjust_amount = Currency.convert(amount, order.base_currency, "GBP")
+      #adjust_amount = Currency.convert(amount, "GBP", order.base_currency)
+      #adjust_amount = amount
       credit = Adjustment.create({:source => self, :adjustable => order, :amount => adjust_amount.abs * -1, :label => I18n.t(:rma_credit)}, :without_protection => true)
       order.update!
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120927030709) do
+ActiveRecord::Schema.define(:version => 20120928072550) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -469,6 +469,7 @@ ActiveRecord::Schema.define(:version => 20120927030709) do
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
     t.integer  "count_on_hand",        :default => 0,  :null => false
+    t.string   "title"
   end
 
   add_index "spree_products", ["available_on"], :name => "index_products_on_available_on"
@@ -791,6 +792,7 @@ ActiveRecord::Schema.define(:version => 20120927030709) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.text     "description"
+    t.string   "title"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"

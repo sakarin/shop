@@ -50,7 +50,12 @@
 
   </div>
 
-  <div id="footer" data-hook>
+  <div id="footer" data-hook align="center">
+    <% if Rails.env == "development"  %>
+      currency : <%= @currency.char_code unless @currency.nil?  %>
+      ----------------------------------------------------
+      <%= params.inspect %>
+    <% end  %>
 
   </div>
 

@@ -227,10 +227,10 @@ div#nav ul li a {
 .dcjq-vertical-mega-menu ul li a {
     background: url(/assets/shop1/arrow-menu.png) left no-repeat;
     padding-left: 10px;
-    padding-right: 25px;
+    padding-right: 20px;
     padding-bottom: 5px;
     padding-top: 5px;
-    margin-left: 50px;
+    margin-left: 20px;
 }
 
 .dcjq-vertical-mega-menu ul li li a {

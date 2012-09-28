@@ -14,8 +14,8 @@ module Spree
     preference :site_url, :string, :default => 'shop'
     preference :check_for_spree_alerts, :boolean, :default => false
 
-    preference :default_meta_description, :string, :default => 'demo site'
-    preference :default_meta_keywords, :string, :default => 'demo'
+    preference :default_meta_description, :string, :default => 'shop'
+    preference :default_meta_keywords, :string, :default => 'shop'
 
     preference :price_per_letter, :decimal, :default => 3.0
     preference :auto_capture, :boolean, :default => true

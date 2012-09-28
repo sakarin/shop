@@ -1,7 +1,7 @@
 module Spree
   Taxon.class_eval do
 
-    attr_accessible :title
+    attr_accessible :title, :meta_description, :meta_keywords
 
 
     # Creates permalink based on Stringex's .to_url method

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120928072550) do
+ActiveRecord::Schema.define(:version => 20120928090405) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -793,6 +793,8 @@ ActiveRecord::Schema.define(:version => 20120928072550) do
     t.datetime "icon_updated_at"
     t.text     "description"
     t.string   "title"
+    t.string   "meta_description"
+    t.string   "meta_keywords"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"

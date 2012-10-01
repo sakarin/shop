@@ -5,6 +5,14 @@ module Spree
     before_filter :determine_store
 
 
+    def index
+      @searcher = Spree::Config.searcher_class.new(params)
+      @products = @searcher.retrieve_products.order("updated_at DESC")
+
+      respond_with(@products)
+    end
+
+
     private
 
     def determine_store

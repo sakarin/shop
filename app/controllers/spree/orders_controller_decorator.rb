@@ -1,6 +1,7 @@
 module Spree
   OrdersController.class_eval do
 
+
     def show
       @order = Order.find_by_number!(params[:id])
 

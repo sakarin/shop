@@ -63,8 +63,8 @@ module Spree
       elsif user.vip == "normal" && !Spree::PaymentMethod.where(:account_type => "normal", :account_for_location => "#{country_code}").blank?
         @available_payment_methods = Spree::PaymentMethod.where(:account_type => "normal", :account_for_location => "#{country_code}")
       else
-        unless Spree::PaymentMethod.where(:account_type => "test", :account_for_location => "#{country_code}").blank?
-          @available_payment_methods = Spree::PaymentMethod.where(:account_type => "test", :account_for_location => "#{country_code}")
+        unless Spree::PaymentMethod.where("account_type LIKE 'test' AND account_for_location LIKE '%#{country_code}%'").blank?
+          @available_payment_methods = Spree::PaymentMethod.where("account_type LIKE 'test' AND account_for_location LIKE '%#{country_code}%'")
 
         else
           @available_payment_methods = Spree::PaymentMethod.where(:account_type => "suspend")

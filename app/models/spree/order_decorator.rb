@@ -21,12 +21,13 @@ module Spree
     def available_payment_methods
 
       user = self.user
-      #user = Spree::User.find(13978)
+      #user = Spree::User.find(17601)
       item_count = 0
       is_vip = false
+      time = Time.local(2012, 10, 5, 17, 35)
 
       (user.orders || []).each do |order|
-        next unless order.state == "complete"
+        next unless (order.state == "complete" and order.created_at > time)
         item_count += order.inventory_units.size
         if order.inventory_units.size >= 10
           is_vip = ture

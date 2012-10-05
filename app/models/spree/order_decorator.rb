@@ -4,8 +4,6 @@ module Spree
     has_many :refunds, :dependent => :destroy
 
 
-
-
     def available_shipping_methods(display_on = nil)
       ShippingMethod.all
     end
@@ -22,32 +20,58 @@ module Spree
 
     def available_payment_methods
 
-      # For Development
-      #@available_payment_methods = PaymentMethod.available(:front_end)
+      user = self.user
+      #user = Spree::User.find(13978)
+      item_count = 0
+      is_vip = false
 
-      # For Production
-      #@available_payment_methods = PaymentMethod.all
-
-
-      if self.user.has_role?('admin')
-        @available_payment_methods = PaymentMethod.all
-      else
-        @payment_methods = PaymentMethod.available(:front_end)
-
-        payment_ids = Array.new
-        @payment_methods.each do |payment_method|
-          payment_ids << payment_method.id
+      (user.orders || []).each do |order|
+        next unless order.state == "complete"
+        item_count += order.inventory_units.size
+        if order.inventory_units.size >= 10
+          is_vip = ture
         end
-        id = payment_ids.sample(1)
-        @available_payment_methods ||= PaymentMethod.find(id)
       end
 
+      if user.vip.blank? && (item_count > 2  && item_count < 6)
+        user.vip = "normal"
+        user.vip_at = Time.now
+        user.save
+        user.reload
+      end
 
+      if user.vip.blank? && (item_count >= 5 || is_vip == true)
+        user.vip = "vip"
+        user.vip_at = Time.now
+        user.save
+        user.reload
+      end
+
+      if user.vip == "vip" && (user.vip_at + 1.months < Date.today)
+        user.vip = "vip_plus"
+        user.save
+        user.reload
+      end
+
+      country_code = Geokit::Geocoders::MultiGeocoder.geocode(user.current_sign_in_ip).country_code
+      @available_payment_methods = []
+
+      if user.vip == "vip"
+        @available_payment_methods = Spree::PaymentMethod.where(:account_type => "vip")
+      elsif user.vip == "vip_plus"
+        @available_payment_methods = Spree::PaymentMethod.where(:account_type => "vip_plus")
+      elsif user.vip == "normal" && !Spree::PaymentMethod.where(:account_type => "normal", :account_for_location => "#{country_code}").blank?
+        @available_payment_methods = Spree::PaymentMethod.where(:account_type => "normal", :account_for_location => "#{country_code}")
+      else
+        unless Spree::PaymentMethod.where(:account_type => "test", :account_for_location => "#{country_code}").blank?
+          @available_payment_methods = Spree::PaymentMethod.where(:account_type => "test", :account_for_location => "#{country_code}")
+
+        else
+          @available_payment_methods = Spree::PaymentMethod.where(:account_type => "suspend")
+        end
+      end
+      @available_payment_methods
     end
-
-
-
-
 
 
     def add_variant(variant, quantity = 1, ad_hoc_option_value_ids=[], product_customizations=[])
@@ -75,14 +99,14 @@ module Spree
 
         # Hack product customizations for Name and Number
         # Hack By Dekpump
-        current_item.price   = variant.price + povs.map(&:price_modifier).compact.sum + Spree::Currency.conversion_to_current(product_customizations.map {|pc| pc.price(variant)}.sum == 6 ? 3 : product_customizations.map {|pc| pc.price(variant)}.sum)
+        current_item.price = variant.price + povs.map(&:price_modifier).compact.sum + Spree::Currency.conversion_to_current(product_customizations.map { |pc| pc.price(variant) }.sum == 6 ? 3 : product_customizations.map { |pc| pc.price(variant) }.sum)
 
         self.line_items << current_item
       end
 
       # populate line_items attributes for additional_fields entries
       # that have populate => [:line_item]
-      Variant.additional_fields.select{|f| !f[:populate].nil? && f[:populate].include?(:line_item) }.each do |field|
+      Variant.additional_fields.select { |f| !f[:populate].nil? && f[:populate].include?(:line_item) }.each do |field|
         value = ""
 
         if field[:only].nil? || field[:only].include?(:variant)
@@ -118,14 +142,12 @@ module Spree
       if old_shipment_state = self.changed_attributes['shipment_state']
         self.state_changes.create({
                                       :previous_state => old_shipment_state,
-                                      :next_state     => self.shipment_state,
-                                      :name           => 'shipment',
-                                      :user_id        => (User.respond_to?(:current) && User.current && User.current.id) || self.user_id
+                                      :next_state => self.shipment_state,
+                                      :name => 'shipment',
+                                      :user_id => (User.respond_to?(:current) && User.current && User.current.id) || self.user_id
                                   }, :without_protection => true)
       end
     end
-
-
 
 
   end

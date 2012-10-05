@@ -17,6 +17,8 @@
 
     <th><%= t(:environment) %></th>
     <th><%= t(:display) %></th>
+    <th>Account Type</th>
+    <th>For Location</th>
     <th><%= t(:active) %></th>
     <th data-hook="admin_payment_methods_index_header_actions"></th>
   </tr>
@@ -27,6 +29,8 @@
 
         <td width="100px"><%= method.environment.to_s.titleize %></td>
         <td width="60px"><%= method.display_on.blank? ? t(:both) : t(method.display_on) %></td>
+        <td width="60px"><%= method.account_type %></td>
+        <td width="60px"><%= method.account_for_location %></td>
         <td width="60px"><%= method.active ? t(:yes) : t(:no) %></td>
         <td width="140px" data-hook="admin_payment_methods_index_row_actions">
           <%= link_to_edit method, :class => 'edit' %>

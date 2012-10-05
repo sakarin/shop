@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121104221209) do
+ActiveRecord::Schema.define(:version => 20121104221211) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -274,13 +274,10 @@ ActiveRecord::Schema.define(:version => 20121104221209) do
 
   create_table "spree_locations", :force => true do |t|
     t.string   "name"
-    t.string   "code"
-    t.string   "operator"
-    t.string   "city"
-    t.string   "state"
+    t.integer  "payment_method_id"
     t.string   "country"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "spree_log_entries", :force => true do |t|
@@ -385,12 +382,14 @@ ActiveRecord::Schema.define(:version => 20121104221209) do
     t.string   "type"
     t.string   "name"
     t.text     "description"
-    t.boolean  "active",      :default => true
-    t.string   "environment", :default => "development"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.boolean  "active",               :default => true
+    t.string   "environment",          :default => "development"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.datetime "deleted_at"
     t.string   "display_on"
+    t.string   "account_type"
+    t.string   "account_for_location"
   end
 
   create_table "spree_payments", :force => true do |t|
@@ -839,8 +838,8 @@ ActiveRecord::Schema.define(:version => 20121104221209) do
     t.string   "persistence_token"
     t.string   "reset_password_token"
     t.string   "perishable_token"
-    t.integer  "sign_in_count",                        :default => 0, :null => false
-    t.integer  "failed_attempts",                      :default => 0, :null => false
+    t.integer  "sign_in_count",                        :default => 0,  :null => false
+    t.integer  "failed_attempts",                      :default => 0,  :null => false
     t.datetime "last_request_at"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -849,14 +848,16 @@ ActiveRecord::Schema.define(:version => 20121104221209) do
     t.string   "login"
     t.integer  "ship_address_id"
     t.integer  "bill_address_id"
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
     t.string   "authentication_token"
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string   "api_key",                :limit => 48
+    t.string   "vip",                                  :default => ""
+    t.datetime "vip_at"
   end
 
   add_index "spree_users", ["persistence_token"], :name => "index_users_on_persistence_token"

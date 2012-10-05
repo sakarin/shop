@@ -1,8 +1,9 @@
 module Spree
   class Location < ActiveRecord::Base
-    attr_accessible :operator, :name, :code, :country, :state, :zip, :city
+    belongs_to :payment_method
+    attr_accessible :name, :payment_method_id, :country
     validates_presence_of :name
-    OPERATOR = [:equal, :except]
+
 
   end
 end

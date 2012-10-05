@@ -2,11 +2,7 @@ class CreateSpreeLocations < ActiveRecord::Migration
   def self.up
     create_table :spree_locations do |t|
       t.string :name
-      t.string :code
-
-      t.string :operator
-      t.string :city
-      t.string :state
+      t.references :payment_method
       t.string :country
 
       t.timestamps

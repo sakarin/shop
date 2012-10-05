@@ -14,25 +14,20 @@
 <table class="index">
   <thead>
     <th><%= t("name") %></th>
-    <th><%= t("location_code") %></th>
-    <th><%= t("location_operator") %></th>
+
+    <th><%= t("paypal_account") %></th>
     <th><%= t("location_conuntry") %></th>
 
-    <th><%= t("location_state") %></th>
-
-    <th><%= t("location_city") %></th>
     <th><%= t("action") %></th>
   </thead>
   <tbody>
     <% @locations.each do |location|%>
       <tr id="<%= dom_id location %>">
         <td width="120px"><%= location.name %></td>
-        <td width="200px"><%= location.code %></td>
-        <td width="200px"><%= location.operator %></td>
-        <td width="80px"><%= location.country %></td>
-        <td width="80px"><%= location.state %></td>
 
-        <td width="80px"><%= location.city %></td>
+        <td width="200px"><%= location.payment_method.name unless location.payment_method.nil? %></td>
+        <td width="80px"><%= location.country %></td>
+
 
         <td width="140px">
           <%= link_to_edit location %> &nbsp;

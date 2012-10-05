@@ -11,25 +11,7 @@
             $("#location_country").val(($("#location_country").val()).toUpperCase());
         });
 
-        $("#location_state").bind('keyup', function (e) {
-            if (e.which >= 97 && e.which <= 122) {
-                var newKey = e.which - 32;
-                // I have tried setting those
-                e.keyCode = newKey;
-                e.charCode = newKey;
-            }
-            $("#location_state").val(($("#location_state").val()).toUpperCase());
-        });
 
-        $("#location_city").bind('keyup', function (e) {
-            if (e.which >= 97 && e.which <= 122) {
-                var newKey = e.which - 32;
-                // I have tried setting those
-                e.keyCode = newKey;
-                e.charCode = newKey;
-            }
-            $("#location_city").val(($("#location_city").val()).toUpperCase());
-        });
     });
 </script>
 
@@ -39,26 +21,14 @@
     <td><%= text_field :location, :name, {"style" => "width:300px"} %></td>
   </tr>
   <tr>
-    <td><label><%= t("location_code") %></label></td>
-    <td><%= text_field :location, :code, {"style" => "width:300px"} %> ** Redirect Path</td>
-  </tr>
-  <tr>
-    <td><label><%= t("block_operator") %></label></td>
-    <td>
-      <%= select(:location, :operator, Spree::Location::OPERATOR.collect { |operator| [t(operator), operator.to_s] }) %>
-    </td>
-  </tr>
-
-  <tr>
     <td><label><%= t("location_conuntry") %></label></td>
     <td><%= text_field :location, :country, {"style" => "width:200px"} %> ** Country Code</td>
   </tr>
   <tr>
-    <td><label><%= t("location_state") %></label></td>
-    <td><%= text_field :location, :state, {"style" => "width:200px"} %> ** State Code Or Region Code</td>
+    <td><label><%= t("paypal_account") %></label></td>
+    <td>
+      <%= collection_select(:location, :payment_method_id, Spree::PaymentMethod.order(:name), :id, :name, include_blank: false, :html => {:style => "width:200px"} ) %>
+    </td>
   </tr>
-  <tr>
-    <td><label><%= t("location_city") %></label></td>
-    <td><%= text_field :location, :city, {"style" => "width:200px"} %></td>
-  </tr>
+
 </table>

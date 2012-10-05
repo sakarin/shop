@@ -1,0 +1,44 @@
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <%= button_link_to t("new_location"), new_object_url, :icon => 'add'  %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= t("locations") %></h1>
+
+<table class="index">
+  <thead>
+    <th><%= t("name") %></th>
+    <th><%= t("location_code") %></th>
+    <th><%= t("location_operator") %></th>
+    <th><%= t("location_conuntry") %></th>
+
+    <th><%= t("location_state") %></th>
+
+    <th><%= t("location_city") %></th>
+    <th><%= t("action") %></th>
+  </thead>
+  <tbody>
+    <% @locations.each do |location|%>
+      <tr id="<%= dom_id location %>">
+        <td width="120px"><%= location.name %></td>
+        <td width="200px"><%= location.code %></td>
+        <td width="200px"><%= location.operator %></td>
+        <td width="80px"><%= location.country %></td>
+        <td width="80px"><%= location.state %></td>
+
+        <td width="80px"><%= location.city %></td>
+
+        <td width="140px">
+          <%= link_to_edit location %> &nbsp;
+          <%= link_to_delete location %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120928090405) do
+ActiveRecord::Schema.define(:version => 20121104221209) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -271,6 +271,17 @@ ActiveRecord::Schema.define(:version => 20120928090405) do
 
   add_index "spree_line_items", ["order_id"], :name => "index_line_items_on_order_id"
   add_index "spree_line_items", ["variant_id"], :name => "index_line_items_on_variant_id"
+
+  create_table "spree_locations", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.string   "operator"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "spree_log_entries", :force => true do |t|
     t.integer  "source_id"

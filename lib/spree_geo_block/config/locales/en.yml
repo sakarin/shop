@@ -1,0 +1,13 @@
+en:
+  location: Location
+  locations: Locations
+  new_location: New Location
+  location_code: Code
+  location_city: City
+  location_state: State
+  location_zip: Zip Code
+  location_conuntry: Conuntry
+  locations_admin: Locations Block
+  manage_locations: Configure locations and associated block names
+  editing_location: Editing Location
+  block_operator: Operator

@@ -1,0 +1,12 @@
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+
+<h1><%= t("new_location") %></h1>
+<%= render "spree/shared/error_messages", :target => @location %>
+
+<%= form_for(:location, :url => collection_url) do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <p class="form-buttons">
+    <%= button t('continue') %>
+    <%= t("or") %> <%= link_to t("actions.cancel"), admin_locations_url %>
+  </p>
+<% end %>

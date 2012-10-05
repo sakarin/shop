@@ -48,6 +48,11 @@ PATH
       spree_core (~> 1.1.0)
 
 PATH
+  remote: lib/spree_geo_block/
+  specs:
+    spree_geo_block (1.0.0)
+
+PATH
   remote: lib/spree_paypal_express
   specs:
     spree_paypal_express (1.1.0)
@@ -141,6 +146,11 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     ffaker (1.12.1)
+    geokit (1.6.5)
+      multi_json
+    geokit-rails3 (0.1.5)
+      geokit (~> 1.5)
+      rails (~> 3.0)
     gyoku (0.4.5)
       builder (>= 2.1.2)
     highline (1.6.11)
@@ -317,6 +327,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 3.2.1)
   exception_notification
+  geokit-rails3
   jquery-rails
   multi_currencies!
   mysql2 (= 0.3.10)
@@ -330,6 +341,7 @@ DEPENDENCIES
   spree_editor!
   spree_faq!
   spree_flexi_variants!
+  spree_geo_block!
   spree_multi_domain!
   spree_paypal_express!
   spree_static_content!

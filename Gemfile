@@ -63,3 +63,7 @@ gem 'paypal_nvp', :git => 'git://github.com/solisoft/paypal_nvp.git'
 
 gem 'tinymce-rails-imageupload', :git => 'git://github.com/PerfectlyNormal/tinymce-rails-imageupload.git'
 
+# gem for location block
+gem "spree_geo_block", :path => "lib/spree_geo_block/"
+gem 'geokit-rails3'
+

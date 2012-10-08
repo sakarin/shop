@@ -1,6 +1,6 @@
 
 
-<% unless @current_store.default? %>
+<% if @current_store.nil? %>
     <%= render "spree/theme/#{@current_store.code}/taxons_show" %>
 <% else %>
     <h3 class="taxon-title"><%= accurate_title %></h3>

@@ -1,5 +1,5 @@
 
-<% unless @current_store.default? %>
+<% if @current_store.nil? %>
     <%= render "spree/theme/#{@current_store.code}/checkout_edit" %>
 <% else %>
     <% content_for :head do %>

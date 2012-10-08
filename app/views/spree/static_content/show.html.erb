@@ -1,4 +1,4 @@
-<% if @current_store.nil? %>
+<% unless @current_store.default? %>
     <%= render "spree/theme/#{@current_store.code}/static_content" %>
 <% else %>
     <% content_for :head do -%>

@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
 
-    <% if @current_store.nil? %>
+    <% unless @current_store.default? %>
         <% if "products" == @current_controller && @taxon %>
             <%= render "spree/shared/filters" %>
         <% else %>

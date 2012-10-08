@@ -1,7 +1,3 @@
-<% unless @current_store.default? %>
-    <%= render "spree/theme/#{@current_store.code}/show" %>
-
-<% else %>
     <div data-hook="product_show" itemscope itemtype="http://schema.org/Product">
       <% @body_id = 'product-details' %>
 
@@ -47,4 +43,4 @@
       </div>
 
     </div>
-<% end %>
+

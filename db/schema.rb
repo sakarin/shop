@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121104221211) do
+ActiveRecord::Schema.define(:version => 20121104221214) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -743,12 +743,15 @@ ActiveRecord::Schema.define(:version => 20121104221211) do
     t.string   "name"
     t.string   "code"
     t.text     "domains"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "default",      :default => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "default",          :default => false
     t.string   "email"
     t.text     "seo_title"
-    t.boolean  "shop_for_vip", :default => false
+    t.boolean  "shop_for_vip",     :default => false
+    t.boolean  "allow_user_login", :default => true
+    t.string   "mail_username",    :default => ""
+    t.string   "mail_password",    :default => ""
   end
 
   create_table "spree_suppliers", :force => true do |t|
@@ -858,6 +861,7 @@ ActiveRecord::Schema.define(:version => 20121104221211) do
     t.string   "api_key",                :limit => 48
     t.string   "vip",                                  :default => ""
     t.datetime "vip_at"
+    t.integer  "store_id"
   end
 
   add_index "spree_users", ["persistence_token"], :name => "index_users_on_persistence_token"

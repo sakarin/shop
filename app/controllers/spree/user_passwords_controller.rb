@@ -1,6 +1,7 @@
 class Spree::UserPasswordsController < Devise::PasswordsController
   include Spree::Core::ControllerHelpers
   helper 'spree/users', 'spree/base'
+  before_filter :set_mail_method, :only =>[:new]
 
   ssl_required
 
@@ -40,6 +41,20 @@ class Spree::UserPasswordsController < Devise::PasswordsController
 
   def update
     super
+  end
+
+  private
+  def set_mail_method
+
+    ActionMailer::Base.smtp_settings = {
+        :address   => "smtp.gmail.com",
+        :port                 => 587,
+        :domain               => "gmail.com",
+        :user_name => current_store.mail_username,
+        :password => current_store.mail_password,
+        :authentication       => "plain",
+        :enable_starttls_auto => true
+    }
   end
 
 end

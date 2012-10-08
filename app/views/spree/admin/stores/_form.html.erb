@@ -22,8 +22,30 @@
     </td>
   </tr>
   <tr>
+    <td><label><%= t("allow_user_login") %></label></td>
+    <td>
+      <label class="sub">
+        <%= radio_button(:store, :allow_user_login, true ) %>
+        <%= t("yes") %>
+      </label> &nbsp;
+      <label class="sub">
+        <%= radio_button(:store, :allow_user_login, false ) %>
+        <%= t("no") %>
+      </label>
+    </td>
+  </tr>
+
+  <tr>
     <td><label><%=t("send_mails_as")%></label></td>
     <td><%= text_field :store, :email, {"style" => "width:200px"} %></td>
+  </tr>
+  <tr>
+    <td><label><%=t("mail_username")%></label></td>
+    <td><%= text_field :store, :mail_username, {"style" => "width:200px"} %></td>
+  </tr>
+  <tr>
+    <td><label><%=t("mail_password")%></label></td>
+    <td><%= text_field :store, :mail_password, {"style" => "width:200px"} %></td>
   </tr>
   <tr>
     <td><label><%=t("domains")%></label></td>

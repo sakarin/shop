@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121104221214) do
+ActiveRecord::Schema.define(:version => 20121104221215) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -346,6 +346,7 @@ ActiveRecord::Schema.define(:version => 20121104221214) do
     t.text     "special_instructions"
     t.integer  "store_id"
     t.string   "base_currency",                                                    :default => "GBP"
+    t.string   "invoice",                                                          :default => ""
   end
 
   add_index "spree_orders", ["number"], :name => "index_orders_on_number"

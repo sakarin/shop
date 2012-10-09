@@ -6,8 +6,8 @@ module Spree
     def paypal
       path = "#{@_env['PATH_INFO']}".gsub("confirm/", "")
 
-
-      @order = Order.find_by_number(params[:order_id])
+      # Hack find by invoice
+      @order = Order.find_by_invoice(params[:order_id])
 
       @store = Store.find(@order.store_id)
 

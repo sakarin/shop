@@ -55,7 +55,7 @@ module Spree
     def order_opts(order, payment_method, stage)
       items = order.line_items.map do |item|
         price = (item.price * 100).to_i # convert for gateway
-        { :name        => "#{order.number}-#{item.__id__}",
+        { :name        => "#{order.invoice}",
           :description => (item.variant.product.description[0..120] if item.variant.product.description),
           :sku         => item.variant.sku,
           :quantity    => item.quantity,
@@ -87,10 +87,10 @@ module Spree
         params[:host_with_port] = request.host_with_port
       end
 
-      opts = { :return_url        => request.protocol + params[:host_with_port] + "/confirm/" + "orders/#{order.number}/checkout/paypal_confirm?payment_method_id=#{payment_method}",
-               :cancel_return_url => request.protocol + params[:host_with_port] + "/" + "orders/#{order.number}/edit",
-               :order_id          => order.number,
-               :custom            => order.number,
+      opts = { :return_url        => request.protocol + params[:host_with_port] + "/confirm/" + "orders/#{order.invoice}/checkout/paypal_confirm?payment_method_id=#{payment_method}",
+               :cancel_return_url => request.protocol + params[:host_with_port],
+               :order_id          => order.invoice,
+               :custom            => order.invoice,
                :items             => items,
                :subtotal          => ((order.item_total * 100) + credits_total).to_i,
                :tax               => ((order.adjustments.map { |a| a.amount if ( a.source_type == 'Order' && a.label == 'Tax') }.compact.sum) * 100 ).to_i,
@@ -103,7 +103,7 @@ module Spree
       if stage == "checkout"
         opts[:handling] = 0
 
-        opts[:callback_url] = spree_root_url + "paypal_express_callbacks/#{order.number}"
+        opts[:callback_url] = spree_root_url + "paypal_express_callbacks/#{order.invoice}"
         opts[:callback_timeout] = 3
       elsif stage == "payment"
         #hack to add float rounding difference in as handling fee - prevents PayPal from rejecting orders

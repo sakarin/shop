@@ -2,6 +2,9 @@ module Spree
   Order.class_eval do
 
     has_many :refunds, :dependent => :destroy
+    attr_accessible :invoice
+
+    before_validation :generate_invoice_number, :on => :create
 
 
     def available_shipping_methods(display_on = nil)
@@ -16,6 +19,16 @@ module Spree
       end
       self.number = random if self.number.blank?
       self.number
+    end
+
+    def generate_invoice_number
+      record = true
+      while record
+        random = "I#{SecureRandom.hex(3).to_s.upcase}"
+        record = self.class.where(:invoice => random).first
+      end
+      self.invoice = random if self.invoice.blank?
+      self.invoice
     end
 
     def available_payment_methods
@@ -57,18 +70,20 @@ module Spree
       country_code = Geokit::Geocoders::MultiGeocoder.geocode(user.current_sign_in_ip).country_code
       @available_payment_methods = []
 
-      if user.vip == "vip"
-        @available_payment_methods = Spree::PaymentMethod.where(:account_type => "vip")
+      if user.has_role?('admin')
+        @available_payment_methods = Spree::PaymentMethod.all
+      elsif user.vip == "vip"
+        @available_payment_methods = Spree::PaymentMethod.where(:account_type => "vip", :environment => Rails.env)
       elsif user.vip == "vip_plus"
-        @available_payment_methods = Spree::PaymentMethod.where(:account_type => "vip_plus")
-      elsif user.vip == "normal" && !Spree::PaymentMethod.where(:account_type => "normal", :account_for_location => "#{country_code}").blank?
-        @available_payment_methods = Spree::PaymentMethod.where(:account_type => "normal", :account_for_location => "#{country_code}")
+        @available_payment_methods = Spree::PaymentMethod.where(:account_type => "vip_plus", :environment => Rails.env)
+      elsif user.vip == "normal" && !Spree::PaymentMethod.where(:account_type => "normal", :account_for_location => "#{country_code}", :environment => Rails.env).blank?
+        @available_payment_methods = Spree::PaymentMethod.where(:account_type => "normal", :account_for_location => "#{country_code}", :environment => Rails.env)
       else
-        unless Spree::PaymentMethod.where("account_type LIKE 'test' AND account_for_location LIKE '%#{country_code}%'").blank?
-          @available_payment_methods = Spree::PaymentMethod.where("account_type LIKE 'test' AND account_for_location LIKE '%#{country_code}%'")
+        unless Spree::PaymentMethod.where("account_type LIKE 'test' AND environment LIKE '#{Rails.env}' AND account_for_location LIKE '%#{country_code}%'").blank?
+          @available_payment_methods = Spree::PaymentMethod.where("account_type LIKE 'test' AND environment LIKE '#{Rails.env}' AND account_for_location LIKE '%#{country_code}%'")
 
         else
-          @available_payment_methods = Spree::PaymentMethod.where(:account_type => "suspend")
+          @available_payment_methods = Spree::PaymentMethod.where(:account_type => "suspend", :environment => Rails.env)
         end
       end
       @available_payment_methods

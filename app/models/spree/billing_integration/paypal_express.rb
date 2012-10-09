@@ -1,6 +1,6 @@
 class Spree::BillingIntegration::PaypalExpress < Spree::BillingIntegration
   preference :login, :string
-  preference :password, :password
+  preference :password, :string
   preference :signature, :string
   preference :review, :boolean, :default => false
   preference :no_shipping, :boolean, :default => false

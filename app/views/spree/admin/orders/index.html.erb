@@ -78,6 +78,11 @@
           </p>
 
           <p>
+            <%= label_tag nil, t(:invoice) %><br/>
+            <%= f.text_field :invoice_cont, :size => 25 %>
+          </p>
+
+          <p>
             <%= label_tag nil, t(:email) %><br/>
             <%= f.text_field :email_cont, :size => 25 %>
           </p>
